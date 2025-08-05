@@ -1,10 +1,12 @@
 <nav class="">
-  <ul class="nav flex-column fs-6 fw-semibold text-grey-300">
+  <ul
+    class="nav justify-content-center flex-xl-column flex-nowrap fs-6 fs-4-xl fw-semibold text-grey-300 pt-2"
+  >
     <li
       routerLink="/"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
-      class="nav-item rounded-end-4 lh-1 d-flex align-items-center gap-3"
+      class="nav-item"
     >
       <svg
         fill="none"
@@ -19,13 +21,9 @@
           fill="#b3b3b3"
         />
       </svg>
-      <span>Overview</span>
+      <span class="d-none d-sm-inline">Overview</span>
     </li>
-    <li
-      routerLink="/transactions"
-      routerLinkActive="active"
-      class="nav-item rounded-end-4 lh-1 d-flex align-items-center gap-3"
-    >
+    <li routerLink="/transactions" routerLinkActive="active" class="nav-item">
       <svg
         fill="none"
         height="18"
@@ -39,13 +37,9 @@
           fill="#b3b3b3"
         />
       </svg>
-      <span>Transactions</span>
+      <span class="d-none d-sm-inline">Transactions</span>
     </li>
-    <li
-      routerLink="/budgets"
-      routerLinkActive="active"
-      class="nav-item rounded-end-4 lh-1 d-flex align-items-center gap-3"
-    >
+    <li routerLink="/budgets" routerLinkActive="active" class="nav-item">
       <svg
         fill="none"
         height="20"
@@ -59,13 +53,9 @@
           fill="#b3b3b3"
         />
       </svg>
-      <span>Budgets</span>
+      <span class="d-none d-sm-inline">Budgets</span>
     </li>
-    <li
-      routerLink="/pots"
-      routerLinkActive="active"
-      class="nav-item rounded-end-4 lh-1 d-flex align-items-center gap-3"
-    >
+    <li routerLink="/pots" routerLinkActive="active" class="nav-item">
       <svg
         fill="none"
         height="22"
@@ -79,12 +69,12 @@
           fill="#b3b3b3"
         />
       </svg>
-      <span>Pots</span>
+      <span class="d-none d-sm-inline">Pots</span>
     </li>
     <li
       routerLink="/recurring-bills"
       routerLinkActive="active"
-      class="nav-item rounded-end-4 lh-1 d-flex align-items-center gap-3"
+      class="nav-item"
     >
       <svg
         fill="none"
@@ -99,7 +89,7 @@
           fill="#b3b3b3"
         />
       </svg>
-      <span>Recurring Bills</span>
+      <span class="d-none d-sm-inline">Recurring Bills</span>
     </li>
   </ul>
 </nav>

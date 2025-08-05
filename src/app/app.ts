@@ -9,5 +9,5 @@ import { Navigation as NavComponent } from "./components/navigation/navigation";
   imports: [RouterOutlet, NavComponent],
 })
 export class App {
-  protected title = "finance";
+  protected title = "Finance";
 }

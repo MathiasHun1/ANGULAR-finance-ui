@@ -1,13 +1,38 @@
 @use "../../../globalStyles.scss" as *;
 
 .nav-item {
-  padding-block: 1rem;
-  padding-left: 32px;
-  border-left: 5px solid transparent;
+  flex-grow: 1;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: 3px solid transparent;
+  font-size: 12px;
+  gap: 0.5rem;
 
-  &:hover {
-    cursor: pointer;
+  @media (min-width: $desktopAndUp) {
+    border-radius: revert;
+    border: none;
+
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+    line-height: 0;
+    font-size: 1rem;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding-block: 1rem;
+    padding-left: 32px;
+    border-left: 5px solid transparent;
   }
+}
+
+.nav-item:hover {
+  cursor: pointer;
 }
 
 .nav-item.active {

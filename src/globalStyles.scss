@@ -44,3 +44,6 @@ $theme-colors: (
 );
 
 @import "bootstrap/scss/bootstrap";
+
+$tabletAndUp: map-get($grid-breakpoints, "sm");
+$desktopAndUp: map-get($grid-breakpoints, "xl");
