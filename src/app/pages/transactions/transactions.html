@@ -1,1 +1,19 @@
-<p>transactions works!</p>
+<div>
+  <div class="page-title-container">
+    <h1 class="page-title">Transactions</h1>
+  </div>
+
+  <div class="transactions-container custom-card">
+    <div class="list-group">
+      @for (transaction of transactions(); track transaction.date) {
+      <div class="transaction-item list-group-item bg-transparent">
+        <img
+          [src]="transaction.avatar"
+          alt=""
+          class="profile-image rounded-circle"
+        />
+      </div>
+      }
+    </div>
+  </div>
+</div>

@@ -5,7 +5,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 $font-family-base: "Public Sans";
-
 $body-bg: black;
 
 $container-max-widths: (
@@ -45,5 +44,24 @@ $theme-colors: (
 
 @import "bootstrap/scss/bootstrap";
 
+/* -- Breakpoint values from bootstrap -- */
 $tabletAndUp: map-get($grid-breakpoints, "sm");
 $desktopAndUp: map-get($grid-breakpoints, "xl");
+
+/* -- Custom Utils -- */
+.page-title-container {
+  padding-bottom: 24px;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  color: map-get($theme-colors, grey-900);
+}
+
+.custom-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px 20px;
+}
