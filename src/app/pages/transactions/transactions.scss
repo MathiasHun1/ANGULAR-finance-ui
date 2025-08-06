@@ -7,3 +7,22 @@
     width: 40px;
   }
 }
+
+.page-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+}
+
+.control-text {
+  display: none;
+
+  @media (min-width: $tabletAndUp) {
+    display: revert;
+  }
+}
+
+.arrow {
+  font-size: 16px;
+}

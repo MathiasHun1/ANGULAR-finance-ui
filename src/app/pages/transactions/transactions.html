@@ -5,15 +5,44 @@
 
   <div class="transactions-container custom-card">
     <div class="list-group">
-      @for (transaction of transactions(); track transaction.date) {
+      @for (transaction of paginatedData(); track transaction.date) {
       <div class="transaction-item list-group-item bg-transparent">
         <img
           [src]="transaction.avatar"
           alt=""
           class="profile-image rounded-circle"
         />
+        <span class="ms-5"> {{ transaction.name }} </span>
       </div>
       }
     </div>
+
+    <nav aria-label="pagination controls">
+      <ul class="pagination">
+        <li class="page-item" (click)="stepPrevPage()">
+          <div class="page-link">
+            <img class="arrow" src="/images/icon-caret-left.svg" alt="" />
+            <span class="control-text">Previoud</span>
+          </div>
+        </li>
+
+        @for (number of pageNumbers(); track number) {
+        <li
+          class="page-item"
+          [ngClass]="{ active: number === currentPage() }"
+          (click)="stepToPage(number)"
+        >
+          <span class="page-link"> {{ number }} </span>
+        </li>
+        }
+
+        <li class="page-item" (click)="stepNextPage()">
+          <div class="page-link">
+            <span class="control-text">Next </span>
+            <img class="arrow" src="/images/icon-caret-right.svg" alt="" />
+          </div>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
