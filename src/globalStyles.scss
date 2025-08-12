@@ -1,8 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
 /**
 * This file contains all the global rules
 */
 
-@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+/**
+1 Bootstrap overrdes
+*/
+
+@import "bootstrap/scss/functions";
+
+@import "bootstrap/scss/variables";
 
 $font-family-base: "Public Sans";
 $body-bg: black;
@@ -15,40 +23,44 @@ $container-max-widths: (
   xxl: 1600px,
 );
 
-$theme-colors: (
-  beige-100: #f8f4f0,
-  beige-500: #98908b,
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    beige-100: #f8f4f0,
+    beige-500: #98908b,
 
-  grey-100: #f2f2f2,
-  grey-300: #b3b3b3,
-  grey-500: #696868,
-  grey-900: #201f24,
+    grey-100: #f2f2f2,
+    grey-300: #b3b3b3,
+    grey-500: #696868,
+    grey-900: #201f24,
 
-  green: #277c78,
-  yellow: #f2cdac,
-  cyan: #82c9d7,
-  navy: #626070,
-  red: #c94736,
-  purple-secondary: #826cb0,
+    green: #277c78,
+    yellow: #f2cdac,
+    cyan: #82c9d7,
+    navy: #626070,
+    red: #c94736,
+    purple-secondary: #826cb0,
 
-  purple-other: #af81ba,
-  turquoise: #597c7c,
-  brown: #93674f,
-  magenta: #934f6f,
-  blue: #3f82b2,
-  navy-grey: #97a0ac,
-  army-green: #7f9161,
-  gold: #cab361,
-  orange: #be6c49,
+    purple-other: #af81ba,
+    turquoise: #597c7c,
+    brown: #93674f,
+    magenta: #934f6f,
+    blue: #3f82b2,
+    navy-grey: #97a0ac,
+    army-green: #7f9161,
+    gold: #cab361,
+    orange: #be6c49,
+  )
 );
 
 @import "bootstrap/scss/bootstrap";
 
-/* -- Breakpoint values from bootstrap -- */
 $tabletAndUp: map-get($grid-breakpoints, "sm");
 $desktopAndUp: map-get($grid-breakpoints, "xl");
 
-/* -- Custom Utils -- */
+/*
+2 Custom Utils
+**/
 .page-title-container {
   padding-bottom: 24px;
 }
@@ -58,6 +70,10 @@ $desktopAndUp: map-get($grid-breakpoints, "xl");
   font-weight: bold;
   margin: 0;
   color: map-get($theme-colors, grey-900);
+}
+
+.content-container {
+  flex-grow: 1;
 }
 
 .custom-card {

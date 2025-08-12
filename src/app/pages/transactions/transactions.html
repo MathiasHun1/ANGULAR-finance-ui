@@ -1,40 +1,59 @@
-<div>
+<div class="page-wrapper d-flex flex-column h-100">
   <div class="page-title-container">
     <h1 class="page-title">Transactions</h1>
   </div>
 
-  <div class="transactions-container custom-card">
+  <div
+    class="content-container custom-card d-flex flex-column justify-content-between"
+  >
+    <!-- Transaction elements -->
     <div class="list-group">
+      <div class="list-group-item">
+        <span>Recipient/sender</span>
+        <span>Category</span>
+        <span>Transaction Date</span>
+        <span class="amount">Amount</span>
+      </div>
+
       @for (transaction of paginatedData(); track transaction.date) {
-      <div class="transaction-item list-group-item bg-transparent">
-        <img
-          [src]="transaction.avatar"
-          alt=""
-          class="profile-image rounded-circle"
-        />
-        <span class="ms-5"> {{ transaction.name }} </span>
+      <div class="transaction-item list-group-item">
+        <div>
+          <img
+            [src]="transaction.avatar"
+            alt=""
+            class="profile-image rounded-circle"
+          />
+          <span class="ms-2"> {{ transaction.name }} </span>
+        </div>
+
+        <span> {{ transaction.category }} </span>
+        <span> {{ transaction.date }} </span>
+        <span class="amount"> {{ transaction.amount }} </span>
       </div>
       }
     </div>
-
-    <nav aria-label="pagination controls">
-      <ul class="pagination">
+    <!-- Pagination -->
+    <nav aria-label="pagination controls" class="">
+      <ul class="pagination d-flex justify-content-between">
         <li class="page-item" (click)="stepPrevPage()">
           <div class="page-link">
             <img class="arrow" src="/images/icon-caret-left.svg" alt="" />
-            <span class="control-text">Previoud</span>
+            <span class="control-text">Previous</span>
           </div>
         </li>
-
-        @for (number of pageNumbers(); track number) {
-        <li
-          class="page-item"
-          [ngClass]="{ active: number === currentPage() }"
-          (click)="stepToPage(number)"
-        >
-          <span class="page-link"> {{ number }} </span>
-        </li>
-        }
+        <!-- Pages -->
+        <div class="d-flex">
+          @for (number of pageNumbers(); track number) {
+          <li class="page-item" (click)="stepToPage(number)">
+            <span
+              class="page-link"
+              [ngClass]="{ active: number === currentPage() }"
+            >
+              {{ number }}
+            </span>
+          </li>
+          }
+        </div>
 
         <li class="page-item" (click)="stepNextPage()">
           <div class="page-link">

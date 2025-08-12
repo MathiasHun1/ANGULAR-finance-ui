@@ -13,6 +13,21 @@
   align-items: center;
   gap: 1rem;
   height: 100%;
+  background-color: transparent;
+  color: black;
+
+  &:hover {
+    color: black;
+    cursor: pointer;
+  }
+}
+
+.page-item {
+}
+
+.page-link.active {
+  background-color: black !important;
+  color: white;
 }
 
 .control-text {
@@ -25,4 +40,30 @@
 
 .arrow {
   font-size: 16px;
+}
+
+.list-group {
+  font-size: 12px;
+}
+
+.list-group .amount {
+  justify-self: end;
+}
+
+.list-group-item {
+  border-left: none;
+  border-right: none;
+  padding-block: 18px;
+  background-color: transparent;
+
+  display: grid;
+  grid-template-columns: 4fr 1.3fr 1.3fr 2.5fr;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
