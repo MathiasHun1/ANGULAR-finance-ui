@@ -53,6 +53,10 @@ $theme-colors: map-merge(
   )
 );
 
+$input-bg: transparent;
+$input-focus-bg: transparent;
+$form-select-bg: transparent;
+
 @import "bootstrap/scss/bootstrap";
 
 $tabletAndUp: map-get($grid-breakpoints, "sm");
@@ -61,6 +65,16 @@ $desktopAndUp: map-get($grid-breakpoints, "xl");
 /*
 2 Custom Utils
 **/
+.overflow-scroll-hidden {
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.overflow-scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
 .page-title-container {
   padding-bottom: 24px;
 }
@@ -70,10 +84,6 @@ $desktopAndUp: map-get($grid-breakpoints, "xl");
   font-weight: bold;
   margin: 0;
   color: map-get($theme-colors, grey-900);
-}
-
-.content-container {
-  flex-grow: 1;
 }
 
 .custom-card {

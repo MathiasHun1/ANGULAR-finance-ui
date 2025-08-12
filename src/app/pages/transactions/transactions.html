@@ -1,67 +1,98 @@
-<div class="page-wrapper d-flex flex-column h-100">
-  <div class="page-title-container">
-    <h1 class="page-title">Transactions</h1>
-  </div>
+<div class="page-title-container">
+  <h1 class="page-title">Transactions</h1>
+</div>
 
-  <div
-    class="content-container custom-card d-flex flex-column justify-content-between"
-  >
-    <!-- Transaction elements -->
-    <div class="list-group">
-      <div class="list-group-item">
-        <span>Recipient/sender</span>
-        <span>Category</span>
-        <span>Transaction Date</span>
-        <span class="amount">Amount</span>
-      </div>
-
-      @for (transaction of paginatedData(); track transaction.date) {
-      <div class="transaction-item list-group-item">
-        <div>
-          <img
-            [src]="transaction.avatar"
-            alt=""
-            class="profile-image rounded-circle"
-          />
-          <span class="ms-2"> {{ transaction.name }} </span>
-        </div>
-
-        <span> {{ transaction.category }} </span>
-        <span> {{ transaction.date }} </span>
-        <span class="amount"> {{ transaction.amount }} </span>
-      </div>
-      }
+<div
+  class="custom-card d-flex flex-column justify-content-between text-grey-500"
+>
+  <!-- INput fields -->
+  <div class="input-section row pt-2 pb-3">
+    <div class="col">
+      <input
+        type="text"
+        class="form-control w-75"
+        placeholder="Search transaction"
+        [(ngModel)]="searchField"
+      />
     </div>
-    <!-- Pagination -->
-    <nav aria-label="pagination controls" class="">
-      <ul class="pagination d-flex justify-content-between">
-        <li class="page-item" (click)="stepPrevPage()">
-          <div class="page-link">
-            <img class="arrow" src="/images/icon-caret-left.svg" alt="" />
-            <span class="control-text">Previous</span>
-          </div>
-        </li>
-        <!-- Pages -->
-        <div class="d-flex">
-          @for (number of pageNumbers(); track number) {
-          <li class="page-item" (click)="stepToPage(number)">
-            <span
-              class="page-link"
-              [ngClass]="{ active: number === currentPage() }"
-            >
-              {{ number }}
-            </span>
-          </li>
-          }
-        </div>
 
-        <li class="page-item" (click)="stepNextPage()">
-          <div class="page-link">
-            <span class="control-text">Next </span>
-            <img class="arrow" src="/images/icon-caret-right.svg" alt="" />
-          </div>
-        </li>
-      </ul>
-    </nav>
+    <div class="col row">
+      <div class="col d-flex align-items-center text-nowrap gap-2">
+        <label for="sortby">Sort by</label>
+        <select id="sortby" class="form-select">
+          <option value="latest">Latest</option>
+          <option value="oldest">Oldest</option>
+          <option value="atoz">A - Z</option>
+          <option value="ztoa">Z - A</option>
+          <option value="highest">Highest</option>
+          <option value="lowest">Lowest</option>
+        </select>
+      </div>
+
+      <div class="col d-flex align-items-center text-nowrap gap-2">
+        <label for="category">category</label>
+        <input type="text" id="category" class="form-control" />
+      </div>
+    </div>
   </div>
+
+  <div class="list-group">
+    <div class="list-group-item">
+      <span>Recipient/sender</span>
+      <span>Category</span>
+      <span>Transaction Date</span>
+      <span class="amount">Amount</span>
+    </div>
+
+    <!-- Transaction elements -->
+    @for (transaction of paginatedData(); track transaction.date) {
+    <div class="transaction-item list-group-item">
+      <div>
+        <img
+          [src]="transaction.avatar"
+          alt=""
+          class="profile-image rounded-circle"
+        />
+        <span class="ms-2 fw-bold fs-6 text-black">
+          {{ transaction.name }}
+        </span>
+      </div>
+
+      <span> {{ transaction.category }} </span>
+      <span> {{ transaction.date }} </span>
+      <span class="amount"> {{ transaction.amount }} </span>
+    </div>
+    }
+  </div>
+  <!-- Pagination -->
+  <nav aria-label="pagination controls" class="pt-4">
+    <ul class="pagination d-flex justify-content-between">
+      <li class="page-item" (click)="stepPrevPage()">
+        <div class="page-link">
+          <img class="arrow" src="/images/icon-caret-left.svg" alt="" />
+          <span class="control-text">Previous</span>
+        </div>
+      </li>
+      <!-- Pages -->
+      <div class="d-flex">
+        @for (number of pageNumbers(); track number) {
+        <li class="page-item" (click)="stepToPage(number)">
+          <span
+            class="page-link"
+            [ngClass]="{ active: number === currentPage() }"
+          >
+            {{ number }}
+          </span>
+        </li>
+        }
+      </div>
+
+      <li class="page-item" (click)="stepNextPage()">
+        <div class="page-link">
+          <span class="control-text">Next </span>
+          <img class="arrow" src="/images/icon-caret-right.svg" alt="" />
+        </div>
+      </li>
+    </ul>
+  </nav>
 </div>

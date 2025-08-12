@@ -1,11 +1,11 @@
-<div
-  class="container-xxl vh-100 bg-beige-100 p-0 d-flex flex-column-reverse flex-xl-row"
->
-  <header class="bg-grey-900 pe-4 col-xl-3">
-    <app-navigation />
-  </header>
+<div class="data-container container-xxl vh-100">
+  <div class="data-container bg-beige-100 p-0 vh-100 row">
+    <header class="bg-grey-900 pe-4 col-xl-3 order-sm-2 order-xl-1">
+      <app-navigation />
+    </header>
 
-  <main class="col h-100 py-4 px-5">
-    <router-outlet />
-  </main>
+    <main class="main py-4 px-5 col-xl order-sm-1 order-xl-2">
+      <router-outlet />
+    </main>
+  </div>
 </div>

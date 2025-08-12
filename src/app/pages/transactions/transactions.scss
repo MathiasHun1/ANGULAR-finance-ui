@@ -1,5 +1,9 @@
 @use "../../../globalStyles.scss" as *;
 
+.input-section {
+  font-size: 14px;
+}
+
 .profile-image {
   width: 32px;
 
@@ -55,9 +59,11 @@
   border-right: none;
   padding-block: 18px;
   background-color: transparent;
+  color: inherit;
 
   display: grid;
   grid-template-columns: 4fr 1.3fr 1.3fr 2.5fr;
+  align-items: center;
 
   &:first-child {
     border-top: none;
@@ -66,4 +72,8 @@
   &:last-child {
     border-bottom: none;
   }
+}
+
+.form-control {
+  background-color: transparent;
 }
