@@ -24,7 +24,7 @@ export class Transactions {
       : Math.ceil(this.transactions().length / this.itemsPerPage);
   });
 
-  // Trigger changes in service-state on form value changes
+  // Trigger changes in service-state when input values change
   constructor() {
     effect(() => {
       this.transactionsService.setSearchValue(this.searchFieldValue());

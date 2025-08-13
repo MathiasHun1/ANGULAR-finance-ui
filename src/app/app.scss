@@ -1,16 +1,30 @@
 @use "../styles/variables" as *;
 
+:root {
+}
+
 .data-container {
-  height: 100%;
-  min-height: 0;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column-reverse;
 
   @media (min-width: $desktopAndUp) {
     height: 100vh;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.header {
+  @media (min-width: $desktopAndUp) {
+    width: 300px;
   }
 }
 
 .main {
   min-height: 0;
-  height: 100%;
   overflow-y: scroll;
+  flex: 1;
 }
