@@ -32,3 +32,11 @@ export interface DataModel {
   budgets: BudgetModel[];
   pots: PotModel[];
 }
+
+export type SortOptions =
+  | "date"
+  | "dateReverse"
+  | "amount"
+  | "amountReverse"
+  | "name"
+  | "nameReverse";
