@@ -20,17 +20,22 @@ export class TransactionService {
 
   private serarchValue = signal("");
   private sortValue = signal<SortOptions>("date");
+  private categoryValue = signal("");
 
   // private methods for filtering and sorting
   private formatData(
     searchValue: string,
+    categoryValue: string,
     sortValue: SortOptions,
     transactions: TransactionModel[]
   ) {
-    const filteredData = this.filterBySearchValue(searchValue, transactions);
-    const sortedData = this.sort(sortValue, filteredData);
+    const filteredData = this.filterByCategory(
+      categoryValue,
+      this.filterBySearchValue(searchValue, transactions)
+    );
+    const sortedFilteredData = this.sort(sortValue, filteredData);
 
-    return sortedData;
+    return sortedFilteredData;
   }
 
   private filterBySearchValue(value: string, transactions: TransactionModel[]) {
@@ -40,6 +45,14 @@ export class TransactionService {
     return transactions.filter((t) =>
       t.name.toLocaleLowerCase().includes(value.trim().toLowerCase())
     );
+  }
+
+  private filterByCategory(value: string, transactions: TransactionModel[]) {
+    if (!value) {
+      return transactions;
+    }
+
+    return transactions.filter((t) => t.category === value);
   }
 
   private sort(
@@ -85,9 +98,20 @@ export class TransactionService {
    * Public API
    ************/
 
+  categories = computed(() => {
+    let categoryList: string[] = [];
+    this.allTransactions().map((t) => {
+      if (!categoryList.includes(t.category)) {
+        categoryList.push(t.category);
+      }
+    });
+    return categoryList;
+  });
+
   computedTransactions = computed(() =>
     this.formatData(
       this.serarchValue(),
+      this.categoryValue(),
       this.sortValue(),
       this.allTransactions()
     )
@@ -99,5 +123,9 @@ export class TransactionService {
 
   setSortValue(value: SortOptions) {
     this.sortValue.set(value);
+  }
+
+  setCategoryValue(value: string) {
+    this.categoryValue.set(value);
   }
 }

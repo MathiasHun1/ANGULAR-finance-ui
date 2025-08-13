@@ -12,14 +12,14 @@
         type="text"
         class="form-control w-75"
         placeholder="Search transaction"
-        [(ngModel)]="searchField"
+        [(ngModel)]="searchFieldValue"
       />
     </div>
 
     <div class="col row">
       <div class="col d-flex align-items-center text-nowrap gap-2">
         <label for="sortby">Sort by</label>
-        <select id="sortby" class="form-select" [(ngModel)]="sortInput">
+        <select id="sortby" class="form-select" [(ngModel)]="sortValue">
           <option value="date">Latest</option>
           <option value="dateReverse">Oldest</option>
           <option value="name">A - Z</option>
@@ -31,7 +31,12 @@
 
       <div class="col d-flex align-items-center text-nowrap gap-2">
         <label for="category">category</label>
-        <input type="text" id="category" class="form-control" />
+        <select id="category" class="form-select" [(ngModel)]="categoryValue">
+          <option value="">All</option>
+          @for (category of categories(); track category) {
+          <option [value]="category">{{ category }}</option>
+          }
+        </select>
       </div>
     </div>
   </div>

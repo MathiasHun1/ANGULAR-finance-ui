@@ -27,17 +27,22 @@ export class Transactions {
   // Trigger changes in service-state on form value changes
   constructor() {
     effect(() => {
-      this.transactionsService.setSearchValue(this.searchField());
+      this.transactionsService.setSearchValue(this.searchFieldValue());
     });
 
     effect(() => {
-      this.transactionsService.setSortValue(this.sortInput());
+      this.transactionsService.setSortValue(this.sortValue());
+    });
+
+    effect(() => {
+      this.transactionsService.setCategoryValue(this.categoryValue());
     });
   }
 
   // Signals used in the template
-  searchField = signal("");
-  sortInput = signal<SortOptions>("date");
+  searchFieldValue = signal("");
+  categoryValue = signal("");
+  sortValue = signal<SortOptions>("date");
   currentPage = signal(1);
   paginatedData = computed(() => {
     const itemsPerPage = this.itemsPerPage;
@@ -55,6 +60,7 @@ export class Transactions {
     }
     return Array.from({ length: pagesCount }, (value, index) => index + 1);
   });
+  categories = this.transactionsService.categories;
 
   // Event Handdlers
   stepToPage(page: number) {

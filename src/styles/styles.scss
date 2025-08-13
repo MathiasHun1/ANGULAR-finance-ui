@@ -1,3 +1,3 @@
-@import "styles/variables"; // Your SCSS variables & theme
+@import "./variables"; // Your SCSS variables & theme
 @import "bootstrap/scss/bootstrap"; // Full Bootstrap CSS (only once)
-@import "styles/global-styles"; // Global custom utilities
+@import "./global_styles"; // Global custom utilities
