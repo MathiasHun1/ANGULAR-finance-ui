@@ -4,7 +4,6 @@ import {
   effect,
   inject,
   Signal,
-  WritableSignal,
   signal,
 } from "@angular/core";
 import { ApiService } from "../../services/api-service";
@@ -12,6 +11,14 @@ import { toSignal } from "@angular/core/rxjs-interop";
 import { TransactionModel } from "../../models/models";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+
+type SortOptions =
+  | "date"
+  | "dateReverse"
+  | "amount"
+  | "amountReverse"
+  | "name"
+  | "nameReverse";
 
 @Component({
   selector: "app-transactions",
@@ -32,7 +39,11 @@ export class Transactions {
 
   // Computed data used for pagination
   private _computedTransactions = computed(() =>
-    this.formatData(this.searchField(), this._allTransactions())
+    this.formatData(
+      this.searchField(),
+      this.sortInput(),
+      this._allTransactions()
+    )
   );
 
   //paginated data used in the template
@@ -84,13 +95,18 @@ export class Transactions {
 
   // Input fields
   searchField = signal("");
+  sortInput = signal<SortOptions>("date");
 
   // Data forming functions
-  formatData(searchValue: string, transactions: TransactionModel[]) {
-    let data: TransactionModel[];
-    data = this.filterBySearchValue(searchValue, transactions);
+  formatData(
+    searchValue: string,
+    sortValue: SortOptions,
+    transactions: TransactionModel[]
+  ) {
+    const filteredData = this.filterBySearchValue(searchValue, transactions);
+    const sortedData = this.sort(sortValue, filteredData);
 
-    return data;
+    return sortedData;
   }
 
   filterBySearchValue(value: string, transactions: TransactionModel[]) {
@@ -100,5 +116,44 @@ export class Transactions {
     return transactions.filter((t) =>
       t.name.toLocaleLowerCase().includes(value.trim().toLowerCase())
     );
+  }
+
+  sort(
+    value: SortOptions,
+    transactions: TransactionModel[]
+  ): TransactionModel[] {
+    if (!value) {
+      return transactions;
+    }
+
+    const transactionsCopy = [...transactions];
+
+    switch (value) {
+      case "date":
+        return transactionsCopy.sort((a, b) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+
+      case "dateReverse":
+        return transactionsCopy.sort((a, b) => {
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
+        });
+
+      case "name":
+        return transactionsCopy.sort((a, b) => a.name.localeCompare(b.name));
+
+      case "nameReverse":
+        return transactionsCopy.sort((a, b) => b.name.localeCompare(a.name));
+
+      case "amount":
+        return transactionsCopy.sort((a, b) => b.amount - a.amount);
+
+      case "amountReverse":
+        return transactionsCopy.sort((a, b) => a.amount - b.amount);
+
+      default:
+        const _exhaustive: never = value;
+        return transactionsCopy;
+    }
   }
 }
