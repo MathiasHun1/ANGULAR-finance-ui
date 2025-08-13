@@ -1,11 +1,4 @@
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  Signal,
-  signal,
-} from "@angular/core";
+import { Component, computed, effect, inject, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { TransactionService } from "../../services/transaction-service";
@@ -25,8 +18,7 @@ export class Transactions {
   private transactions = this.transactionsService.computedTransactions;
   private itemsPerPage = 10;
 
-  currentPage = signal(1);
-  pagesCount = computed<number | undefined>(() => {
+  private pagesCount = computed<number | undefined>(() => {
     return this.transactions().length === 0
       ? undefined
       : Math.ceil(this.transactions().length / this.itemsPerPage);
@@ -46,6 +38,7 @@ export class Transactions {
   // Signals used in the template
   searchField = signal("");
   sortInput = signal<SortOptions>("date");
+  currentPage = signal(1);
   paginatedData = computed(() => {
     const itemsPerPage = this.itemsPerPage;
     const firstIndex = (this.currentPage() - 1) * itemsPerPage;

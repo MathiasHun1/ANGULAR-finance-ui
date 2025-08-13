@@ -1,18 +1,12 @@
-/**
-* This file contains all the global rules
-*/
-
-/**
-1 Bootstrap overrdes
-*/
-
+// Bootstrap function + variable imports
 @import "bootstrap/scss/functions";
-
 @import "bootstrap/scss/variables";
 
+// Font & background
 $font-family-base: "Montserrat";
 $body-bg: black;
 
+// Custom container widths
 $container-max-widths: (
   sm: 540px,
   md: 720px,
@@ -21,24 +15,22 @@ $container-max-widths: (
   xxl: 1600px,
 );
 
+// Custom theme colors
 $theme-colors: map-merge(
   $theme-colors,
   (
     beige-100: #f8f4f0,
     beige-500: #98908b,
-
     grey-100: #f2f2f2,
     grey-300: #b3b3b3,
     grey-500: #696868,
     grey-900: #201f24,
-
     green: #277c78,
     yellow: #f2cdac,
     cyan: #82c9d7,
     navy: #626070,
     red: #c94736,
     purple-secondary: #826cb0,
-
     purple-other: #af81ba,
     turquoise: #597c7c,
     brown: #93674f,
@@ -51,41 +43,11 @@ $theme-colors: map-merge(
   )
 );
 
+// Transparent inputs
 $input-bg: transparent;
 $input-focus-bg: transparent;
 $form-select-bg: transparent;
 
-@import "bootstrap/scss/bootstrap";
-
+// Custom breakpoints
 $tabletAndUp: map-get($grid-breakpoints, "sm");
 $desktopAndUp: map-get($grid-breakpoints, "xl");
-
-/*
-2 Custom Utils
-**/
-.overflow-scroll-hidden {
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.overflow-scroll-hidden::-webkit-scrollbar {
-  display: none;
-}
-
-.page-title-container {
-  padding-bottom: 24px;
-}
-
-.page-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
-  color: map-get($theme-colors, grey-900);
-}
-
-.custom-card {
-  background-color: white;
-  border-radius: 12px;
-  padding: 24px 20px;
-}

@@ -1,0 +1,27 @@
+// Scrollbar hidden utility
+.overflow-scroll-hidden {
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.overflow-scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+// Page title styles
+.page-title-container {
+  padding-bottom: 24px;
+}
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  color: map-get($theme-colors, grey-900);
+}
+
+// Card component
+.custom-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px 20px;
+}
