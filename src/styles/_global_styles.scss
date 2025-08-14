@@ -13,6 +13,12 @@ body {
   }
 }
 
+// Bootstrap class overrides
+.list-group-item {
+  background-color: transparent;
+  border-inline: none;
+}
+
 // Scrollbar hidden utility
 .overflow-scroll-hidden {
   @media (min-width: $desktopAndUp) {
@@ -23,6 +29,15 @@ body {
 }
 .overflow-scroll-hidden::-webkit-scrollbar {
   display: none;
+}
+
+// font utilities
+.fs-7 {
+  font-size: (14rem/16);
+}
+
+.fs-8 {
+  font-size: (12rem/16);
 }
 
 // Page title styles

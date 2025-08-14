@@ -1,0 +1,26 @@
+@use "../../../styles/variables" as *;
+
+.progress-body {
+  height: 32px;
+  width: 100%;
+  border-radius: 6px;
+  background-color: map-get($theme-colors, beige-100);
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.avatar {
+  width: 32px;
+}
+
+.list-group-item:nth-child(1) {
+  border-top: none;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
