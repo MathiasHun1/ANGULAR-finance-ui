@@ -1,20 +1,58 @@
-@let trx = transaction(); @if (!trx) {
+@let templateBudget = budget(); @if (!templateBudget) {
 <div>Loading..</div>
 } @else {
 
-<div class="fs-8 d-flex align-items-center justify-content-between py-3">
-  <div class="d-flex align-items-center">
-    <img [src]="trx.avatar" alt="" class="avatar rounded-circle" />
-    <p class="m-0 fs-7 ps-3 fw-bolder">{{ trx.name }}</p>
+<div class="custom-card" style="padding: 2rem">
+  <div class="d-flex align-items-center pb-3">
+    <div
+      class="p-2 rounded-circle me-3"
+      [style.backgroundColor]="templateBudget.theme"
+    ></div>
+    <h2 class="budget-title m-0 fs-5 fw-bolder">
+      {{ templateBudget.category }}
+    </h2>
   </div>
 
-  <div class="d-flex flex-column text-end">
-    <span class="fw-bold">
-      {{ trx.amount | currency }}
-    </span>
-    <span class="text-grey-500">
-      {{ trx.date | date : "dd MMM yyyy" }}
-    </span>
+  <p class="fs-7 text-grey-500 m-0 pb-3">
+    Maximum of {{ templateBudget.maximum }}$
+  </p>
+
+  <!-- Custom progress bar -->
+  <div class="progress-body mb-3">
+    <div
+      class="progress-bar"
+      [style.backgroundColor]="templateBudget.theme"
+      [style.width]="usedUpBudget() + '%'"
+    ></div>
+  </div>
+
+  <h2 class="fs-7 text-grey-500">Spent: ${{ moneySpent() }}</h2>
+
+  <!-- Last spendings  -->
+  <div class="list-group custom-card bg-beige-100 p-3">
+    @if (!transactions()) {
+    <div>Loading..</div>
+    } @else { @for(transaction of transactions(); track transaction) {
+
+    <div
+      class="list-group-item fs-8 d-flex align-items-center justify-content-between py-3"
+    >
+      <div class="d-flex align-items-center">
+        <img [src]="transaction.avatar" alt="" class="avatar rounded-circle" />
+        <p class="m-0 fs-7 ps-3 fw-bolder">{{ transaction.name }}</p>
+      </div>
+
+      <div class="d-flex flex-column text-end">
+        <span class="fw-bold">
+          {{ transaction.amount | currency }}
+        </span>
+        <span class="text-grey-500">
+          {{ transaction.date | date : "dd MMM yyyy" }}
+        </span>
+      </div>
+    </div>
+
+    } }
   </div>
 </div>
 }

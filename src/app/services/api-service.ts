@@ -26,8 +26,9 @@ export class ApiService {
   }
 
   getBudgets() {
-    return this.http
-      .get<BudgetModel[]>(`${this.baseUrl}/budgets`)
-      .pipe(tap((result) => console.log("Budgets from API: ", result)));
+    return this.http.get<BudgetModel[]>(`${this.baseUrl}/budgets`).pipe(
+      tap((result) => console.log("Budgets from API: ", result)),
+      delay(1500)
+    );
   }
 }

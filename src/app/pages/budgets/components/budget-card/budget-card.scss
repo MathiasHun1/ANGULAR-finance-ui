@@ -1,3 +1,27 @@
+@use "../../../../../styles/variables" as *;
+
 .avatar {
   width: 32px;
+}
+
+.progress-body {
+  height: 32px;
+  width: 100%;
+  border-radius: 6px;
+  background-color: map-get($theme-colors, beige-100);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.list-group-item:nth-child(1) {
+  border-top: none;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
 }

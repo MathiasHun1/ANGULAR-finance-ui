@@ -51,7 +51,7 @@
 
     <!-- Transaction elements -->
     @if (!paginatedData()) {
-    <p class="h1 text-center py-5">Loading..</p>
+    <p class="h2 text-center py-5">Loading..</p>
     } @for (transaction of paginatedData(); track transaction.date) {
     <div class="transaction-item list-group-item">
       <div>

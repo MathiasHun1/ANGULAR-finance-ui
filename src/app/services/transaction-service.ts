@@ -133,4 +133,15 @@ export class TransactionService {
   setCategoryValue(value: string) {
     this.categoryValue.set(value);
   }
+
+  getTransactionsByCategory(category: string | undefined) {
+    if (!category) {
+      return undefined;
+    }
+
+    const transactions = this.allTransactions();
+    return transactions
+      ? transactions.filter((t) => t.category === category)
+      : undefined;
+  }
 }

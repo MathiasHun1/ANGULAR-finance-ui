@@ -1,8 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { Component, computed, effect, inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ApiService } from "../../services/api-service";
 import { toSignal } from "@angular/core/rxjs-interop";
-import { TransactionModel } from "../../models/models";
 import { BudgetCard } from "./components/budget-card/budget-card";
 
 @Component({
@@ -14,17 +13,5 @@ import { BudgetCard } from "./components/budget-card/budget-card";
 export class Budgets {
   private apiService = inject(ApiService);
 
-  transactions = toSignal<TransactionModel[]>(
-    this.apiService.getTransactions()
-  );
-
   budgets = toSignal(this.apiService.getBudgets());
-
-  filterTransactions(value: string) {
-    const transactions = this.transactions();
-    if (!transactions) {
-      return;
-    }
-    return transactions.filter((t) => t.category === value);
-  }
 }
