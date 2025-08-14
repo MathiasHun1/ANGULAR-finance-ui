@@ -30,14 +30,17 @@ export class Transactions {
   constructor() {
     effect(() => {
       this.transactionsService.setSearchValue(this.searchFieldValue());
+      this.searchFieldValue() && this.stepToPage(1);
     });
 
     effect(() => {
       this.transactionsService.setSortValue(this.sortValue());
+      this.sortValue() && this.stepToPage(1);
     });
 
     effect(() => {
       this.transactionsService.setCategoryValue(this.categoryValue());
+      this.categoryValue() && this.stepToPage(1);
     });
   }
 
