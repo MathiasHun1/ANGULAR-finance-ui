@@ -1,6 +1,6 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { map, tap } from "rxjs";
+import { delay, map, tap } from "rxjs";
 import { BudgetModel, TransactionModel } from "../models/models";
 
 @Injectable({
@@ -20,7 +20,8 @@ export class ApiService {
             ...transaction,
             avatar: transaction.avatar.replace("./assets", ""),
           }))
-        )
+        ),
+        delay(1000)
       );
   }
 

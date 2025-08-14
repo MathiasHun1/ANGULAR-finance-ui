@@ -1,4 +1,6 @@
-@let trx = transaction(); @if (trx) {
+@let trx = transaction(); @if (!trx) {
+<div>Loading..</div>
+} @else {
 
 <div class="fs-8 d-flex align-items-center justify-content-between py-3">
   <div class="d-flex align-items-center">

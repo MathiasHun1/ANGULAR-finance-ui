@@ -19,9 +19,11 @@ export class Transactions {
   private itemsPerPage = 10;
 
   private pagesCount = computed<number | undefined>(() => {
-    return this.transactions().length === 0
-      ? undefined
-      : Math.ceil(this.transactions().length / this.itemsPerPage);
+    const transactions = this.transactions();
+    if (!transactions) {
+      return undefined;
+    }
+    return Math.ceil(transactions.length / this.itemsPerPage);
   });
 
   // Trigger changes in service-state when input values change
@@ -49,7 +51,8 @@ export class Transactions {
     const firstIndex = (this.currentPage() - 1) * itemsPerPage;
     const lastIndex = firstIndex + itemsPerPage;
 
-    return this.transactions().slice(firstIndex, lastIndex);
+    const transactions = this.transactions();
+    return transactions ? transactions.slice(firstIndex, lastIndex) : undefined;
   });
   pageNumbers = computed<number[]>(() => {
     const pagesCount = this.pagesCount();

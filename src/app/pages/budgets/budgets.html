@@ -25,7 +25,9 @@
 
     <!-- Last spendings card -->
     <div class="list-group custom-card bg-beige-100 p-3">
-      @for(transaction of filterTransactions(budget.category); track
+      @if (!transactions()) {
+      <div>Loading..</div>
+      } @else { @for(transaction of filterTransactions(budget.category); track
       transaction) {
 
       <app-budget-card
@@ -33,7 +35,7 @@
         class="list-group-item"
       ></app-budget-card>
 
-      }
+      } }
     </div>
   </div>
   }

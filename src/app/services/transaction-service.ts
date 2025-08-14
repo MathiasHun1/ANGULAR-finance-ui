@@ -11,11 +11,8 @@ export class TransactionService {
   private apiService = inject(ApiService);
 
   // Private signals for state management
-  private allTransactions: Signal<TransactionModel[]> = toSignal(
-    this.apiService.getTransactions(),
-    {
-      initialValue: [],
-    }
+  private allTransactions: Signal<TransactionModel[] | undefined> = toSignal(
+    this.apiService.getTransactions()
   );
 
   private serarchValue = signal("");
@@ -99,8 +96,12 @@ export class TransactionService {
    ************/
 
   categories = computed(() => {
+    const transactions = this.allTransactions();
+    if (!transactions) {
+      return undefined;
+    }
     let categoryList: string[] = [];
-    this.allTransactions().map((t) => {
+    transactions.map((t) => {
       if (!categoryList.includes(t.category)) {
         categoryList.push(t.category);
       }
@@ -108,14 +109,18 @@ export class TransactionService {
     return categoryList;
   });
 
-  computedTransactions = computed(() =>
-    this.formatData(
+  computedTransactions = computed(() => {
+    const transactions = this.allTransactions();
+    if (!transactions) {
+      return undefined;
+    }
+    return this.formatData(
       this.serarchValue(),
       this.categoryValue(),
       this.sortValue(),
-      this.allTransactions()
-    )
-  );
+      transactions
+    );
+  });
 
   setSearchValue(value: string) {
     this.serarchValue.set(value);

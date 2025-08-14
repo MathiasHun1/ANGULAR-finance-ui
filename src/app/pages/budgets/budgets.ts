@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, effect, inject } from "@angular/core";
+import { Component, computed, effect, inject } from "@angular/core";
 import { ApiService } from "../../services/api-service";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { TransactionModel } from "../../models/models";
@@ -12,11 +12,12 @@ import { BudgetCard } from "./components/budget-card/budget-card";
   styleUrl: "./budgets.scss",
 })
 export class Budgets {
-  apiService = inject(ApiService);
+  private apiService = inject(ApiService);
 
   transactions = toSignal<TransactionModel[]>(
     this.apiService.getTransactions()
   );
+
   budgets = toSignal(this.apiService.getBudgets());
 
   filterTransactions(value: string) {
