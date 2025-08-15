@@ -51,9 +51,24 @@
 
   <!-- Last spendings  -->
   <div class="list-group custom-card bg-beige-100 p-3">
+    <div class="d-flex justify-content-between align-items-center px-3 py-2">
+      <h3 class="fs-6 fw-bold text-black m-0">Latest Spendings</h3>
+      <button
+        class="btn btn-link text-grey-500 text-decoration-none d-flex align-items-center gap-3 px-0"
+        (click)="toggleOpoenedstate()"
+      >
+        <span class="lh-0 fs-7">
+          @if(!openedState()) { See All } @else { Collapse }
+        </span>
+        <img src="/images/icon-caret-right.svg" alt="" />
+      </button>
+    </div>
     @if (!transactions()) {
     <div>Loading..</div>
-    } @else { @for(transaction of transactions(); track transaction) {
+
+    } @else { @let renderedTransactions = openedState() ? transactions() :
+    transactions()?.slice(0, 3); @for(transaction of renderedTransactions; track
+    transaction) {
 
     <div
       class="list-group-item fs-8 d-flex align-items-center justify-content-between py-3"

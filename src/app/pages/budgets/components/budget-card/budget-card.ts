@@ -16,6 +16,7 @@ export class BudgetCard {
   transactions = computed(() =>
     this.transactionService.getTransactionsByCategory(this.budget()?.category)
   );
+  openedState = signal(false);
 
   moneySpent = computed<number | undefined>(() => {
     const allTransactions = this.transactions();
@@ -44,4 +45,8 @@ export class BudgetCard {
     }
     return (moneySpent / budgetMax) * 100;
   });
+
+  toggleOpoenedstate() {
+    this.openedState.update((prev) => !prev);
+  }
 }
