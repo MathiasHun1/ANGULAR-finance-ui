@@ -1,1 +1,47 @@
-<p>pots works!</p>
+<div class="page-title-container">
+  <h1 class="page-title">Pots</h1>
+</div>
+
+@if(!pots()) {
+<p class="h2">Loading..</p>
+} @else {
+<div class="row g-4">
+  @for(pot of pots(); track pot) {
+  <div class="col-12 col-lg-6">
+    <div class="custom-card">
+      <div class="d-flex align-items-center">
+        <div
+          class="p-2 rounded-circle me-3"
+          [style.backgroundColor]="pot.theme"
+        ></div>
+        <h2 class="m-0 fs-5 fw-bolder">{{ pot.name }}</h2>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <span>Total Saved</span>
+        <span>${{ pot.total }}</span>
+      </div>
+      <!-- Progress Bar -->
+      <div>
+        <div class="progress-body">
+          <div
+            class="progress-bar"
+            [style.width.%]="(pot.total / pot.target) * 100"
+            [style.backgroundColor]="pot.theme"
+          ></div>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <span>{{ ((pot.total / pot.target) * 100).toFixed(1) }}%</span>
+        <span>${{ pot.target }}</span>
+      </div>
+      <!-- Buttons -->
+      <div class="d-flex gap-3">
+        <div class="btn bg-beige-100 w-100">Add money</div>
+        <div class="btn bg-beige-100 w-100">Withdraw</div>
+      </div>
+    </div>
+  </div>
+
+  }
+</div>
+}

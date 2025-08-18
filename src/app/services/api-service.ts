@@ -1,11 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { delay, map, tap } from "rxjs";
-import {
-  BudgetModel,
-  ExtendedBudget,
-  TransactionModel,
-} from "../models/models";
+import { BudgetModel, TransactionModel, PotModel } from "../models/models";
 
 @Injectable({
   providedIn: "root",
@@ -13,6 +9,7 @@ import {
 export class ApiService {
   private baseUrl = "http://localhost:3000";
   private http = inject(HttpClient);
+  private delay = 1000;
 
   getTransactions() {
     return this.http
@@ -25,14 +22,21 @@ export class ApiService {
             avatar: transaction.avatar.replace("./assets", ""),
           }))
         ),
-        delay(1000)
+        delay(this.delay)
       );
   }
 
   getBudgets() {
     return this.http.get<BudgetModel[]>(`${this.baseUrl}/budgets`).pipe(
       tap((result) => console.log("Budgets from API: ", result)),
-      delay(1500)
+      delay(this.delay)
+    );
+  }
+
+  getPots() {
+    return this.http.get<PotModel[]>(`${this.baseUrl}/pots`).pipe(
+      tap((result) => console.log("Pots from API: ", result)),
+      delay(this.delay)
     );
   }
 }

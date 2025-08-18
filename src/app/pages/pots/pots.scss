@@ -1,0 +1,15 @@
+@use "../../../styles/variables" as *;
+
+.progress-body {
+  height: 10px;
+  width: 100%;
+  border-radius: 6px;
+  background-color: map-get($theme-colors, beige-100);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 6px;
+  width: 100%;
+}
