@@ -1,13 +1,15 @@
 <div class="page-title-container">
   <h1 class="page-title">Budgets</h1>
 </div>
-@if (!budgets()) {
+@if (!extendedBudgets()) {
 <p class="h2">Loading..</p>
 } @else {
 
 <div class="container p-0">
   <section class="diagram-section">
-    <div class="custom-card d-flex flex-column align-items-center gap-5">
+    <div
+      class="custom-card d-flex flex-column flex-md-row flex-xl-column align-items-center gap-5"
+    >
       <app-chart></app-chart>
 
       <div class="w-100">
@@ -36,7 +38,7 @@
   </section>
 
   <section class="d-flex flex-column gap-4">
-    @for (budget of budgets(); track budget) {
+    @for (budget of extendedBudgets(); track budget) {
 
     <app-budget-card [budget]="budget" />
 

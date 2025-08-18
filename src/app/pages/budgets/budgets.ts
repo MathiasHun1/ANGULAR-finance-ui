@@ -1,7 +1,5 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
-import { ApiService } from "../../services/api-service";
-import { toSignal } from "@angular/core/rxjs-interop";
 import { BudgetCard } from "./components/budget-card/budget-card";
 import { Chart } from "../../shared/components/chart/chart";
 import { BudgetService } from "../../services/budget-service";
@@ -13,9 +11,7 @@ import { BudgetService } from "../../services/budget-service";
   styleUrl: "./budgets.scss",
 })
 export class Budgets {
-  private apiService = inject(ApiService);
   private budegetService = inject(BudgetService);
 
-  budgets = toSignal(this.apiService.getBudgets());
   extendedBudgets = this.budegetService.extendedBudgets;
 }

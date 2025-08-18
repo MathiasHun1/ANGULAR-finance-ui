@@ -1,9 +1,17 @@
 @use "../../../styles/variables" as *;
 
 .container {
-  display: grid;
-  grid-template-columns: 2fr 3fr;
-  gap: 1.5rem;
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @media (min-width: $desktopAndUp) {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 1.5rem;
+  }
 }
 
 .list-group-item:nth-child(1) {
