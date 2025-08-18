@@ -1,7 +1,11 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { delay, map, tap } from "rxjs";
-import { BudgetModel, TransactionModel } from "../models/models";
+import {
+  BudgetModel,
+  ExtendedBudget,
+  TransactionModel,
+} from "../models/models";
 
 @Injectable({
   providedIn: "root",

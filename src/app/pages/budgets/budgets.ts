@@ -4,6 +4,7 @@ import { ApiService } from "../../services/api-service";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { BudgetCard } from "./components/budget-card/budget-card";
 import { Chart } from "../../shared/components/chart/chart";
+import { BudgetService } from "../../services/budget-service";
 
 @Component({
   selector: "app-budgets",
@@ -13,6 +14,8 @@ import { Chart } from "../../shared/components/chart/chart";
 })
 export class Budgets {
   private apiService = inject(ApiService);
+  private budegetService = inject(BudgetService);
 
   budgets = toSignal(this.apiService.getBudgets());
+  extendedBudgets = this.budegetService.extendedBudgets;
 }

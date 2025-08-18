@@ -1,5 +1,6 @@
 import { TransactionModel } from "../../models/models";
 
+//returns the transactions of the actual month
 export const getActualMonthTransactions = (
   transactions: TransactionModel[]
 ) => {

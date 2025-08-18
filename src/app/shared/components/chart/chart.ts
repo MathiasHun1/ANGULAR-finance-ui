@@ -2,7 +2,6 @@ import { Component, computed, inject, signal } from "@angular/core";
 import { ChartConfiguration } from "chart.js";
 import { BaseChartDirective } from "ng2-charts";
 import { BudgetService } from "../../../services/budget-service";
-import { TransactionService } from "../../../services/transaction-service";
 import { ExtendedBudget } from "../../../models/models";
 import { getActualMonthTransactions } from "../../utils/utils";
 
@@ -13,27 +12,9 @@ import { getActualMonthTransactions } from "../../utils/utils";
   styleUrl: "./chart.scss",
 })
 export class Chart {
-  budgetService = inject(BudgetService);
-  transactionsService = inject(TransactionService);
-  budgets = this.budgetService.budgets;
+  private budgetService = inject(BudgetService);
 
-  // Connect budget objects with corresponding transactions
-  budgetsWithOwnTransactions = computed<ExtendedBudget[] | undefined>(() => {
-    const budgets = this.budgets();
-    if (!budgets) {
-      return undefined;
-    }
-
-    const extendedBudgets = budgets.map((b) => {
-      const transactions = this.transactionsService.getTransactionsByCategory(
-        b.category
-      );
-
-      return { ...b, transactions: transactions };
-    });
-
-    return extendedBudgets;
-  });
+  private budgetsWithOwnTransactions = this.budgetService.extendedBudgets;
 
   limit = this.budgetService.budgetsLimit;
   spendingsList = computed<number[]>(() => {
@@ -55,6 +36,16 @@ export class Chart {
     });
   });
 
+  moneySpent = computed(() => {
+    const spendingsList = this.spendingsList();
+
+    return spendingsList
+      ? spendingsList.reduce((total, value) => {
+          return total + value;
+        }, 0)
+      : 0;
+  });
+
   chartData = computed<ChartConfiguration<"doughnut">["data"]["datasets"]>(
     () => {
       const budgets = this.budgetService.budgets();
@@ -64,4 +55,8 @@ export class Chart {
       ];
     }
   );
+
+  chartOptions: ChartConfiguration<"doughnut">["options"] = {
+    cutout: "60%",
+  };
 }

@@ -1,1 +1,12 @@
-<canvas baseChart [type]="'doughnut'" [datasets]="chartData()"></canvas>
+<div class="chart">
+  <canvas
+    baseChart
+    [type]="'doughnut'"
+    [datasets]="chartData()"
+    [options]="chartOptions"
+  ></canvas>
+  <div class="limit d-flex flex-column text-center">
+    <span class="fs-2 fw-bold"> ${{ moneySpent() * -1 }}</span>
+    <span class="text-grey-500 fs-8">of ${{ limit() }} limit</span>
+  </div>
+</div>

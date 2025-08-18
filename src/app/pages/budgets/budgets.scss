@@ -3,4 +3,26 @@
 .container {
   display: grid;
   grid-template-columns: 2fr 3fr;
+  gap: 1.5rem;
+}
+
+.list-group-item:nth-child(1) {
+  border-top: none;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+.list-group-item {
+  position: relative;
+
+  & .custom-border {
+    position: absolute;
+    left: 0;
+    top: 14px;
+    bottom: 14px;
+    border-left: 6px solid;
+    border-radius: 24%;
+  }
 }
