@@ -3,10 +3,11 @@ import { Component, inject } from "@angular/core";
 import { ApiService } from "../../services/api-service";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { BudgetCard } from "./components/budget-card/budget-card";
+import { Chart } from "../../shared/components/chart/chart";
 
 @Component({
   selector: "app-budgets",
-  imports: [CommonModule, BudgetCard],
+  imports: [CommonModule, BudgetCard, Chart],
   templateUrl: "./budgets.html",
   styleUrl: "./budgets.scss",
 })

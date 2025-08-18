@@ -11,10 +11,14 @@ import { SortOptions } from "../../models/models";
   styleUrl: "./transactions.scss",
 })
 export class Transactions {
-  // Services
+  /**
+   * Services
+   */
   private transactionsService = inject(TransactionService);
 
-  // Private state variables
+  /**
+   * Private state variables
+   */
   private transactions = this.transactionsService.computedTransactions;
   private itemsPerPage = 10;
 
@@ -26,7 +30,7 @@ export class Transactions {
     return Math.ceil(transactions.length / this.itemsPerPage);
   });
 
-  // Trigger changes in service-state when input values change
+  //Trigger changes in service-state when input values change
   constructor() {
     effect(() => {
       this.transactionsService.setSearchValue(this.searchFieldValue());
@@ -44,7 +48,9 @@ export class Transactions {
     });
   }
 
-  // Signals used in the template
+  /**
+   * Signals used in the template
+   */
   searchFieldValue = signal("");
   categoryValue = signal("");
   sortValue = signal<SortOptions>("date");
@@ -68,7 +74,10 @@ export class Transactions {
   });
   categories = this.transactionsService.categories;
 
-  // Event Handdlers
+  /**
+   * Event Handdlers
+   */
+
   stepToPage(page: number) {
     this.currentPage.set(page);
   }

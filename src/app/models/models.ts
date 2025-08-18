@@ -40,3 +40,7 @@ export type SortOptions =
   | "amountReverse"
   | "name"
   | "nameReverse";
+
+export interface ExtendedBudget extends BudgetModel {
+  transactions: TransactionModel[] | undefined;
+}

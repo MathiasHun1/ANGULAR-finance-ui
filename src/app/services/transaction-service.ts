@@ -11,7 +11,7 @@ export class TransactionService {
   private apiService = inject(ApiService);
 
   // Private signals for state management
-  private allTransactions: Signal<TransactionModel[] | undefined> = toSignal(
+  allTransactions: Signal<TransactionModel[] | undefined> = toSignal(
     this.apiService.getTransactions()
   );
 
