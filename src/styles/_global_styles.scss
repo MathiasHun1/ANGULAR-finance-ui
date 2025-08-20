@@ -61,3 +61,10 @@ body {
   border-radius: 12px;
   padding: 24px 20px;
 }
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 1rem;
+  padding-inline: 0;
+}

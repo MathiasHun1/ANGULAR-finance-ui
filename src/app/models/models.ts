@@ -1,3 +1,10 @@
+export interface RecurringBill {
+  avatar: string;
+  name: string;
+  dueDate: number;
+  amount: number;
+}
+
 export interface TransactionModel {
   avatar: string;
   name: string;

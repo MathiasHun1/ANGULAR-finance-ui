@@ -1,0 +1,17 @@
+.bill-line {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+.icon {
+  width: 32px;
+  border-radius: 100%;
+}
+
+.list-group-item:nth-child(1) {
+  border-top: none;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}

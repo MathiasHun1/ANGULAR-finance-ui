@@ -43,6 +43,15 @@ $theme-colors: map-merge(
   )
 );
 
+$spacers: map-merge(
+  $spacers,
+  (
+    5: $spacer * 2,
+    6: $spacer * 2.5,
+    7: $spacer * 3,
+  )
+);
+
 // Transparent inputs
 $input-bg: transparent;
 $input-focus-bg: transparent;

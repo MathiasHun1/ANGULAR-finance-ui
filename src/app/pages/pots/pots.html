@@ -9,19 +9,21 @@
   @for(pot of pots(); track pot) {
   <div class="col-12 col-lg-6">
     <div class="custom-card">
-      <div class="d-flex align-items-center">
+      <!-- Card title -->
+      <div class="d-flex align-items-center pb-5">
         <div
           class="p-2 rounded-circle me-3"
           [style.backgroundColor]="pot.theme"
         ></div>
         <h2 class="m-0 fs-5 fw-bolder">{{ pot.name }}</h2>
       </div>
-      <div class="d-flex align-items-center justify-content-between">
-        <span>Total Saved</span>
-        <span>${{ pot.total }}</span>
+      <!-- Total-saved line -->
+      <div class="d-flex align-items-center justify-content-between pb-2">
+        <span class="fs--7 text-grey-500">Total Saved</span>
+        <span class="fs-3 fw-bolder">${{ pot.total }}</span>
       </div>
       <!-- Progress Bar -->
-      <div>
+      <div class="mb-2">
         <div class="progress-body">
           <div
             class="progress-bar"
@@ -30,8 +32,13 @@
           ></div>
         </div>
       </div>
-      <div class="d-flex align-items-center justify-content-between">
-        <span>{{ ((pot.total / pot.target) * 100).toFixed(1) }}%</span>
+      <!-- % representation line -->
+      <div
+        class="d-flex align-items-center justify-content-between pb-5 fs-8 text-grey-500"
+      >
+        <span class="fw-bolder"
+          >{{ ((pot.total / pot.target) * 100).toFixed(1) }}%</span
+        >
         <span>${{ pot.target }}</span>
       </div>
       <!-- Buttons -->

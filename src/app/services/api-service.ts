@@ -1,7 +1,22 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { delay, map, tap } from "rxjs";
-import { BudgetModel, TransactionModel, PotModel } from "../models/models";
+import {
+  delay,
+  distinct,
+  filter,
+  forkJoin,
+  map,
+  mergeAll,
+  Observable,
+  tap,
+  toArray,
+} from "rxjs";
+import {
+  BudgetModel,
+  TransactionModel,
+  PotModel,
+  RecurringBill,
+} from "../models/models";
 
 @Injectable({
   providedIn: "root",
@@ -38,5 +53,33 @@ export class ApiService {
       tap((result) => console.log("Pots from API: ", result)),
       delay(this.delay)
     );
+  }
+
+  getRecurringTypeBills(): Observable<RecurringBill[]> {
+    return this.http
+      .get<TransactionModel[]>(`${this.baseUrl}/transactions`)
+      .pipe(
+        // 1. Filter out the recurring transactions.
+        map((result) => result.filter((t) => t.recurring === true)),
+        // 2.Flatten the array into a stream of individual transactions.
+        mergeAll(),
+        // 3.  Emit only transactions with a unique name.
+        distinct((transaction) => transaction.name),
+        // 4. Transform the stream of transactions back to an array
+        toArray(),
+        map((bills) =>
+          bills.map((b) => {
+            const duedate = new Date(b.date).getDate();
+            return {
+              avatar: b.avatar,
+              name: b.name,
+              dueDate: duedate,
+              amount: b.amount,
+            };
+          })
+        ),
+        tap((res) => console.log("Log bills from API :", res)),
+        delay(1000)
+      );
   }
 }
