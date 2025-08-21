@@ -33,11 +33,11 @@
 <section class="row">
   <div class="col-7">
     <!-- Pots -->
-    <div class="custom-card">
+    <div class="custom-card mb-3">
       <div class="d-flex justify-content-between align-items-center pb-3">
         <h2 class="fs-5 fw-bold">Pots</h2>
         <a class="navlink" routerLink="/pots"
-          >See details
+          >See Details
           <img class="ms-2" src="/images/icon-caret-right.svg" alt="" />
         </a>
       </div>
@@ -78,6 +78,48 @@
             />
             }
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transactions -->
+    <div class="custom-card">
+      <div class="d-flex justify-content-between align-items-center pb-3">
+        <h2 class="fs-5 fw-bold">Transactions</h2>
+        <a class="navlink" routerLink="/transactions"
+          >View All
+          <img class="ms-2" src="/images/icon-caret-right.svg" alt="" />
+        </a>
+      </div>
+
+      <div>
+        <div class="list-group">
+          @for (transaction of transactions(); track transaction) {
+          <div class="list-group-item d-felx justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+              <img
+                class="avatar"
+                [src]="transaction.avatar.replace('/assets', '')"
+                alt=""
+              />
+              <p class="m-0 fs-7 fw-bolder">
+                {{ transaction.name }}
+              </p>
+            </div>
+
+            <div class="text-end">
+              <p
+                [ngClass]="{ 'text-green': transaction.amount > 0 }"
+                class="fs-7 fw-bold mb-0"
+              >
+                {{ transaction.amount | currency }}
+              </p>
+              <p class="fs-8 text-grey-500 mb-0">
+                {{ transaction.date | date }}
+              </p>
+            </div>
+          </div>
+          }
         </div>
       </div>
     </div>

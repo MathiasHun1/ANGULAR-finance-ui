@@ -21,3 +21,16 @@
   top: 50%;
   transform: translateY(-50%);
 }
+
+.avatar {
+  width: 40px;
+  border-radius: 100%;
+}
+
+.list-group-item:nth-child(1) {
+  border-top: none;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
