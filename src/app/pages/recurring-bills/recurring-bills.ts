@@ -12,36 +12,16 @@ import { FormsModule, FormControl } from "@angular/forms";
 })
 export class RecurringBills {
   private billsService = inject(RecurringbillsService);
-  private billTypes = this.billsService.billTypes;
 
-  sortedBills = computed(() => {
-    return this.billsService.sort(this.sortValue(), this.billTypes());
-  });
-  paidBills = computed(() => {
-    return this.billTypes().filter((b) => b.dueDate < new Date().getDate());
-  });
-  dueSoonBills = computed(() =>
-    this.billTypes().filter((b) => {
-      const today = new Date().getDate();
-      return today <= b.dueDate && today >= b.dueDate - 3;
-    })
-  );
-  upcomingBills = computed(() =>
-    this.billTypes().filter((b) => new Date().getDate() <= b.dueDate)
-  );
+  sortedBills = this.billsService.sortedBills;
+  paidBills = this.billsService.paidBills;
+  dueSoonBills = this.billsService.dueSoonBills;
+  upcomingBills = this.billsService.upcomingBills;
 
-  sortValue = signal<SortOptions>("date");
-  searchFieldValue = signal("");
+  sortValue = this.billsService.sortValue;
+  searchFieldValue = this.billsService.searchFieldValue;
 
-  getTotalAmount(bills: RecurringBill[]) {
-    return Number(
-      bills
-        .reduce((total, bill) => {
-          return total + bill.amount;
-        }, 0)
-        .toFixed(2)
-    );
-  }
+  getTotalAmount = this.billsService.getTotalAmount;
 
   getDueDateInfo(dueDate: number) {
     const todaysDay = new Date().getDate();

@@ -34,22 +34,22 @@
         <div class="list-group-item">
           <span class="text-grey-500">Paid bills</span>
           <div class="fw-bolder">
-            <span class="pe-1">{{ paidBills().length }}</span
-            >(${{ getTotalAmount(paidBills()) * -1 }})<span></span>
+            <span class="pe-1">{{ paidBills().bills.length }}</span
+            >(${{ getTotalAmount(paidBills().bills) * -1 }})<span></span>
           </div>
         </div>
         <div class="list-group-item">
           <span class="text-grey-500">Total upcoming</span>
           <div class="fw-bolder">
-            <span class="pe-1">{{ upcomingBills().length }}</span>
-            <span>(${{ getTotalAmount(upcomingBills()) * -1 }})</span>
+            <span class="pe-1">{{ upcomingBills().bills.length }}</span>
+            <span>(${{ getTotalAmount(upcomingBills().bills) * -1 }})</span>
           </div>
         </div>
         <div class="list-group-item text-red">
           <span class="">Due soon</span>
           <div class="fw-bolder">
-            <span class="pe-1">{{ dueSoonBills().length }}</span>
-            <span>(${{ getTotalAmount(dueSoonBills()) * -1 }})</span>
+            <span class="pe-1">{{ dueSoonBills().bills.length }}</span>
+            <span>(${{ getTotalAmount(dueSoonBills().bills) * -1 }})</span>
           </div>
         </div>
       </div>

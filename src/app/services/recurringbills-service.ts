@@ -1,4 +1,4 @@
-import { inject, Injectable } from "@angular/core";
+import { inject, Injectable, computed, signal } from "@angular/core";
 import { ApiService } from "./api-service";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { map, take, tap } from "rxjs";
@@ -24,6 +24,34 @@ export class RecurringbillsService {
     ),
     { initialValue: [] }
   );
+
+  sortedBills = computed(() => {
+    return this.sort(this.sortValue(), this.billTypes());
+  });
+  paidBills = computed(() => {
+    return {
+      bills: this.billTypes().filter((b) => b.dueDate < new Date().getDate()),
+      theme: "#277C78",
+    };
+  });
+  dueSoonBills = computed(() => {
+    return {
+      bills: this.billTypes().filter((b) => {
+        const today = new Date().getDate();
+        return today <= b.dueDate && today >= b.dueDate - 3;
+      }),
+      theme: "#82C9D7",
+    };
+  });
+  upcomingBills = computed(() => {
+    return {
+      bills: this.billTypes().filter((b) => new Date().getDate() <= b.dueDate),
+      theme: "#F2CDAC",
+    };
+  });
+
+  sortValue = signal<SortOptions>("date");
+  searchFieldValue = signal("");
 
   sort(value: SortOptions, transactions: RecurringBill[]): RecurringBill[] {
     if (!value) {
@@ -59,5 +87,15 @@ export class RecurringbillsService {
         const _exhaustive: never = value;
         return transactionsCopy;
     }
+  }
+
+  getTotalAmount(bills: RecurringBill[]) {
+    return Number(
+      bills
+        .reduce((total, bill) => {
+          return total + bill.amount;
+        }, 0)
+        .toFixed(2)
+    );
   }
 }
