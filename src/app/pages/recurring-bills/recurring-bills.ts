@@ -1,38 +1,37 @@
-import { Component, computed, effect, inject } from "@angular/core";
+import { Component, computed, effect, inject, signal } from "@angular/core";
 import { RecurringbillsService } from "../../services/recurringbills-service";
 import { CommonModule } from "@angular/common";
-import { Signal } from "@angular/core";
-import { RecurringBill } from "../../models/models";
+import { RecurringBill, SortOptions } from "../../models/models";
+import { FormsModule, FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-recurring-bills",
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: "./recurring-bills.html",
   styleUrl: "./recurring-bills.scss",
 })
 export class RecurringBills {
   private billsService = inject(RecurringbillsService);
+  private billTypes = this.billsService.billTypes;
 
-  billTypes = this.billsService.billTypes;
   sortedBills = computed(() => {
-    const billsCopy = [...this.billTypes()];
-    return billsCopy.sort((a, b) => a.dueDate - b.dueDate);
+    return this.billsService.sort(this.sortValue(), this.billTypes());
   });
-
   paidBills = computed(() => {
     return this.billTypes().filter((b) => b.dueDate < new Date().getDate());
   });
-
   dueSoonBills = computed(() =>
     this.billTypes().filter((b) => {
       const today = new Date().getDate();
-      return today < b.dueDate && today >= b.dueDate - 3;
+      return today <= b.dueDate && today >= b.dueDate - 3;
     })
   );
-
   upcomingBills = computed(() =>
     this.billTypes().filter((b) => new Date().getDate() <= b.dueDate)
   );
+
+  sortValue = signal<SortOptions>("date");
+  searchFieldValue = signal("");
 
   getTotalAmount(bills: RecurringBill[]) {
     return Number(
@@ -65,5 +64,15 @@ export class RecurringBills {
       path: "",
       isClose: false,
     };
+  }
+
+  filterBills(bills: RecurringBill[]) {
+    if (!this.searchFieldValue) {
+      return bills;
+    }
+
+    return bills.filter((b) =>
+      b.name.toLowerCase().trim().includes(this.searchFieldValue())
+    );
   }
 }

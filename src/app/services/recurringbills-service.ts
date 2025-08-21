@@ -5,6 +5,7 @@ import { map, take, tap } from "rxjs";
 import { TransactionModel } from "../models/models";
 import { RecurringBill } from "../models/models";
 import { Signal } from "@angular/core";
+import { SortOptions } from "../models/models";
 
 @Injectable({
   providedIn: "root",
@@ -23,4 +24,40 @@ export class RecurringbillsService {
     ),
     { initialValue: [] }
   );
+
+  sort(value: SortOptions, transactions: RecurringBill[]): RecurringBill[] {
+    if (!value) {
+      return transactions;
+    }
+
+    const transactionsCopy = [...transactions];
+
+    switch (value) {
+      case "date":
+        return transactionsCopy.sort((a, b) => {
+          return a.dueDate - b.dueDate;
+        });
+
+      case "dateReverse":
+        return transactionsCopy.sort((a, b) => {
+          return b.dueDate - a.dueDate;
+        });
+
+      case "name":
+        return transactionsCopy.sort((a, b) => a.name.localeCompare(b.name));
+
+      case "nameReverse":
+        return transactionsCopy.sort((a, b) => b.name.localeCompare(a.name));
+
+      case "amountReverse":
+        return transactionsCopy.sort((a, b) => b.amount - a.amount);
+
+      case "amount":
+        return transactionsCopy.sort((a, b) => a.amount - b.amount);
+
+      default:
+        const _exhaustive: never = value;
+        return transactionsCopy;
+    }
+  }
 }

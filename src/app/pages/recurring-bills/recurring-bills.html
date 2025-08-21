@@ -45,8 +45,8 @@
             <span>(${{ getTotalAmount(upcomingBills()) * -1 }})</span>
           </div>
         </div>
-        <div class="list-group-item">
-          <span class="text-grey-500">Due soon</span>
+        <div class="list-group-item text-red">
+          <span class="">Due soon</span>
           <div class="fw-bolder">
             <span class="pe-1">{{ dueSoonBills().length }}</span>
             <span>(${{ getTotalAmount(dueSoonBills()) * -1 }})</span>
@@ -56,15 +56,39 @@
     </div>
   </section>
 
+  <!-- Bills List card -->
   <section class="custom-card mt-4 mt-xl-0 px-3 flex-grow-1">
-    <div class="bill-line d-none d-sm-grid">
-      <p>Bill title</p>
-      <p>Due date</p>
-      <p class="text-end">Amount</p>
+    <div class="row">
+      <div class="col">
+        <input
+          type="text"
+          class="form-control w-75"
+          placeholder="Search bills"
+          [(ngModel)]="searchFieldValue"
+        />
+      </div>
+
+      <div class="col d-flex justify-content-end align-items-center gap-2 mb-4">
+        <label for="sortby" class="fs-7 text-grey-500">Sort by</label>
+        <select id="sortby" class="form-select w-50" [(ngModel)]="sortValue">
+          <option value="date">Latest</option>
+          <option value="dateReverse">Oldest</option>
+          <option value="name">A - Z</option>
+          <option value="nameReverse">Z - A</option>
+          <option value="amount">Highest</option>
+          <option value="amountReverse">Lowest</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="bill-line d-none d-sm-grid fs-8 text-grey-500">
+      <p class="m-0">Bill title</p>
+      <p class="m-0">Due date</p>
+      <p class="text-end m-0">Amount</p>
     </div>
 
     <div class="list-group">
-      @for (bill of sortedBills(); track bill) {
+      @for (bill of filterBills(sortedBills()); track bill) {
       <div class="bill-line list-group-item">
         <div>
           <img class="icon" [src]="bill.avatar" alt="" />
