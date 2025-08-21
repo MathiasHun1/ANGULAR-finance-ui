@@ -11,8 +11,22 @@
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
-
+  gap: 8px;
   align-items: center;
+}
+
+.grid-container.budgets {
+  @media (min-width: $tabletAndUp) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding-left: 15%;
+  }
+  @media (min-width: $desktopAndUp) {
+    padding-left: revert;
+    padding-inline: 0;
+  }
 }
 
 .pot-icon {

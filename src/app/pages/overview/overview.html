@@ -7,22 +7,22 @@
 } @else {
 
 <!-- Total balance cards line -->
-<div class="row g-3 mb-3">
-  <div class="col-4">
+<div class="row g-3 mb-5">
+  <div class="col-12 col-sm-4">
     <div class="custom-card bg-grey-900 text-white">
       <h2 class="fs-7 fw-normal text-white">Current balance</h2>
       <p class="fs-3 fw-bold mb-0 pt-1">{{ balance()?.current | currency }}</p>
     </div>
   </div>
 
-  <div class="col-4">
+  <div class="col-12 col-sm-4">
     <div class="custom-card">
       <h2 class="fs-7 fw-normal text-grey-500">Income</h2>
       <p class="fs-3 fw-bold mb-0 pt-1">{{ balance()?.income | currency }}</p>
     </div>
   </div>
 
-  <div class="col-4">
+  <div class="col-12 col-sm-4">
     <div class="custom-card">
       <h2 class="fs-7 fw-normal text-grey-500">Expanses</h2>
       <p class="fs-3 fw-bold mb-0 pt-1">{{ balance()?.expenses | currency }}</p>
@@ -31,7 +31,7 @@
 </div>
 
 <section class="row">
-  <div class="col-7 d-flex flex-column">
+  <div class="col-12 col-xl-7 d-flex flex-column">
     <!-- Pots -->
     <div class="custom-card mb-3 flex-grow-1">
       <div class="d-flex justify-content-between align-items-center pb-3">
@@ -43,7 +43,7 @@
       </div>
 
       <div class="row">
-        <div class="col-6">
+        <div class="col-12 col-sm-6">
           <div
             class="custom-card position-relative bg-beige-100 py-3 text-center"
           >
@@ -52,8 +52,8 @@
             <img class="pot-icon" src="/images/icon-pot.svg" alt="" />
           </div>
         </div>
-        <div class="col-6">
-          <div class="grid-container h-100">
+        <div class="col-12 col-sm-6">
+          <div class="grid-container h-100 pt-3 pt-sm-0">
             @let data = potsData(); @if (data && data.length >= 4) {
 
             <app-list-item
@@ -83,7 +83,7 @@
     </div>
 
     <!-- Transactions -->
-    <div class="custom-card">
+    <div class="custom-card mb-3 mb-xl-0">
       <div class="d-flex justify-content-between align-items-center pb-3">
         <h2 class="fs-5 fw-bold">Transactions</h2>
         <a class="navlink" routerLink="/transactions"
@@ -125,7 +125,7 @@
     </div>
   </div>
 
-  <div class="col-5 d-flex flex-column">
+  <div class="col-12 col-xl-5 d-flex flex-column">
     <!-- Budgets -->
     <div class="custom-card mb-3">
       <div class="d-flex justify-content-between align-items-center pb-3">
@@ -136,9 +136,11 @@
         </a>
       </div>
 
-      <div class="d-flex justify-content-between">
-        <app-chart></app-chart>
-        <div class="d-flex flex-column justify-content-between">
+      <div class="row">
+        <div class="col-12 col-sm-8 d-flex justify-content-center">
+          <app-chart></app-chart>
+        </div>
+        <div class="grid-container budgets col-12 col-sm-4 pt-4 pt-sm-0">
           @for (budget of budgets(); track budget) {
           <app-list-item
             [name]="budget.category"
