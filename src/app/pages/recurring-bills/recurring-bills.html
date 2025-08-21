@@ -6,88 +6,100 @@
 <p class="h2">Loading..</p>
 } @else {
 
-<section class="d-flex flex-column gap-3 flex-sm-row">
-  <!-- Bills Card -->
-  <div
-    class="custom-card bg-grey-900 text-white d-flex flex-column gap-4 flex-grow-1"
+<div class="d-xl-flex flex-row">
+  <section
+    class="d-flex flex-column gap-3 gap-sm-4 flex-sm-row flex-xl-column px-xl-4 flex-grow-1"
   >
-    <div class="d-none d-sm-block pt-3">
-      <img src="/images/icon-recurring-bills.svg" alt="" />
-    </div>
+    <!-- Bills Card -->
+    <div
+      class="custom-card bg-grey-900 text-white d-flex flex-column gap-4 flex-grow-1 flex-xl-grow-0"
+    >
+      <div class="d-none d-sm-block pt-3">
+        <img src="/images/icon-recurring-bills.svg" alt="" />
+      </div>
 
-    <div class="d-flex align-items-center gap-4">
-      <img src="/images/icon-recurring-bills.svg" alt="" class="d-sm-none" />
-      <div>
-        <h2 class="m-0 fs-7 pb-2">Total Bills</h2>
-        <p class="m-0 fs-3 fw-bolder">$560</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Summary card -->
-  <div class="custom-card flex-grow-1">
-    <h2 class="m-0 fs-6 fw-bolder">Summary</h2>
-    <div class="list-group fs-8">
-      <div class="list-group-item">
-        <span class="text-grey-500">Paid bills</span>
-        <div class="fw-bolder">
-          <span class="pe-1">{{ paidBills().length }}</span
-          >(${{ getTotalAmount(paidBills()) * -1 }})<span></span>
-        </div>
-      </div>
-      <div class="list-group-item">
-        <span class="text-grey-500">Total upcoming</span>
-        <div class="fw-bolder">
-          <span class="pe-1">{{ upcomingBills().length }}</span>
-          <span>(${{ getTotalAmount(upcomingBills()) * -1 }})</span>
-        </div>
-      </div>
-      <div class="list-group-item">
-        <span class="text-grey-500">Due soon</span>
-        <div class="fw-bolder">
-          <span class="pe-1">{{ dueSoonBills().length }}</span>
-          <span>(${{ getTotalAmount(dueSoonBills()) * -1 }})</span>
+      <div class="d-flex align-items-center gap-4">
+        <img src="/images/icon-recurring-bills.svg" alt="" class="d-sm-none" />
+        <div>
+          <h2 class="m-0 fs-7 pb-2">Total Bills</h2>
+          <p class="m-0 fs-3 fw-bolder">$560</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<section class="custom-card mt-5">
-  <div class="bill-line">
-    <p>Bill title</p>
-    <p>Due date</p>
-    <p class="text-end">Amount</p>
-  </div>
-
-  <div class="list-group">
-    @for (bill of sortedBills(); track bill) {
-    <div class="bill-line list-group-item">
-      <div>
-        <img class="icon" [src]="bill.avatar" alt="" />
-        <span class="ps-3 fs-7 fw-bolder">{{ bill.name }}</span>
+    <!-- Summary card -->
+    <div class="custom-card flex-grow-1 flex-xl-grow-0">
+      <h2 class="m-0 fs-6 fw-bolder">Summary</h2>
+      <div class="list-group fs-8">
+        <div class="list-group-item">
+          <span class="text-grey-500">Paid bills</span>
+          <div class="fw-bolder">
+            <span class="pe-1">{{ paidBills().length }}</span
+            >(${{ getTotalAmount(paidBills()) * -1 }})<span></span>
+          </div>
+        </div>
+        <div class="list-group-item">
+          <span class="text-grey-500">Total upcoming</span>
+          <div class="fw-bolder">
+            <span class="pe-1">{{ upcomingBills().length }}</span>
+            <span>(${{ getTotalAmount(upcomingBills()) * -1 }})</span>
+          </div>
+        </div>
+        <div class="list-group-item">
+          <span class="text-grey-500">Due soon</span>
+          <div class="fw-bolder">
+            <span class="pe-1">{{ dueSoonBills().length }}</span>
+            <span>(${{ getTotalAmount(dueSoonBills()) * -1 }})</span>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div>
-        <span class="fs-8 text-green pe-3"
-          >Monthly - {{ bill.dueDate + 1 }}th</span
+  <section class="custom-card mt-4 mt-xl-0 px-3 flex-grow-1">
+    <div class="bill-line d-none d-sm-grid">
+      <p>Bill title</p>
+      <p>Due date</p>
+      <p class="text-end">Amount</p>
+    </div>
+
+    <div class="list-group">
+      @for (bill of sortedBills(); track bill) {
+      <div class="bill-line list-group-item">
+        <div>
+          <img class="icon" [src]="bill.avatar" alt="" />
+          <span class="ps-3 fs-7 fw-bolder">{{ bill.name }}</span>
+
+          <div class="d-sm-none">
+            <span class="fs-8 text-green pe-3"
+              >Monthly - {{ bill.dueDate + 1 }}th</span
+            >
+            @if (getDueDateInfo(bill.dueDate).path) {
+            <img [src]="getDueDateInfo(bill.dueDate).path" alt="" />
+            }
+          </div>
+        </div>
+
+        <div class="d-none d-sm-block">
+          <span class="fs-8 text-green pe-3"
+            >Monthly - {{ bill.dueDate + 1 }}th</span
+          >
+          @if (getDueDateInfo(bill.dueDate).path) {
+          <img [src]="getDueDateInfo(bill.dueDate).path" alt="" />
+          }
+        </div>
+
+        <p
+          class="text-end fs-7 fw-bolder align-self-end align-self-sm-start m-0"
+          [ngClass]="{
+            'text-red': getDueDateInfo(bill.dueDate).isClose
+          }"
         >
-        @if (getDueDateInfo(bill.dueDate).path) {
-        <img [src]="getDueDateInfo(bill.dueDate).path" alt="" />
-        }
+          ${{ bill.amount * -1 }}
+        </p>
       </div>
-
-      <p
-        class="text-end fs-7 fw-bolder"
-        [ngClass]="{
-          'text-red': getDueDateInfo(bill.dueDate).isClose
-        }"
-      >
-        ${{ bill.amount * -1 }}
-      </p>
+      }
     </div>
-    }
-  </div>
-</section>
-
+  </section>
+</div>
 }

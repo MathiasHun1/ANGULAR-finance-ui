@@ -34,29 +34,6 @@ export class RecurringBills {
     this.billTypes().filter((b) => new Date().getDate() <= b.dueDate)
   );
 
-  // paidBillsTotal = computed(() => {
-  //   const bills = this.billTypes();
-  //   const today = new Date().getDate();
-  //   if (!bills) {
-  //     return {
-  //       amountTotal: 0,
-  //       billsCount: 0,
-  //     };
-  //   }
-
-  //   let billsCount = 0;
-
-  //   const amountTotal = bills.reduce((total, bill) => {
-  //     if (bill.dueDate > today) {
-  //       return total + 0;
-  //     }
-
-  //     billsCount++;
-  //     return total + bill.amount;
-  //   }, 0);
-
-  //   return { amountTotal, billsCount };
-  // });
   getTotalAmount(bills: RecurringBill[]) {
     return Number(
       bills
@@ -77,7 +54,7 @@ export class RecurringBills {
       };
     }
 
-    if (todaysDay < dueDate && todaysDay >= dueDate - 3) {
+    if (todaysDay <= dueDate && todaysDay >= dueDate - 3) {
       return {
         path: "/images/icon-bill-due.svg",
         isClose: true,

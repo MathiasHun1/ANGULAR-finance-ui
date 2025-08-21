@@ -1,6 +1,12 @@
+@use "../../../styles/variables" as *;
+
 .bill-line {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr;
+
+  @media (min-width: $tabletAndUp) {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
 }
 
 .icon {
