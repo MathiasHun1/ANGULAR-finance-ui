@@ -2,6 +2,10 @@
   <h1 class="page-title">Transactions</h1>
 </div>
 
+@if (!paginatedData()) {
+<p class="h2 text-center py-5">Loading..</p>
+} @else {
+
 <div
   class="custom-card d-flex flex-column justify-content-between text-grey-500"
 >
@@ -50,9 +54,8 @@
     </div>
 
     <!-- Transaction elements -->
-    @if (!paginatedData()) {
-    <p class="h2 text-center py-5">Loading..</p>
-    } @for (transaction of paginatedData(); track transaction.date) {
+
+    @for (transaction of paginatedData(); track transaction.date) {
     <div class="transaction-item list-group-item">
       <div>
         <img
@@ -111,3 +114,4 @@
     </ul>
   </nav>
 </div>
+}

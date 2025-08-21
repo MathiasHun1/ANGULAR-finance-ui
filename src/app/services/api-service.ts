@@ -1,21 +1,12 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import {
-  delay,
-  distinct,
-  filter,
-  forkJoin,
-  map,
-  mergeAll,
-  Observable,
-  tap,
-  toArray,
-} from "rxjs";
+import { delay, distinct, map, mergeAll, Observable, tap, toArray } from "rxjs";
 import {
   BudgetModel,
   TransactionModel,
   PotModel,
   RecurringBill,
+  BalanceModel,
 } from "../models/models";
 
 @Injectable({
@@ -30,7 +21,6 @@ export class ApiService {
     return this.http
       .get<TransactionModel[]>(`${this.baseUrl}/transactions`)
       .pipe(
-        tap((result) => console.log("logged from API service: ", result)),
         map((result) =>
           result.map((transaction: TransactionModel) => ({
             ...transaction,
@@ -42,17 +32,15 @@ export class ApiService {
   }
 
   getBudgets() {
-    return this.http.get<BudgetModel[]>(`${this.baseUrl}/budgets`).pipe(
-      tap((result) => console.log("Budgets from API: ", result)),
-      delay(this.delay)
-    );
+    return this.http
+      .get<BudgetModel[]>(`${this.baseUrl}/budgets`)
+      .pipe(delay(this.delay));
   }
 
   getPots() {
-    return this.http.get<PotModel[]>(`${this.baseUrl}/pots`).pipe(
-      tap((result) => console.log("Pots from API: ", result)),
-      delay(this.delay)
-    );
+    return this.http
+      .get<PotModel[]>(`${this.baseUrl}/pots`)
+      .pipe(delay(this.delay));
   }
 
   getRecurringTypeBills(): Observable<RecurringBill[]> {
@@ -81,5 +69,11 @@ export class ApiService {
         tap((res) => console.log("Log bills from API :", res)),
         delay(1000)
       );
+  }
+
+  getBalance() {
+    return this.http
+      .get<BalanceModel>(`${this.baseUrl}/balance`)
+      .pipe(delay(1000));
   }
 }

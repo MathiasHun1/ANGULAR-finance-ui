@@ -1,0 +1,14 @@
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+.decor {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  bottom: 0px;
+  width: 4px;
+  border-radius: 9999999999px;
+  background-color: red;
+}

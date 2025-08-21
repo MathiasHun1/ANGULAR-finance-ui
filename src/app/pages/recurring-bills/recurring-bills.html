@@ -2,8 +2,8 @@
   <h1 class="page-title">Recurring Bills</h1>
 </div>
 
-@if (!sortedBills()) {
-<p class="h2">Loading..</p>
+@if (sortedBills().length === 0) {
+<p class="h2 text-center py-5">Loading..</p>
 } @else {
 
 <div class="d-xl-flex flex-row">

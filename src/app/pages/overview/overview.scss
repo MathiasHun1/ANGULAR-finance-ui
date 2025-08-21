@@ -1,0 +1,23 @@
+@use "../../../styles/variables" as *;
+
+.navlink {
+  text-decoration: none;
+  color: map-get($theme-colors, grey-500);
+  display: flex;
+  align-items: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+
+  align-items: center;
+}
+
+.pot-icon {
+  position: absolute;
+  left: 14%;
+  top: 50%;
+  transform: translateY(-50%);
+}
