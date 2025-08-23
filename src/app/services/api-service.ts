@@ -66,7 +66,7 @@ export class ApiService {
             };
           })
         ),
-        tap((res) => console.log("Log bills from API :", res)),
+        // tap((res) => console.log("Log bills from API :", res)),
         delay(1000)
       );
   }

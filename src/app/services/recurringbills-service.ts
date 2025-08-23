@@ -15,7 +15,7 @@ export class RecurringbillsService {
 
   billTypes: Signal<RecurringBill[]> = toSignal(
     this.apiService.getRecurringTypeBills().pipe(
-      tap((res) => console.log("LOG bills from service: ", res)),
+      // tap((res) => console.log("LOG bills from service: ", res)),
       map((result) =>
         result.map((t) => {
           return { ...t, avatar: t.avatar.replace("./assets", "") };
