@@ -4,6 +4,7 @@ import { TransactionService } from "./transaction-service";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { BudgetModel, ExtendedBudget } from "../models/models";
 import { getActualMonthTransactions } from "../shared/utils/utils";
+import { checkThemeOptions } from "../shared/utils/utils";
 
 @Injectable({
   providedIn: "root",
@@ -57,5 +58,14 @@ export class BudgetService {
     });
 
     return extended;
+  });
+
+  themeOptions = computed(() => {
+    const budgets = this.budgets();
+    if (!budgets) {
+      return [];
+    }
+
+    return checkThemeOptions(budgets);
   });
 }

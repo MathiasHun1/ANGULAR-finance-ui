@@ -1,4 +1,5 @@
 import { TransactionModel } from "../../models/models";
+import { themeOptions } from "../constants";
 
 //returns the transactions of the actual month
 export const getActualMonthTransactions = (
@@ -8,4 +9,18 @@ export const getActualMonthTransactions = (
   return transactions.filter(
     (t) => new Date(t.date).getMonth() === currentMonth
   );
+};
+
+export const checkThemeOptions = (
+  themedObjects: Array<{ theme: string; [key: string]: any }>
+): Array<{ name: string; color: string; inUse: boolean }> => {
+  const themesInUse = themedObjects.map((obj) => obj.theme);
+  const checkedThemes = themeOptions.map((t) => {
+    return {
+      ...t,
+      inUse: themesInUse.includes(t.color) ? true : false,
+    };
+  });
+
+  return checkedThemes;
 };

@@ -7,7 +7,7 @@ import { Modal } from "./shared/components/modal/modal";
   selector: "app-root",
   templateUrl: "./app.html",
   styleUrl: "./app.scss",
-  imports: [RouterOutlet, NavComponent, Modal],
+  imports: [RouterOutlet, NavComponent],
 })
 export class App {
   protected title = "Finance";

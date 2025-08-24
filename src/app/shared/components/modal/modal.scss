@@ -11,6 +11,9 @@
 
 .visible {
   opacity: 1;
-
   transition: opacity 300ms ease;
+}
+
+.modal-footer {
+  border-top: none;
 }

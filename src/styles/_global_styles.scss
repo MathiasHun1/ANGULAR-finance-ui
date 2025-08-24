@@ -19,6 +19,12 @@ body {
   border-inline: none;
 }
 
+.form-label {
+  font-size: 14px;
+  font-weight: bolder;
+  color: map-get($theme-colors, "grey-500");
+}
+
 // Scrollbar hidden utility
 .overflow-scroll-hidden {
   @media (min-width: $desktopAndUp) {

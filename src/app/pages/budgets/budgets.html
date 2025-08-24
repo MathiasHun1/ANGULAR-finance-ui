@@ -46,3 +46,48 @@
   </section>
 </div>
 }
+
+<button (click)="openModal()">Opoen modal</button>
+
+<!-- Input Modal  -->
+<app-modal
+  [title]="'Add new Budget'"
+  [subTitle]="
+    'Choose a category to set a spending budget. Theese categories can help you monitor spendings.'
+  "
+  [modalOpened]="modalOpened()"
+  (modalClosed)="onCloseModal($event)"
+>
+  <form (ngSubmit)="submitForm(budgetForm.value)" #budgetForm="ngForm">
+    <label class="form-label" for="budget-category">Budget-category</label>
+    <select
+      class="form-control mb-3"
+      id="budget-category"
+      name="category"
+      ngModel
+    >
+      @for (option of budgetOptions; track option) {
+      <option [value]="option">{{ option }}</option>
+      }
+    </select>
+
+    <label class="form-label" for="budget-max-spend">Maximum Spend</label>
+    <input
+      class="form-control mb-3"
+      type="text"
+      id="budget-max-spend"
+      name="maximum"
+      ngModel
+    />
+
+    <label class="form-label" for="budget-theme-select">Theme</label>
+    <app-custom-select-input
+      [options]="themeOptionsStrings()"
+      [placeHolder]="'Select a theme'"
+      name="theme"
+      ngModel
+    />
+
+    <button type="submit" class="btn btn-dark w-100">Add Budget</button>
+  </form>
+</app-modal>
