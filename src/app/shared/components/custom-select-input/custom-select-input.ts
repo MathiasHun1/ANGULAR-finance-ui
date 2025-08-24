@@ -1,5 +1,6 @@
 import { Component, forwardRef, input, signal } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { ThemeOption } from "../../../models/models";
 
 @Component({
   selector: "app-custom-select-input",
@@ -15,17 +16,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   ],
 })
 export class CustomSelectInput implements ControlValueAccessor {
-  options = input<string[]>([]);
+  options = input<ThemeOption[]>([]);
   placeHolder = input<string>("");
 
-  value = signal<string>("");
+  value = signal<ThemeOption>({ name: "", color: "", inUse: false });
   isOpened = signal(false);
 
-  writeValue(value: string): void {
+  writeValue(value: ThemeOption): void {
     this.value.set(value);
   }
 
-  registerOnChange(fn: (value: string) => {}): void {
+  registerOnChange(fn: (value: ThemeOption) => {}): void {
     this.onChange = fn;
   }
 
@@ -33,10 +34,9 @@ export class CustomSelectInput implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean): void {}
 
-  onChange(value: string) {}
+  onChange(value: ThemeOption) {}
   onTouched() {}
-
-  select(option: string) {
+  select(option: ThemeOption) {
     this.value.set(option);
     this.onChange(this.value());
     this.onTouched();

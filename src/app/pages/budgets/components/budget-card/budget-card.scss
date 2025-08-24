@@ -25,3 +25,16 @@
 .list-group-item:last-child {
   border-bottom: none;
 }
+
+.budget-form {
+  isolation: isolate;
+  position: relative;
+}
+
+.form-select {
+  z-index: 100;
+}
+
+.button {
+  z-index: -0;
+}

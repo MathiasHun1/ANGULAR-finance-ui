@@ -52,3 +52,9 @@ export interface ExtendedBudget extends BudgetModel {
   transactions: TransactionModel[];
   spentThisMonth: number;
 }
+
+export interface ThemeOption {
+  name: string;
+  color: string;
+  inUse: boolean;
+}

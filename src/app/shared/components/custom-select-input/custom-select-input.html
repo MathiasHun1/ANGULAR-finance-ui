@@ -1,11 +1,28 @@
 <div class="custom-select mb-3">
-  <div class="selected" (click)="toggleOpen()">
-    {{ value() || placeHolder() }}
+  <div
+    class="selected h-100 d-flex justify-content-start align-items-center ms-4"
+    (click)="toggleOpen()"
+  >
+    <div
+      class="p-2 rounded-circle"
+      [style.backgroundColor]="options()[0].color"
+    ></div>
+    <span class="ms-2">{{ options()[0].name || placeHolder() }}</span>
   </div>
   @if (isOpened()) {
-  <ul>
+  <ul class="list-group bg-white px-2">
     @for (option of options(); track option) {
-    <li [value]="option" (click)="select(option)">{{ option }}</li>
+    <li
+      [value]="option.name"
+      (click)="select(option)"
+      class="list-group-item d-flex align-items-center justify-content-start px-3 py-2"
+    >
+      <div
+        class="p-2 rounded-circle"
+        [style.backgroundColor]="option.color"
+      ></div>
+      <span class="ms-3">{{ option.name }}</span>
+    </li>
     }
   </ul>
   }

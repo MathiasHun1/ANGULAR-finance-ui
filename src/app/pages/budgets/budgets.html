@@ -58,7 +58,11 @@
   [modalOpened]="modalOpened()"
   (modalClosed)="onCloseModal($event)"
 >
-  <form (ngSubmit)="submitForm(budgetForm.value)" #budgetForm="ngForm">
+  <form
+    class="budget-form"
+    (ngSubmit)="submitForm(budgetForm.value)"
+    #budgetForm="ngForm"
+  >
     <label class="form-label" for="budget-category">Budget-category</label>
     <select
       class="form-control mb-3"
@@ -82,12 +86,14 @@
 
     <label class="form-label" for="budget-theme-select">Theme</label>
     <app-custom-select-input
-      [options]="themeOptionsStrings()"
+      [options]="themeOptions()"
       [placeHolder]="'Select a theme'"
       name="theme"
       ngModel
     />
 
-    <button type="submit" class="btn btn-dark w-100">Add Budget</button>
+    <button class="button" type="submit" class="btn btn-dark w-100">
+      Add Budget
+    </button>
   </form>
 </app-modal>

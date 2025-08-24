@@ -42,6 +42,6 @@ export class Budgets {
   }
 
   submitForm(formValue: any) {
-    console.log(formValue);
+    console.log({ ...formValue, theme: formValue.theme.name });
   }
 }
