@@ -1,19 +1,22 @@
-import { computed, inject, Injectable } from "@angular/core";
+import { computed, inject, Injectable, signal } from "@angular/core";
 import { ApiService } from "./api-service";
 import { TransactionService } from "./transaction-service";
-import { toSignal } from "@angular/core/rxjs-interop";
 import { BudgetModel, ExtendedBudget } from "../models/models";
 import { getActualMonthTransactions } from "../shared/utils/utils";
 import { checkThemeOptions } from "../shared/utils/utils";
+import { budgetOptions } from "../shared/constants";
 
 @Injectable({
   providedIn: "root",
 })
 export class BudgetService {
-  apiService = inject(ApiService);
-  transactionService = inject(TransactionService);
+  private apiService = inject(ApiService);
+  private transactionService = inject(TransactionService);
 
-  //all budget element related transactions
+  // budgets = toSignal<BudgetModel[]>(this.apiService.getBudgets());
+  budgets = signal<BudgetModel[] | null>(null);
+
+  //all budget-element related transactions
   budgetTransactions = computed(() => {
     const budgetCategories = this.budgets()?.map((b) => b.category);
     return this.transactionService
@@ -21,7 +24,6 @@ export class BudgetService {
       ?.filter((t) => budgetCategories?.includes(t.category));
   });
 
-  budgets = toSignal<BudgetModel[]>(this.apiService.getBudgets());
   budgetsLimit = computed<number>(() => {
     const budgets = this.budgets();
     if (!budgets) {
@@ -60,6 +62,19 @@ export class BudgetService {
     return extended;
   });
 
+  availableCategories = computed(() => {
+    const budgets = this.budgets();
+    if (!budgets) {
+      return [];
+    }
+
+    return budgetOptions.filter((option) => {
+      return !budgets.some(
+        (budget) => budget.category.toLowerCase() === option.toLowerCase()
+      );
+    });
+  });
+
   themeOptions = computed(() => {
     const budgets = this.budgets();
     if (!budgets) {
@@ -68,4 +83,24 @@ export class BudgetService {
 
     return checkThemeOptions(budgets);
   });
+
+  getBudgets() {
+    this.apiService.getBudgets().subscribe({
+      next: (response) => this.budgets.set(response),
+      error: (err) => console.error("Error fetching budgets", err),
+    });
+  }
+
+  addBudget(budget: BudgetModel) {
+    this.apiService.addBudget(budget).subscribe({
+      next: (response) =>
+        this.budgets.update((prev) => {
+          if (!prev) {
+            return null;
+          }
+          return [...prev, response];
+        }),
+      error: (err) => console.error("Error adding budget object", err),
+    });
+  }
 }

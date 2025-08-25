@@ -1,5 +1,10 @@
-<div class="page-title-container">
+<div
+  class="page-title-container d-flex justify-content-between align-items-center"
+>
   <h1 class="page-title">Budgets</h1>
+  <button class="btn btn-dark p-3" (click)="openModal()">
+    + Add new Budget
+  </button>
 </div>
 @if (!extendedBudgets()) {
 <p class="h2 text-center py-5">Loading..</p>
@@ -15,7 +20,7 @@
       <div class="w-100">
         <h2 class="h5 fw-bold">Spending Summary</h2>
         <ul class="list-group w-100">
-          @for (budget of extendedBudgets(); track budget) {
+          @for (budget of extendedBudgets(); track budget.category) {
           <li class="list-group-item w-100 px-0 py-3">
             <div class="custom-border" [style.borderColor]="budget.theme"></div>
             <div
@@ -38,7 +43,7 @@
   </section>
 
   <section class="d-flex flex-column gap-4">
-    @for (budget of extendedBudgets(); track budget) {
+    @for (budget of extendedBudgets(); track budget.category) {
 
     <app-budget-card [budget]="budget" />
 
@@ -46,8 +51,6 @@
   </section>
 </div>
 }
-
-<button (click)="openModal()">Opoen modal</button>
 
 <!-- Input Modal  -->
 <app-modal
@@ -58,19 +61,15 @@
   [modalOpened]="modalOpened()"
   (modalClosed)="onCloseModal($event)"
 >
-  <form
-    class="budget-form"
-    (ngSubmit)="submitForm(budgetForm.value)"
-    #budgetForm="ngForm"
-  >
+  <form class="budget-form" (ngSubmit)="submitForm()" #budgetForm="ngForm">
     <label class="form-label" for="budget-category">Budget-category</label>
     <select
       class="form-control mb-3"
       id="budget-category"
       name="category"
-      ngModel
+      [(ngModel)]="selectedCategory"
     >
-      @for (option of budgetOptions; track option) {
+      @for (option of budgetOptions(); track option) {
       <option [value]="option">{{ option }}</option>
       }
     </select>
@@ -81,15 +80,14 @@
       type="text"
       id="budget-max-spend"
       name="maximum"
-      ngModel
+      [(ngModel)]="maximumSpent"
     />
 
     <label class="form-label" for="budget-theme-select">Theme</label>
     <app-custom-select-input
       [options]="themeOptions()"
-      [placeHolder]="'Select a theme'"
       name="theme"
-      ngModel
+      [(ngModel)]="selectedTheme"
     />
 
     <button class="button" type="submit" class="btn btn-dark w-100">

@@ -1,12 +1,23 @@
-import { Component, forwardRef, input, signal } from "@angular/core";
+import {
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  forwardRef,
+  HostListener,
+  input,
+  signal,
+  viewChild,
+} from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { ThemeOption } from "../../../models/models";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-custom-select-input",
   templateUrl: "./custom-select-input.html",
   styleUrl: "./custom-select-input.scss",
-  imports: [],
+  imports: [CommonModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -16,12 +27,16 @@ import { ThemeOption } from "../../../models/models";
   ],
 })
 export class CustomSelectInput implements ControlValueAccessor {
-  options = input<ThemeOption[]>([]);
-  placeHolder = input<string>("");
+  options = input<ThemeOption[]>([{ name: "", color: "", inUse: false }]);
 
-  value = signal<ThemeOption>({ name: "", color: "", inUse: false });
+  value = signal<ThemeOption>({ name: "lajos", color: "red", inUse: false });
   isOpened = signal(false);
+  listElement = viewChild<ElementRef<HTMLUListElement>>("optionsList");
 
+  /**
+   *
+   * Required for angular
+   */
   writeValue(value: ThemeOption): void {
     this.value.set(value);
   }
@@ -34,9 +49,16 @@ export class CustomSelectInput implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean): void {}
 
-  onChange(value: ThemeOption) {}
+  onChange(value: ThemeOption | undefined) {}
   onTouched() {}
+
+  /*******************************/
+
   select(option: ThemeOption) {
+    if (option.inUse) {
+      return;
+    }
+
     this.value.set(option);
     this.onChange(this.value());
     this.onTouched();
@@ -45,5 +67,27 @@ export class CustomSelectInput implements ControlValueAccessor {
 
   toggleOpen() {
     this.isOpened.set(!this.isOpened());
+  }
+
+  @HostListener("document:click", ["$event"])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target;
+    const listEleemnt = this.listElement();
+    if (!target || !listEleemnt) {
+      return;
+    }
+
+    if (target !== listEleemnt.nativeElement) {
+      this.isOpened.set(false);
+    }
+  }
+
+  constructor() {
+    effect(() => {
+      const options = this.options();
+      if (options.length > 0) {
+        this.value.set(options[0]);
+      }
+    });
   }
 }

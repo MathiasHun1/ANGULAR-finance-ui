@@ -1,12 +1,13 @@
 import { CommonModule } from "@angular/common";
-import { Component, computed, inject, signal } from "@angular/core";
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { BudgetCard } from "./components/budget-card/budget-card";
 import { Chart } from "../../shared/components/chart/chart";
 import { BudgetService } from "../../services/budget-service";
 import { Modal } from "../../shared/components/modal/modal";
-import { budgetOptions, themeOptions } from "../../shared/constants";
+import { budgetOptions } from "../../shared/constants";
 import { FormsModule } from "@angular/forms";
 import { CustomSelectInput } from "../../shared/components/custom-select-input/custom-select-input";
+import { BudgetModel, ThemeOption } from "../../models/models";
 
 @Component({
   selector: "app-budgets",
@@ -21,27 +22,44 @@ import { CustomSelectInput } from "../../shared/components/custom-select-input/c
   templateUrl: "./budgets.html",
   styleUrl: "./budgets.scss",
 })
-export class Budgets {
-  private budegetService = inject(BudgetService);
+export class Budgets implements OnInit {
+  private budgetService = inject(BudgetService);
 
-  extendedBudgets = this.budegetService.extendedBudgets;
+  ngOnInit(): void {
+    this.budgetService.getBudgets();
+  }
+
+  extendedBudgets = this.budgetService.extendedBudgets;
   modalOpened = signal(false);
   openModal() {
     this.modalOpened.set(true);
   }
-  budgetOptions = budgetOptions;
-  themeOptions = this.budegetService.themeOptions;
-  themeOptionsStrings = computed(() =>
-    this.themeOptions().map((option) => option.name)
-  );
+  budgetOptions = this.budgetService.availableCategories;
+  themeOptions = this.budgetService.themeOptions;
+
+  selectedTheme = signal<ThemeOption | undefined>(undefined);
+  maximumSpent = signal<string>("");
+  selectedCategory = signal<string>("");
 
   onCloseModal(event: string) {
-    console.log(event);
-
     this.modalOpened.set(false);
   }
 
-  submitForm(formValue: any) {
-    console.log({ ...formValue, theme: formValue.theme.name });
+  submitForm() {
+    if (
+      !this.selectedCategory() ||
+      !this.maximumSpent() ||
+      !this.selectedTheme()?.name
+    ) {
+      return;
+    }
+
+    const newBudget: BudgetModel = {
+      category: this.selectedCategory(),
+      maximum: Number(this.maximumSpent()),
+      theme: this.selectedTheme()!.name,
+    };
+
+    this.budgetService.addBudget(newBudget);
   }
 }

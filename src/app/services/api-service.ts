@@ -76,4 +76,8 @@ export class ApiService {
       .get<BalanceModel>(`${this.baseUrl}/balance`)
       .pipe(delay(1000));
   }
+
+  addBudget(budget: BudgetModel) {
+    return this.http.post<BudgetModel>(`${this.baseUrl}/budgets`, budget);
+  }
 }

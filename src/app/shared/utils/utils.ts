@@ -14,11 +14,11 @@ export const getActualMonthTransactions = (
 export const checkThemeOptions = (
   themedObjects: Array<{ theme: string; [key: string]: any }>
 ): Array<{ name: string; color: string; inUse: boolean }> => {
-  const themesInUse = themedObjects.map((obj) => obj.theme);
+  const themesInUse = themedObjects.map((obj) => obj.theme.toLowerCase());
   const checkedThemes = themeOptions.map((t) => {
     return {
       ...t,
-      inUse: themesInUse.includes(t.color) ? true : false,
+      inUse: themesInUse.includes(t.color.toLowerCase()) ? true : false,
     };
   });
 

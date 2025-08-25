@@ -61,6 +61,11 @@ body {
   color: map-get($theme-colors, grey-900);
 }
 
+html.modal.visible {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 // Card component
 .custom-card {
   background-color: white;
