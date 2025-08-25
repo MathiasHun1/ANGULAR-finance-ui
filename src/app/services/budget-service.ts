@@ -2,8 +2,10 @@ import { computed, inject, Injectable, signal } from "@angular/core";
 import { ApiService } from "./api-service";
 import { TransactionService } from "./transaction-service";
 import { BudgetModel, ExtendedBudget } from "../models/models";
-import { getActualMonthTransactions } from "../shared/utils/utils";
-import { checkThemeOptions } from "../shared/utils/utils";
+import {
+  getActualMonthTransactions,
+  getCheckedThemeOptions,
+} from "../shared/utils/utils";
 import { budgetOptions } from "../shared/constants";
 
 @Injectable({
@@ -81,7 +83,7 @@ export class BudgetService {
       return [];
     }
 
-    return checkThemeOptions(budgets);
+    return getCheckedThemeOptions(budgets);
   });
 
   getBudgets() {

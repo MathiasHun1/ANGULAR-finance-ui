@@ -11,6 +11,7 @@
 } @else {
 
 <div class="container p-0">
+  <!-- Chart section -->
   <section class="diagram-section">
     <div
       class="custom-card d-flex flex-column flex-md-row flex-xl-column align-items-center gap-5"
@@ -42,6 +43,7 @@
     </div>
   </section>
 
+  <!-- Cards Section -->
   <section class="d-flex flex-column gap-4">
     @for (budget of extendedBudgets(); track budget.category) {
 
@@ -68,6 +70,7 @@
       id="budget-category"
       name="category"
       [(ngModel)]="selectedCategory"
+      required
     >
       @for (option of budgetOptions(); track option) {
       <option [value]="option">{{ option }}</option>
@@ -81,7 +84,15 @@
       id="budget-max-spend"
       name="maximum"
       [(ngModel)]="maximumSpent"
+      required
+      #maximumInput="ngModel"
+      minlength="1"
+      pattern="^[1-9][0-9]*$"
     />
+
+    @if (maximumInput.invalid && (maximumInput.dirty || maximumInput.touched)) {
+    <p class="text-red">Field invalid</p>
+    }
 
     <label class="form-label" for="budget-theme-select">Theme</label>
     <app-custom-select-input
@@ -90,7 +101,12 @@
       [(ngModel)]="selectedTheme"
     />
 
-    <button class="button" type="submit" class="btn btn-dark w-100">
+    <button
+      class="button"
+      type="submit"
+      class="btn btn-dark w-100"
+      [disabled]="budgetForm.invalid"
+    >
       Add Budget
     </button>
   </form>

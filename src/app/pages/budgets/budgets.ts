@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, inject, OnInit, signal } from "@angular/core";
+import { Component, effect, inject, OnInit, signal } from "@angular/core";
 import { BudgetCard } from "./components/budget-card/budget-card";
 import { Chart } from "../../shared/components/chart/chart";
 import { BudgetService } from "../../services/budget-service";
@@ -45,6 +45,12 @@ export class Budgets implements OnInit {
     this.modalOpened.set(false);
   }
 
+  clearForm() {
+    this.selectedCategory.set("");
+    this.maximumSpent.set("");
+    this.selectedTheme.set(undefined);
+  }
+
   submitForm() {
     if (
       !this.selectedCategory() ||
@@ -57,9 +63,10 @@ export class Budgets implements OnInit {
     const newBudget: BudgetModel = {
       category: this.selectedCategory(),
       maximum: Number(this.maximumSpent()),
-      theme: this.selectedTheme()!.name,
+      theme: this.selectedTheme()!.color,
     };
 
     this.budgetService.addBudget(newBudget);
+    this.clearForm();
   }
 }

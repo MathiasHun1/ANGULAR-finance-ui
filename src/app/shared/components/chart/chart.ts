@@ -30,20 +30,25 @@ export class Chart {
       // get the corresponding transactions, and sum the last month spendings
       const actualTransactions = getActualMonthTransactions(b.transactions);
 
-      return actualTransactions.reduce((total: number, t) => {
-        return total + t.amount;
-      }, 0);
+      const result =
+        -1 *
+        actualTransactions.reduce((total: number, t) => {
+          return total + t.amount;
+        }, 0);
+
+      return result >= 0 ? result : 0;
     });
   });
 
   moneySpent = computed(() => {
     const spendingsList = this.spendingsList();
+    if (!spendingsList) {
+      return 0;
+    }
 
-    return spendingsList
-      ? spendingsList.reduce((total, value) => {
-          return total + value;
-        }, 0)
-      : 0;
+    return spendingsList.reduce((total, value) => {
+      return total + value;
+    }, 0);
   });
 
   chartData = computed<ChartConfiguration<"doughnut">["data"]["datasets"]>(

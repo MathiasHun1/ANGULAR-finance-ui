@@ -30,11 +30,13 @@ export class BudgetCard {
       return transactionMonth === 7; //hardcoded "august" for now
     });
 
-    const result: number = monthTransactions.reduce((total, t) => {
-      return total + Number(t.amount);
-    }, 0);
+    const result: number =
+      -1 *
+      monthTransactions.reduce((total, t) => {
+        return total + Number(t.amount);
+      }, 0);
 
-    return result * -1;
+    return result >= 0 ? result : 0;
   });
 
   usedUpBudget = computed<number>(() => {
