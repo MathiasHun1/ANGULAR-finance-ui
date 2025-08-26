@@ -1,22 +1,92 @@
 <div class="modal" tabindex="-1" #modal (click)="onBackdropClick($event)">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content custom-card text-black">
-      <!-- Header -->
       <header class="">
         <div class="d-flex justify-content-between align-items-center pb-2">
-          <p class="modal-title fs-2 fw-bold">{{ title() }}</p>
-          <button
-            type="button"
-            class="button btn-close border border-2 border-black rounded-circle p-2"
-            aria-label="Close"
-            (click)="modalClosed.emit('close')"
-          ></button>
+          <!-- Title -->
+          <p class="modal-title fs-2 fw-bold">
+            @if (currentFormType() == 'add-budget') {
+            Add New Budget
+            }
+
+            @if (currentFormType() === 'edit-budget') {
+            Edit Budget
+            }
+            @if (currentFormType() === 'delete-budget') {
+            Delete '{{budgetService.activeBudget().name}}'?
+            }
+
+            @if (currentFormType() === 'add-pot') {
+            Add POT/>
+            }
+
+            @if (currentFormType() === 'edit-pot') {
+            Edit POT
+            }
+
+            @if (currentFormType() === 'delete-pot') {
+            Delete POT/>
+            }
+          </p>
+          <button type="button" class="button btn-close border border-2 border-black rounded-circle p-2"
+            aria-label="Close" (click)="closeModal()"></button>
         </div>
-        <p class="fs-7 text-grey-500">{{ subTitle() }}</p>
+
+        <!-- Sub-title -->
+        <p class="fs-7 text-grey-500">
+          @if (currentFormType() == 'add-budget') {
+          Choose a category to set a spending budget. These categories can help you monitor spending.
+          }
+
+          @if (currentFormType() === 'edit-budget') {
+          As your budgets change, feel free to update your spending limits
+          }
+          @if (currentFormType() === 'delete-budget') {
+          Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will
+          be removed
+          forever.
+          }
+
+          @if (currentFormType() === 'add-pot') {
+          Add POT/>
+          }
+
+          @if (currentFormType() === 'edit-pot') {
+          Edit POT/>
+          }
+
+          @if (currentFormType() === 'delete-pot') {
+          Delete POT/>
+          }
+        </p>
       </header>
+
       <!-- Body -->
       <div class="modal-body">
-        <ng-content />
+        @if (currentFormType() == 'add-budget') {
+        <app-add-budget-form />
+        }
+
+        @if (currentFormType() === 'edit-budget') {
+        Edit Budget
+        }
+
+        @if (currentFormType() === 'delete-budget') {
+        <app-delete-budget-form />
+        }
+
+        @if (currentFormType() === 'add-pot') {
+        Add POT/>
+        }
+
+        @if (currentFormType() === 'edit-pot') {
+        Edit POT/>
+        }
+
+        @if (currentFormType() === 'delete-pot') {
+        Delete POT/>
+        }
+
       </div>
     </div>
   </div>

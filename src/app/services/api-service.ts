@@ -31,12 +31,6 @@ export class ApiService {
       );
   }
 
-  getBudgets() {
-    return this.http
-      .get<BudgetModel[]>(`${this.baseUrl}/budgets`)
-      .pipe(delay(this.delay));
-  }
-
   getPots() {
     return this.http
       .get<PotModel[]>(`${this.baseUrl}/pots`)
@@ -77,7 +71,20 @@ export class ApiService {
       .pipe(delay(1000));
   }
 
+  /**
+   * Budget related API calls
+   */
+  getBudgets() {
+    return this.http
+      .get<BudgetModel[]>(`${this.baseUrl}/budgets`)
+      .pipe(delay(this.delay));
+  }
+
   addBudget(budget: BudgetModel) {
     return this.http.post<BudgetModel>(`${this.baseUrl}/budgets`, budget);
+  }
+
+  deleteBudget(id: string) {
+    return this.http.delete(`${this.baseUrl}/budgets/${id}`);
   }
 }

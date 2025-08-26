@@ -2,15 +2,17 @@
 <div>Loading..</div>
 } @else {
 
+<!-- Title -->
 <div class="custom-card" style="padding: 2rem">
-  <div class="d-flex align-items-center pb-3">
-    <div
-      class="p-2 rounded-circle me-3"
-      [style.backgroundColor]="templateBudget.theme"
-    ></div>
-    <h2 class="budget-title m-0 fs-5 fw-bolder">
-      {{ templateBudget.category }}
-    </h2>
+  <div class="d-flex justify-content-between">
+    <div class="d-flex align-items-center pb-3">
+      <div class="p-2 rounded-circle me-3" [style.backgroundColor]="templateBudget.theme"></div>
+      <h2 class="budget-title m-0 fs-5 fw-bolder">
+        {{ templateBudget.category }}
+      </h2>
+    </div>
+
+    <app-dropdown [type]="'budget'" [entityName]="templateBudget.category" [id]="templateBudget.id"></app-dropdown>
   </div>
 
   <p class="fs-7 text-grey-500 m-0 pb-3">
@@ -19,33 +21,19 @@
 
   <!-- Custom progress bar -->
   <div class="progress-body mb-3">
-    <div
-      class="progress-bar"
-      [style.backgroundColor]="templateBudget.theme"
-      [style.width]="usedUpBudget() + '%'"
-    ></div>
+    <div class="progress-bar" [style.backgroundColor]="templateBudget.theme" [style.width]="usedUpBudget() + '%'"></div>
   </div>
 
   <div class="fs-7 text-grey-500 d-flex mb-4">
-    <div
-      class="w-100 ps-3"
-      [style.borderLeft]="'4px solid ' + templateBudget.theme"
-    >
+    <div class="w-100 ps-3" [style.borderLeft]="'4px solid ' + templateBudget.theme">
       <p class="m-0">Spent</p>
       <p class="m-0 text-black fw-bolder">${{ moneySpent() }}</p>
     </div>
-    <div
-      class="w-100 ps-3 border-beige-100"
-      [style.borderLeft]="'4px solid transparent'"
-    >
+    <div class="w-100 ps-3 border-beige-100" [style.borderLeft]="'4px solid transparent'">
       <p class="m-0">Remaining</p>
       <p class="m-0 text-black fw-bolder">
         ${{
-          templateBudget.maximum - moneySpent()! < 0
-            ? 0
-            : templateBudget.maximum - moneySpent()!
-        }}
-      </p>
+        templateBudget.maximum - moneySpent()! < 0 ? 0 : templateBudget.maximum - moneySpent()! }} </p>
     </div>
   </div>
 
@@ -53,10 +41,8 @@
   <div class="list-group custom-card bg-beige-100 p-3">
     <div class="d-flex justify-content-between align-items-center px-3 py-2">
       <h3 class="fs-6 fw-bold text-black m-0">Latest Spendings</h3>
-      <button
-        class="btn btn-link text-grey-500 text-decoration-none d-flex align-items-center gap-3 px-0"
-        (click)="toggleOpoenedstate()"
-      >
+      <button class="btn btn-link text-grey-500 text-decoration-none d-flex align-items-center gap-3 px-0"
+        (click)="toggleOpoenedstate()">
         <span class="lh-0 fs-7">
           @if(!openedState()) { See All } @else { Collapse }
         </span>
@@ -70,15 +56,9 @@
     transactions()?.slice(0, 3); @for(transaction of renderedTransactions; track
     transaction) {
 
-    <div
-      class="list-group-item fs-8 d-flex align-items-center justify-content-between py-3"
-    >
+    <div class="list-group-item fs-8 d-flex align-items-center justify-content-between py-3">
       <div class="d-flex align-items-center">
-        <img
-          [src]="transaction.avatar"
-          alt=""
-          class="avatar rounded-circle d-none d-sm-block"
-        />
+        <img [src]="transaction.avatar" alt="" class="avatar rounded-circle d-none d-sm-block" />
         <p class="m-0 fs-7 ps-sm-3 fw-bolder">{{ transaction.name }}</p>
       </div>
 

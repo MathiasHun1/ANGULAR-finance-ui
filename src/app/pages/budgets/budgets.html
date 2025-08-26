@@ -1,6 +1,4 @@
-<div
-  class="page-title-container d-flex justify-content-between align-items-center"
->
+<div class="page-title-container d-flex justify-content-between align-items-center">
   <h1 class="page-title">Budgets</h1>
   <button class="btn btn-dark p-3" (click)="openModal()">
     + Add new Budget
@@ -13,9 +11,7 @@
 <div class="container p-0">
   <!-- Chart section -->
   <section class="diagram-section">
-    <div
-      class="custom-card d-flex flex-column flex-md-row flex-xl-column align-items-center gap-5"
-    >
+    <div class="custom-card d-flex flex-column flex-md-row flex-xl-column align-items-center gap-5">
       <app-chart></app-chart>
 
       <div class="w-100">
@@ -24,14 +20,10 @@
           @for (budget of extendedBudgets(); track budget.category) {
           <li class="list-group-item w-100 px-0 py-3">
             <div class="custom-border" [style.borderColor]="budget.theme"></div>
-            <div
-              class="m-0 ps-4 fs-7 text-grey-500 d-flex justify-content-between align-items-center w-100"
-            >
+            <div class="m-0 ps-4 fs-7 text-grey-500 d-flex justify-content-between align-items-center w-100">
               <span>{{ budget.category }}</span>
               <div>
-                <span class="fs-7 fw-bold text-black ms-auto pe-2"
-                  >${{ (budget.spentThisMonth * -1).toFixed(2) }}</span
-                >
+                <span class="fs-7 fw-bold text-black ms-auto pe-2">${{ (budget.spentThisMonth * -1).toFixed(2) }}</span>
                 of
                 <span class="fs-8">${{ budget.maximum.toFixed(2) }}</span>
               </div>
@@ -53,61 +45,3 @@
   </section>
 </div>
 }
-
-<!-- Input Modal  -->
-<app-modal
-  [title]="'Add new Budget'"
-  [subTitle]="
-    'Choose a category to set a spending budget. Theese categories can help you monitor spendings.'
-  "
-  [modalOpened]="modalOpened()"
-  (modalClosed)="onCloseModal($event)"
->
-  <form class="budget-form" (ngSubmit)="submitForm()" #budgetForm="ngForm">
-    <label class="form-label" for="budget-category">Budget-category</label>
-    <select
-      class="form-control mb-3"
-      id="budget-category"
-      name="category"
-      [(ngModel)]="selectedCategory"
-      required
-    >
-      @for (option of budgetOptions(); track option) {
-      <option [value]="option">{{ option }}</option>
-      }
-    </select>
-
-    <label class="form-label" for="budget-max-spend">Maximum Spend</label>
-    <input
-      class="form-control mb-3"
-      type="text"
-      id="budget-max-spend"
-      name="maximum"
-      [(ngModel)]="maximumSpent"
-      required
-      #maximumInput="ngModel"
-      minlength="1"
-      pattern="^[1-9][0-9]*$"
-    />
-
-    @if (maximumInput.invalid && (maximumInput.dirty || maximumInput.touched)) {
-    <p class="text-red">Field invalid</p>
-    }
-
-    <label class="form-label" for="budget-theme-select">Theme</label>
-    <app-custom-select-input
-      [options]="themeOptions()"
-      name="theme"
-      [(ngModel)]="selectedTheme"
-    />
-
-    <button
-      class="button"
-      type="submit"
-      class="btn btn-dark w-100"
-      [disabled]="budgetForm.invalid"
-    >
-      Add Budget
-    </button>
-  </form>
-</app-modal>

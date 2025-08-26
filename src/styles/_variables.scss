@@ -15,6 +15,8 @@ $container-max-widths: (
   xxl: 1600px,
 );
 
+$dropdown-min-width: 0;
+
 // Custom theme colors
 $theme-colors: map-merge(
   $theme-colors,

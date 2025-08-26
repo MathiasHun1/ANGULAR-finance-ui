@@ -1,29 +1,21 @@
 import { CommonModule } from "@angular/common";
-import { Component, effect, inject, OnInit, signal } from "@angular/core";
+import { Component, inject, OnInit, signal, viewChild } from "@angular/core";
 import { BudgetCard } from "./components/budget-card/budget-card";
 import { Chart } from "../../shared/components/chart/chart";
 import { BudgetService } from "../../services/budget-service";
-import { Modal } from "../../shared/components/modal/modal";
-import { budgetOptions } from "../../shared/constants";
-import { FormsModule } from "@angular/forms";
-import { CustomSelectInput } from "../../shared/components/custom-select-input/custom-select-input";
+import { FormsModule, NgForm } from "@angular/forms";
 import { BudgetModel, ThemeOption } from "../../models/models";
+import { ModalService } from "../../services/modal-service";
 
 @Component({
   selector: "app-budgets",
-  imports: [
-    CommonModule,
-    FormsModule,
-    BudgetCard,
-    Chart,
-    Modal,
-    CustomSelectInput,
-  ],
+  imports: [CommonModule, FormsModule, BudgetCard, Chart],
   templateUrl: "./budgets.html",
   styleUrl: "./budgets.scss",
 })
 export class Budgets implements OnInit {
   private budgetService = inject(BudgetService);
+  private modalService = inject(ModalService);
 
   ngOnInit(): void {
     this.budgetService.getBudgets();
@@ -32,7 +24,8 @@ export class Budgets implements OnInit {
   extendedBudgets = this.budgetService.extendedBudgets;
   modalOpened = signal(false);
   openModal() {
-    this.modalOpened.set(true);
+    // this.modalOpened.set(true);
+    this.modalService.openModal("add-budget");
   }
   budgetOptions = this.budgetService.availableCategories;
   themeOptions = this.budgetService.themeOptions;
@@ -41,14 +34,15 @@ export class Budgets implements OnInit {
   maximumSpent = signal<string>("");
   selectedCategory = signal<string>("");
 
+  budgetForm = viewChild<NgForm>("budgetForm");
+
   onCloseModal(event: string) {
     this.modalOpened.set(false);
+    this.clearForm();
   }
 
   clearForm() {
-    this.selectedCategory.set("");
-    this.maximumSpent.set("");
-    this.selectedTheme.set(undefined);
+    this.budgetForm()?.resetForm();
   }
 
   submitForm() {
@@ -60,7 +54,7 @@ export class Budgets implements OnInit {
       return;
     }
 
-    const newBudget: BudgetModel = {
+    const newBudget: Omit<BudgetModel, "id"> = {
       category: this.selectedCategory(),
       maximum: Number(this.maximumSpent()),
       theme: this.selectedTheme()!.color,

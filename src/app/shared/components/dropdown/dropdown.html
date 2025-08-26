@@ -1,0 +1,29 @@
+<div class="btn-group">
+  <button class="btn bg-transparent px-3 rounded-2" data-bs-toggle="dropdown" aria-expanded="false"
+    data-bs-offset="10,20">
+    <img src="/images/icon-ellipsis.svg" alt="" />
+  </button>
+  <ul class="dropdown-menu custom-card p-2 shadow-lg">
+    <li class="dropdown-item px-2" (click)="onEditClick()">
+      @if(type() === "budget") {
+      Edit Budget
+      }
+
+      @if(type() === "pot") {
+      Edit Pot
+      }
+    </li>
+    <li class="px-2">
+      <hr class="dropdown-divider" />
+    </li>
+    <li class="dropdown-item px-2 text-red" (click)="onDeleteClick()">
+      @if(type() === "budget") {
+      Delete Budget
+      }
+
+      @if(type() === "pot") {
+      Delete Pot
+      }
+    </li>
+  </ul>
+</div>

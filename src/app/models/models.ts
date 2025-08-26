@@ -24,6 +24,7 @@ export interface BudgetModel {
   category: string;
   maximum: number;
   theme: string;
+  id: string;
 }
 
 export interface PotModel {

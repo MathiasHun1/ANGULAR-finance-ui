@@ -1,11 +1,11 @@
 import { Component, computed, signal, inject, input } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { BudgetModel, TransactionModel } from "../../../../models/models";
+import { BudgetModel } from "../../../../models/models";
 import { TransactionService } from "../../../../services/transaction-service";
-
+import { Dropdown } from "../../../../shared/components/dropdown/dropdown";
 @Component({
   selector: "app-budget-card",
-  imports: [CommonModule],
+  imports: [CommonModule, Dropdown],
   templateUrl: "./budget-card.html",
   styleUrl: "./budget-card.scss",
 })
