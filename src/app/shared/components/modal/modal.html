@@ -13,7 +13,7 @@
             Edit Budget
             }
             @if (currentFormType() === 'delete-budget') {
-            Delete '{{budgetService.activeBudget().name}}'?
+            Delete '{{budgetService.activeBudget().category}}'?
             }
 
             @if (currentFormType() === 'add-pot') {
@@ -68,7 +68,7 @@
         }
 
         @if (currentFormType() === 'edit-budget') {
-        Edit Budget
+        <app-edit-budget-form />
         }
 
         @if (currentFormType() === 'delete-budget') {

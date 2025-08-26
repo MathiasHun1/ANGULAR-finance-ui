@@ -12,6 +12,7 @@ export interface TransactionModel {
   date: string;
   amount: number;
   recurring: boolean;
+  id: string;
 }
 
 export interface BalanceModel {

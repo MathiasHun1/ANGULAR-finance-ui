@@ -1,9 +1,17 @@
-import { Component, computed, inject, signal } from "@angular/core";
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnInit,
+  signal,
+} from "@angular/core";
 import { ChartConfiguration } from "chart.js";
 import { BaseChartDirective } from "ng2-charts";
 import { BudgetService } from "../../../services/budget-service";
 import { ExtendedBudget } from "../../../models/models";
 import { getActualMonthTransactions } from "../../utils/utils";
+import { Budgets } from "../../../pages/budgets/budgets";
 
 @Component({
   selector: "app-chart",
@@ -11,8 +19,16 @@ import { getActualMonthTransactions } from "../../utils/utils";
   templateUrl: "./chart.html",
   styleUrl: "./chart.scss",
 })
-export class Chart {
+export class Chart implements OnInit {
   private budgetService = inject(BudgetService);
+
+  ngOnInit(): void {
+    const budgets = this.budgetService.budgets();
+    if (budgets) {
+      return;
+    }
+    this.budgetService.getBudgets();
+  }
 
   private budgetsWithOwnTransactions = this.budgetService.extendedBudgets;
 
@@ -41,6 +57,7 @@ export class Chart {
   });
 
   moneySpent = computed(() => {
+    console.log("run");
     const spendingsList = this.spendingsList();
     if (!spendingsList) {
       return 0;

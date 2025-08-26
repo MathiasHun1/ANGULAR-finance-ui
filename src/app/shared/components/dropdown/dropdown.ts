@@ -19,16 +19,14 @@ export class Dropdown {
   onDeleteClick() {
     if (this.type() === "budget") {
       this.modalService.openModal("delete-budget");
-      this.budgetService.activeBudget.set({
-        name: this.entityName(),
-        id: this.id(),
-      });
+      this.budgetService.setActiveBudget(this.id());
     }
   }
 
   onEditClick() {
     if (this.type() === "budget") {
-      console.log("Edit budget");
+      this.modalService.openModal("edit-budget");
+      this.budgetService.setActiveBudget(this.id());
     }
   }
 }

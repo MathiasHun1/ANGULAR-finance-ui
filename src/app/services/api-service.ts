@@ -87,4 +87,11 @@ export class ApiService {
   deleteBudget(id: string) {
     return this.http.delete(`${this.baseUrl}/budgets/${id}`);
   }
+
+  updateBudget(budget: BudgetModel) {
+    return this.http.put<BudgetModel>(
+      `${this.baseUrl}/budgets/${budget.id}`,
+      budget
+    );
+  }
 }

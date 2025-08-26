@@ -8,14 +8,15 @@ import {
 } from "@angular/core";
 import { viewChild } from "@angular/core";
 import {} from "@angular/core";
+import { BudgetService } from "../../../services/budget-service";
 import { ModalService } from "../../../services/modal-service";
 import { AddBudgetForm } from "../forms/add-budget-form/add-budget-form";
 import { DeleteBudgetForm } from "../forms/delete-budget-form/delete-budget-form";
-import { BudgetService } from "../../../services/budget-service";
+import { EditBudgetForm } from "../forms/edit-budget-form/edit-budget-form";
 
 @Component({
   selector: "app-modal",
-  imports: [AddBudgetForm, DeleteBudgetForm],
+  imports: [AddBudgetForm, DeleteBudgetForm, EditBudgetForm],
   templateUrl: "./modal.html",
   styleUrl: "./modal.scss",
 })

@@ -1,0 +1,18 @@
+<form class="budget-form" (ngSubmit)="submitForm()" #budgetForm="ngForm">
+
+
+  <label class="form-label" for="budget-max-spend">Maximum Spend</label>
+  <input class="form-control mb-3" type="text" id="budget-max-spend" name="maximum" [(ngModel)]="maximumSpent" required
+    #maximumInput="ngModel" minlength="1" pattern="^[1-9][0-9]*$" />
+
+  @if (maximumInput.invalid && (maximumInput.dirty || maximumInput.touched)) {
+  <p class="text-red">Field invalid</p>
+  }
+
+  <label class="form-label" for="budget-theme-select">Theme</label>
+  <app-custom-select-input [options]="themeOptions()" name="theme" [(ngModel)]="selectedTheme" />
+
+  <button class="button" type="submit" class="btn btn-dark w-100" [disabled]="budgetForm.invalid">
+    Save Changes
+  </button>
+</form>

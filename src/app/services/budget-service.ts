@@ -87,15 +87,29 @@ export class BudgetService {
     return getCheckedThemeOptions(budgets);
   });
 
-  activeBudget = signal({
-    name: "",
+  activeBudget = signal<BudgetModel>({
+    category: "",
     id: "",
+    maximum: 0,
+    theme: "",
   });
+
+  setActiveBudget(id: string) {
+    const budget = this.budgets()?.find((b) => b.id === id);
+    if (budget) {
+      return this.activeBudget.set(budget);
+    }
+
+    console.error("Budget with id not found:", id);
+    this.clearActiveBudget();
+  }
 
   clearActiveBudget() {
     this.activeBudget.set({
-      name: "",
+      category: "",
       id: "",
+      maximum: 0,
+      theme: "",
     });
   }
 
@@ -136,6 +150,20 @@ export class BudgetService {
         });
       },
       error: (err) => console.error("Error deleting budget object", err),
+    });
+  }
+
+  updateBudget(budget: BudgetModel) {
+    this.apiService.updateBudget(budget).subscribe({
+      next: (response) => {
+        this.budgets.update((prev) => {
+          if (!prev) {
+            return null;
+          }
+          return prev.map((b) => (b.id === response.id ? response : b));
+        });
+      },
+      error: (err) => console.error("Error updating budget object", err),
     });
   }
 }

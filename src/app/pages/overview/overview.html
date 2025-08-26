@@ -36,17 +36,14 @@
     <div class="custom-card mb-3 flex-grow-1">
       <div class="d-flex justify-content-between align-items-center pb-3">
         <h2 class="fs-5 fw-bold">Pots</h2>
-        <a class="navlink" routerLink="/pots"
-          >See Details
+        <a class="navlink" routerLink="/pots">See Details
           <img class="ms-2" src="/images/icon-caret-right.svg" alt="" />
         </a>
       </div>
 
       <div class="row">
         <div class="col-12 col-sm-6">
-          <div
-            class="custom-card position-relative bg-beige-100 py-3 text-center"
-          >
+          <div class="custom-card position-relative bg-beige-100 py-3 text-center">
             <p class="fs-7 text-grey-500 my-2">Total saved</p>
             <p class="fs-3 fw-bold m-0">${{ totalSavedPots() }}</p>
             <img class="pot-icon" src="/images/icon-pot.svg" alt="" />
@@ -56,26 +53,10 @@
           <div class="grid-container h-100 pt-3 pt-sm-0">
             @let data = potsData(); @if (data && data.length >= 4) {
 
-            <app-list-item
-              [name]="data[0].name"
-              [value]="data[0].total"
-              [borderColor]="data[0].theme"
-            />
-            <app-list-item
-              [name]="data[1].name"
-              [value]="data[1].total"
-              [borderColor]="data[1].theme"
-            />
-            <app-list-item
-              [name]="data[2].name"
-              [value]="data[2].total"
-              [borderColor]="data[2].theme"
-            />
-            <app-list-item
-              [name]="data[3].name"
-              [value]="data[3].total"
-              [borderColor]="data[3].theme"
-            />
+            <app-list-item [name]="data[0].name" [value]="data[0].total" [borderColor]="data[0].theme" />
+            <app-list-item [name]="data[1].name" [value]="data[1].total" [borderColor]="data[1].theme" />
+            <app-list-item [name]="data[2].name" [value]="data[2].total" [borderColor]="data[2].theme" />
+            <app-list-item [name]="data[3].name" [value]="data[3].total" [borderColor]="data[3].theme" />
             }
           </div>
         </div>
@@ -86,32 +67,24 @@
     <div class="custom-card mb-3 mb-xl-0">
       <div class="d-flex justify-content-between align-items-center pb-3">
         <h2 class="fs-5 fw-bold">Transactions</h2>
-        <a class="navlink" routerLink="/transactions"
-          >View All
+        <a class="navlink" routerLink="/transactions">View All
           <img class="ms-2" src="/images/icon-caret-right.svg" alt="" />
         </a>
       </div>
 
       <div>
         <div class="list-group">
-          @for (transaction of transactions(); track transaction) {
+          @for (transaction of transactions(); track transaction.id) {
           <div class="list-group-item d-felx justify-content-between">
             <div class="d-flex align-items-center gap-3">
-              <img
-                class="avatar"
-                [src]="transaction.avatar.replace('/assets', '')"
-                alt=""
-              />
+              <img class="avatar" [src]="transaction.avatar.replace('/assets', '')" alt="" />
               <p class="m-0 fs-7 fw-bolder">
                 {{ transaction.name }}
               </p>
             </div>
 
             <div class="text-end">
-              <p
-                [ngClass]="{ 'text-green': transaction.amount > 0 }"
-                class="fs-7 fw-bold mb-0"
-              >
+              <p [ngClass]="{ 'text-green': transaction.amount > 0 }" class="fs-7 fw-bold mb-0">
                 {{ transaction.amount | currency }}
               </p>
               <p class="fs-8 text-grey-500 mb-0">
@@ -130,8 +103,7 @@
     <div class="custom-card mb-3">
       <div class="d-flex justify-content-between align-items-center pb-3">
         <h2 class="fs-5 fw-bold">Budgets</h2>
-        <a class="navlink" routerLink="/budgets"
-          >See Details
+        <a class="navlink" routerLink="/budgets">See Details
           <img class="ms-2" src="/images/icon-caret-right.svg" alt="" />
         </a>
       </div>
@@ -141,12 +113,8 @@
           <app-chart></app-chart>
         </div>
         <div class="grid-container budgets col-12 col-sm-4 pt-4 pt-sm-0">
-          @for (budget of budgets(); track budget) {
-          <app-list-item
-            [name]="budget.category"
-            [value]="budget.spentThisMonth * -1"
-            [borderColor]="budget.theme"
-          />
+          @for (budget of budgets(); track budget.id) {
+          <app-list-item [name]="budget.category" [value]="budget.spentThisMonth * -1" [borderColor]="budget.theme" />
           }
         </div>
       </div>
@@ -156,43 +124,33 @@
     <div class="custom-card flex-grow-1">
       <div class="d-flex justify-content-between align-items-center pb-3">
         <h2 class="fs-5 fw-bold">Recurring Bills</h2>
-        <a class="navlink" routerLink="/recurring-bills"
-          >See Details
+        <a class="navlink" routerLink="/recurring-bills">See Details
           <img class="ms-2" src="/images/icon-caret-right.svg" alt="" />
         </a>
       </div>
 
-      <div
-        class="custom-card d-flex justify-content-between align-items-center bg-beige-100 px-3 py-4 mb-3"
-        [style.borderLeft]="'4px solid'"
-        [style.borderColor]="paidBills().theme"
-      >
+      <div class="custom-card d-flex justify-content-between align-items-center bg-beige-100 px-3 py-4 mb-3"
+        [style.borderLeft]="'4px solid'" [style.borderColor]="paidBills().theme">
         <span class="text-grey-500 fs-7">Paid Bills</span>
         <span class="fs-7 fw-bold">{{
           getTotalAmount(paidBills().bills) * -1 | currency
-        }}</span>
+          }}</span>
       </div>
 
-      <div
-        class="custom-card d-flex justify-content-between align-items-center bg-beige-100 px-3 py-4 mb-3"
-        [style.borderLeft]="'4px solid'"
-        [style.borderColor]="upcomingBills().theme"
-      >
+      <div class="custom-card d-flex justify-content-between align-items-center bg-beige-100 px-3 py-4 mb-3"
+        [style.borderLeft]="'4px solid'" [style.borderColor]="upcomingBills().theme">
         <span class="text-grey-500 fs-7">Total Upcoming</span>
         <span class="fs-7 fw-bold">{{
           getTotalAmount(upcomingBills().bills) * -1 | currency
-        }}</span>
+          }}</span>
       </div>
 
-      <div
-        class="custom-card d-flex justify-content-between align-items-center bg-beige-100 px-3 py-4"
-        [style.borderLeft]="'4px solid'"
-        [style.borderColor]="dueSoonBills().theme"
-      >
+      <div class="custom-card d-flex justify-content-between align-items-center bg-beige-100 px-3 py-4"
+        [style.borderLeft]="'4px solid'" [style.borderColor]="dueSoonBills().theme">
         <span class="text-grey-500 fs-7">Due Soon</span>
         <span class="fs-7 fw-bold">{{
           getTotalAmount(dueSoonBills().bills) * -1 | currency
-        }}</span>
+          }}</span>
       </div>
     </div>
   </div>

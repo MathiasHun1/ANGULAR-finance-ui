@@ -13,11 +13,15 @@ import { ModalService } from "../../services/modal-service";
   templateUrl: "./budgets.html",
   styleUrl: "./budgets.scss",
 })
-export class Budgets implements OnInit {
+export class Budgets {
   private budgetService = inject(BudgetService);
   private modalService = inject(ModalService);
 
   ngOnInit(): void {
+    const budgets = this.budgetService.budgets();
+    if (budgets) {
+      return;
+    }
     this.budgetService.getBudgets();
   }
 
