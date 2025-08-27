@@ -1,56 +1,55 @@
-<div class="page-title-container">
+<div class="page-title-container d-flex justify-content-between align-items-center">
   <h1 class="page-title">Pots</h1>
+  <button class="btn btn-dark p-3" (click)="openModal()">
+    + Add new Pot
+  </button>
 </div>
-
 @if(!pots()) {
 <p class="h2 text-center py-5">Loading..</p>
 } @else {
 <div class="row g-4">
-  @for(pot of pots(); track pot) {
+  @for(pot of pots(); track pot.id) {
   <div class="col-12 col-lg-6">
     <div class="custom-card">
       <!-- Card title -->
-      <div class="d-flex align-items-center pb-5">
-        <div
-          class="p-2 rounded-circle me-3"
-          [style.backgroundColor]="pot.theme"
-        ></div>
-        <h2 class="m-0 fs-5 fw-bolder">{{ pot.name }}</h2>
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center pb-5">
+          <div class="p-2 rounded-circle me-3" [style.backgroundColor]="pot.theme"></div>
+          <h2 class="m-0 fs-5 fw-bolder">{{ pot.name }}</h2>
+        </div>
+
+        <app-dropdown [type]="'pot'" [entityName]="pot.name" [id]="pot.id"></app-dropdown>
       </div>
+
       <!-- Total-saved line -->
       <div class="d-flex align-items-center justify-content-between pb-2">
         <span class="fs--7 text-grey-500">Total Saved</span>
         <span class="fs-3 fw-bolder">${{ pot.total }}</span>
       </div>
+
       <!-- Progress Bar -->
       <div class="mb-2">
         <div class="progress-body">
-          <div
-            class="progress-bar"
-            [style.width.%]="(pot.total / pot.target) * 100"
-            [style.backgroundColor]="pot.theme"
-          ></div>
+          <div class="progress-bar" [style.width.%]="(pot.total / pot.target) * 100"
+            [style.backgroundColor]="pot.theme"></div>
         </div>
       </div>
+
       <!-- % representation line -->
-      <div
-        class="d-flex align-items-center justify-content-between pb-5 fs-8 text-grey-500"
-      >
-        <span class="fw-bolder"
-          >{{ ((pot.total / pot.target) * 100).toFixed(1) }}%</span
-        >
+      <div class="d-flex align-items-center justify-content-between pb-5 fs-8 text-grey-500">
+        <span class="fw-bolder">{{ ((pot.total / pot.target) * 100).toFixed(1) }}%</span>
         <span>${{ pot.target }}</span>
       </div>
+
       <!-- Buttons -->
       <div class="d-flex gap-3">
         <div class="btn bg-beige-100 w-100">Add money</div>
         <div class="btn bg-beige-100 w-100">Withdraw</div>
       </div>
+
     </div>
   </div>
-
   }
+
 </div>
 }
-
-<!-- <app-modal> this is a MODAL FROM POTS </app-modal> -->

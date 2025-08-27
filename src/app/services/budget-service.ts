@@ -127,13 +127,13 @@ export class BudgetService {
     const id = uuidv4();
     const budgetWithId = { ...budget, id };
     this.apiService.addBudget(budgetWithId).subscribe({
-      next: (response) =>
+      next: (budget) =>
         this.budgets.update((prev) => {
           if (!prev) {
-            return null;
+            return [budget];
           }
 
-          return [...prev, response];
+          return prev.concat(budget);
         }),
       error: (err) => console.error("Error adding budget object", err),
     });

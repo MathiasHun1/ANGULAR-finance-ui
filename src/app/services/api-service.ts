@@ -31,12 +31,6 @@ export class ApiService {
       );
   }
 
-  getPots() {
-    return this.http
-      .get<PotModel[]>(`${this.baseUrl}/pots`)
-      .pipe(delay(this.delay));
-  }
-
   getRecurringTypeBills(): Observable<RecurringBill[]> {
     return this.http
       .get<TransactionModel[]>(`${this.baseUrl}/transactions`)
@@ -93,5 +87,26 @@ export class ApiService {
       `${this.baseUrl}/budgets/${budget.id}`,
       budget
     );
+  }
+
+  /**
+   * Pots related API calls
+   */
+  getPots() {
+    return this.http
+      .get<PotModel[]>(`${this.baseUrl}/pots`)
+      .pipe(delay(this.delay));
+  }
+
+  addPot(pot: PotModel) {
+    return this.http.post<PotModel>(`${this.baseUrl}/pots`, pot);
+  }
+
+  deletePot(id: string) {
+    return this.http.delete(`${this.baseUrl}/pots/${id}`);
+  }
+
+  updatePot(pot: PotModel) {
+    return this.http.put<PotModel>(`${this.baseUrl}/pots/${pot.id}`, pot);
   }
 }

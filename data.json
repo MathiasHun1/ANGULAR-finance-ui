@@ -490,18 +490,11 @@
       "id": "3e41"
     },
     {
-      "name": "New Laptop",
-      "target": 1000,
-      "total": 10,
-      "theme": "#F2CDAC",
-      "id": "8374"
-    },
-    {
+      "id": "4d495630-ce6b-495a-8e22-ff49492873de",
       "name": "Holiday",
-      "target": 1440,
-      "total": 531,
-      "theme": "#826CB0",
-      "id": "6488"
+      "target": 12000,
+      "total": 0,
+      "theme": "#3f82b2"
     }
   ]
 }

@@ -13,20 +13,30 @@ import { ModalService } from "../../../services/modal-service";
 import { AddBudgetForm } from "../forms/add-budget-form/add-budget-form";
 import { DeleteBudgetForm } from "../forms/delete-budget-form/delete-budget-form";
 import { EditBudgetForm } from "../forms/edit-budget-form/edit-budget-form";
+import { AddPotForm } from "../forms/add-pot-form/add-pot-form";
+import { PotsService } from "../../../services/pots-service";
+import { DeletePotForm } from "../forms/delete-pot-form/delete-pot-form";
 
 @Component({
   selector: "app-modal",
-  imports: [AddBudgetForm, DeleteBudgetForm, EditBudgetForm],
+  imports: [
+    AddBudgetForm,
+    DeleteBudgetForm,
+    EditBudgetForm,
+    AddPotForm,
+    DeletePotForm,
+  ],
   templateUrl: "./modal.html",
   styleUrl: "./modal.scss",
 })
 export class Modal {
   modalService = inject(ModalService);
-  currentFormType = this.modalService.currentFormType;
   budgetService = inject(BudgetService);
+  potService = inject(PotsService);
 
   modal = viewChild<ElementRef<HTMLDivElement>>("modal");
 
+  currentFormType = this.modalService.currentFormType;
   title = input<string>();
   subTitle = input<string>();
   entityName = input<string>("");
