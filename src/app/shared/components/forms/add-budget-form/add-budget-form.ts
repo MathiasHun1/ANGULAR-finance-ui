@@ -20,7 +20,7 @@ export class AddBudgetForm {
   selectedCategory = signal<string>("");
   budgetOptions = this.budgetService.availableCategories;
   themeOptions = this.budgetService.themeOptions;
-  selectedTheme = signal<ThemeOption | undefined>(undefined);
+  selectedTheme = signal(this.getFirstUnusedTheme());
   maximumSpent = signal<string>("");
 
   submitForm() {
@@ -45,5 +45,13 @@ export class AddBudgetForm {
 
   clearForm() {
     this.budgetForm()?.resetForm();
+  }
+
+  getFirstUnusedTheme() {
+    if (this.themeOptions()) {
+      return this.themeOptions().find((option) => !option.inUse);
+    }
+
+    return undefined;
   }
 }

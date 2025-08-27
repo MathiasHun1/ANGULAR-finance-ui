@@ -450,8 +450,8 @@
   "budgets": [
     {
       "category": "Entertainment",
-      "maximum": 50,
-      "theme": "#277C78",
+      "maximum": 75,
+      "theme": "#3f82b2",
       "id": "0b26"
     },
     {
@@ -465,6 +465,18 @@
       "maximum": 75,
       "theme": "#F2CDAC",
       "id": "242f"
+    },
+    {
+      "id": "e7af0b17-0f68-4349-90c0-13dd64636d4f",
+      "category": "Shopping",
+      "maximum": 130,
+      "theme": "#c94736"
+    },
+    {
+      "id": "d9857fd8-cc17-468f-8387-187f23ba9718",
+      "category": "Groceries",
+      "maximum": 200,
+      "theme": "#626070"
     }
   ],
   "pots": [
@@ -484,17 +496,17 @@
     },
     {
       "name": "Gift",
-      "target": 150,
+      "target": 160,
       "total": 110,
-      "theme": "#82C9D7",
+      "theme": "#82c9d7",
       "id": "3e41"
     },
     {
-      "id": "4d495630-ce6b-495a-8e22-ff49492873de",
-      "name": "Holiday",
-      "target": 12000,
+      "name": "Fishing",
+      "target": 950,
       "total": 0,
-      "theme": "#3f82b2"
+      "theme": "#826cb0",
+      "id": "47d83cd7-e74f-4c3b-8cc3-f2a183457e53"
     }
   ]
 }

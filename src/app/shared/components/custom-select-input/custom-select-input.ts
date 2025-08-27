@@ -27,9 +27,10 @@ import { CommonModule } from "@angular/common";
   ],
 })
 export class CustomSelectInput implements ControlValueAccessor {
-  options = input<ThemeOption[]>([{ name: "", color: "", inUse: false }]);
+  options = input<ThemeOption[]>();
+  defaultValue = input<ThemeOption>();
 
-  value = signal<ThemeOption>({ name: "lajos", color: "red", inUse: false });
+  value = signal<ThemeOption | undefined>(undefined);
   isOpened = signal(false);
   listElement = viewChild<ElementRef<HTMLUListElement>>("optionsList");
 
@@ -38,7 +39,14 @@ export class CustomSelectInput implements ControlValueAccessor {
    * Required for angular
    */
   writeValue(value: ThemeOption): void {
-    this.value.set(value);
+    if (value) {
+      if (this.defaultValue()) {
+        this.value.set(this.defaultValue());
+        return;
+      }
+    }
+
+    this.value.set(undefined);
   }
 
   registerOnChange(fn: (value: ThemeOption) => {}): void {
@@ -80,14 +88,5 @@ export class CustomSelectInput implements ControlValueAccessor {
     if (target !== listEleemnt.nativeElement) {
       this.isOpened.set(false);
     }
-  }
-
-  constructor() {
-    effect(() => {
-      const options = this.options();
-      if (options.length > 0) {
-        this.value.set(options[0]);
-      }
-    });
   }
 }

@@ -18,8 +18,8 @@ export class EditBudgetForm {
   budgetForm = viewChild<NgForm>("budgetForm");
 
   themeOptions = this.budgetService.themeOptions;
-  selectedTheme = signal<ThemeOption | undefined>(undefined);
-  maximumSpent = signal<string>("");
+  selectedTheme = signal(this.getActiveTheme());
+  maximumSpent = signal(this.budgetService.activeBudget().maximum);
 
   submitForm() {
     if (!this.maximumSpent() || !this.selectedTheme()?.name) {
@@ -38,5 +38,15 @@ export class EditBudgetForm {
 
   clearForm() {
     this.budgetForm()?.resetForm();
+  }
+
+  getActiveTheme() {
+    const themeItem = this.themeOptions().find(
+      (t) =>
+        t.color.toLowerCase() ===
+        this.budgetService.activeBudget().theme.toLowerCase()
+    );
+
+    return themeItem;
   }
 }

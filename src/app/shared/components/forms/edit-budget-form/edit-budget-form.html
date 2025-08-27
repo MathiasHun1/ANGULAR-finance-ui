@@ -10,7 +10,8 @@
   }
 
   <label class="form-label" for="budget-theme-select">Theme</label>
-  <app-custom-select-input [options]="themeOptions()" name="theme" [(ngModel)]="selectedTheme" />
+  <app-custom-select-input [options]="themeOptions()" name="theme" [(ngModel)]="selectedTheme"
+    [defaultValue]="getActiveTheme()" />
 
   <button class="button" type="submit" class="btn btn-dark w-100" [disabled]="budgetForm.invalid">
     Save Changes

@@ -141,7 +141,9 @@ export class TransactionService {
 
     const transactions = this.allTransactions();
     return transactions
-      ? transactions.filter((t) => t.category === category)
+      ? transactions.filter(
+          (t) => t.category.toLowerCase() === category.toLowerCase()
+        )
       : undefined;
   }
 }

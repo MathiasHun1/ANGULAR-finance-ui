@@ -17,11 +17,11 @@
             }
 
             @if (currentFormType() === 'add-pot') {
-            Add POT
+            Add New Pot
             }
 
             @if (currentFormType() === 'edit-pot') {
-            Edit POT
+            Edit Pot
             }
 
             @if (currentFormType() === 'delete-pot') {
@@ -52,7 +52,7 @@
           }
 
           @if (currentFormType() === 'edit-pot') {
-          Edit POT/>
+          If your saving targets change, feel free to update your pots.
           }
 
           @if (currentFormType() === 'delete-pot') {
@@ -82,7 +82,7 @@
         }
 
         @if (currentFormType() === 'edit-pot') {
-        Edit POT/>
+        <app-edit-pot-form />
         }
 
         @if (currentFormType() === 'delete-pot') {

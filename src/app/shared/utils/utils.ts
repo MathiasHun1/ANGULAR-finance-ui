@@ -15,8 +15,6 @@ export const getCheckedThemeOptions = (
   themedObjects: Array<{ theme: string; [key: string]: any }>
 ): Array<ThemeOption> => {
   const themesInUse = themedObjects.map((obj) => obj.theme.toLowerCase());
-  console.log(themesInUse);
-
   const checkedThemes = themeOptions.map((t) => {
     return {
       ...t,

@@ -57,7 +57,6 @@ export class Chart implements OnInit {
   });
 
   moneySpent = computed(() => {
-    console.log("run");
     const spendingsList = this.spendingsList();
     if (!spendingsList) {
       return 0;

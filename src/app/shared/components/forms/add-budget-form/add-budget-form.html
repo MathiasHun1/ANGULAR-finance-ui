@@ -15,7 +15,8 @@
   }
 
   <label class="form-label" for="budget-theme-select">Theme</label>
-  <app-custom-select-input [options]="themeOptions()" name="theme" [(ngModel)]="selectedTheme" />
+  <app-custom-select-input [options]="themeOptions()" name="theme" [(ngModel)]="selectedTheme"
+    [defaultValue]="getFirstUnusedTheme()" />
 
   <button class="button" type="submit" class="btn btn-dark w-100" [disabled]="budgetForm.invalid">
     Add Budget

@@ -116,7 +116,6 @@ export class BudgetService {
   getBudgets() {
     this.apiService.getBudgets().subscribe({
       next: (response) => {
-        console.log(response);
         this.budgets.set(response);
       },
       error: (err) => console.error("Error fetching budgets", err),

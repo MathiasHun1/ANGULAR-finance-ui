@@ -1,1 +1,22 @@
-<p>edit-pot-form works!</p>
+<form class="edit-pots-form" (ngSubmit)="submitForm()" #editPotsForm="ngForm">
+  <label class="form-label" for="edit-pot-category">Budget-category</label>
+  <input type="text" class="form-control mb-3" id="edit-pot-category" name="category" [(ngModel)]="categoryName"
+    required #categoryInput="ngModel" minlength="1" maxlength="30" />
+
+  <label class="form-label" for="pots-target">Target</label>
+  <input class="form-control mb-3" type="text" id="pots-target" name="target" [(ngModel)]="targetValue" required
+    #targetInput="ngModel" pattern="^[1-9][0-9]*$" />
+
+  @if (targetInput.invalid && (targetInput.dirty || targetInput.touched)) {
+  <p class="text-red">Field invalid</p>
+  }
+
+
+  <label class="form-label" for="pots-theme-select">Theme</label>
+  <app-custom-select-input [options]="themeOptions()" name="theme" [(ngModel)]="selectedTheme"
+    [defaultValue]="getActiveTheme()" />
+
+  <button class="button" type="submit" class="btn btn-dark w-100" [disabled]="editPotsForm.invalid">
+    Save Changes
+  </button>
+</form>

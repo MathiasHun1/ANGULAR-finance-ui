@@ -19,7 +19,7 @@ export class AddPotForm {
 
   categoryName = ""; // angular form lacks signal-support
   themeOptions = this.potService.themeOptions;
-  selectedTheme: ThemeOption | undefined = undefined;
+  selectedTheme = this.getFirstUnusedTheme();
   targetValue = ""; // angular form lacks signal-support
 
   submitForm() {
@@ -41,5 +41,13 @@ export class AddPotForm {
 
   clearForm() {
     this.potsForm()?.resetForm();
+  }
+
+  getFirstUnusedTheme() {
+    if (this.themeOptions()) {
+      return this.themeOptions().find((option) => !option.inUse);
+    }
+
+    return undefined;
   }
 }

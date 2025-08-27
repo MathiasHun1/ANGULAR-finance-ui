@@ -16,6 +16,7 @@ import { EditBudgetForm } from "../forms/edit-budget-form/edit-budget-form";
 import { AddPotForm } from "../forms/add-pot-form/add-pot-form";
 import { PotsService } from "../../../services/pots-service";
 import { DeletePotForm } from "../forms/delete-pot-form/delete-pot-form";
+import { EditPotForm } from "../forms/edit-pot-form/edit-pot-form";
 
 @Component({
   selector: "app-modal",
@@ -25,6 +26,7 @@ import { DeletePotForm } from "../forms/delete-pot-form/delete-pot-form";
     EditBudgetForm,
     AddPotForm,
     DeletePotForm,
+    EditPotForm,
   ],
   templateUrl: "./modal.html",
   styleUrl: "./modal.scss",
@@ -53,7 +55,7 @@ export class Modal {
         this.modal()!.nativeElement.classList.remove("visible");
       } else {
         this.modal()!.nativeElement.style.display = "block";
-        // add some style asyncrounously, to make animations work
+        // add some style asynchronously, to make animations work
         setTimeout(() => {
           this.modal()!.nativeElement.classList.add("visible");
         }, 0);
