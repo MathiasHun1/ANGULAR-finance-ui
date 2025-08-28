@@ -502,11 +502,11 @@
       "id": "3e41"
     },
     {
-      "name": "Fishing",
-      "target": 950,
+      "id": "e3344996-41ba-47fc-b1c4-a524f98fd6c6",
+      "name": "bla",
+      "target": 2000,
       "total": 0,
-      "theme": "#826cb0",
-      "id": "47d83cd7-e74f-4c3b-8cc3-f2a183457e53"
+      "theme": "#7f9161"
     }
   ]
 }

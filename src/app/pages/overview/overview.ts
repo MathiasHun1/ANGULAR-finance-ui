@@ -1,4 +1,4 @@
-import { Component, computed, inject } from "@angular/core";
+import { Component, computed, effect, inject } from "@angular/core";
 import { ApiService } from "../../services/api-service";
 import { toSignal } from "@angular/core/rxjs-interop";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../../models/models";
 import { CommonModule } from "@angular/common";
 import { PotsService } from "../../services/pots-service";
-import { Router, RouterLink } from "@angular/router";
+import { RouterLink } from "@angular/router";
 import { ListItem } from "../../shared/components/list-item/list-item";
 import { TransactionService } from "../../services/transaction-service";
 import { Chart } from "../../shared/components/chart/chart";
@@ -58,4 +58,10 @@ export class Overview {
   upcomingBills = this.billsService.upcomingBills;
   dueSoonBills = this.billsService.dueSoonBills;
   getTotalAmount = this.billsService.getTotalAmount;
+
+  constructor() {
+    effect(() => {
+      console.log(this.transactionsService.income());
+    });
+  }
 }

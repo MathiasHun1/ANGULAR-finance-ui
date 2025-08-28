@@ -2,7 +2,7 @@ import { Component, inject, viewChild, signal } from "@angular/core";
 import { PotsService } from "../../../../services/pots-service";
 import { ModalService } from "../../../../services/modal-service";
 import { FormsModule, NgForm } from "@angular/forms";
-import { PotModel, ThemeOption } from "../../../../models/models";
+import { PotModel } from "../../../../models/models";
 import { CustomSelectInput } from "../../custom-select-input/custom-select-input";
 
 @Component({

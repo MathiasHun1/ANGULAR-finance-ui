@@ -15,7 +15,7 @@ export class TransactionService {
     this.apiService.getTransactions()
   );
 
-  private serarchValue = signal("");
+  private searchValue = signal("");
   private sortValue = signal<SortOptions>("date");
   private categoryValue = signal("");
 
@@ -115,15 +115,35 @@ export class TransactionService {
       return undefined;
     }
     return this.formatData(
-      this.serarchValue(),
+      this.searchValue(),
       this.categoryValue(),
       this.sortValue(),
       transactions
     );
   });
 
+  income = computed(() => {
+    const transactions = this.allTransactions();
+    if (!transactions) {
+      return 0;
+    }
+
+    const month = 6;
+    const monthTransactions = transactions.filter((t) => {
+      const trMonth = new Date(t.date).getMonth();
+      return trMonth === month;
+    });
+
+    if (monthTransactions) {
+      return monthTransactions.reduce((total: number, transaction) => {
+        return total + transaction.amount;
+      }, 0);
+    }
+    return 0;
+  });
+
   setSearchValue(value: string) {
-    this.serarchValue.set(value);
+    this.searchValue.set(value);
   }
 
   setSortValue(value: SortOptions) {
