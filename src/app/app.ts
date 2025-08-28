@@ -3,14 +3,12 @@ import { RouterOutlet } from "@angular/router";
 import { Navigation as NavComponent } from "./shared/components/navigation/navigation";
 import { Modal } from "./shared/components/modal/modal";
 import { CommonModule } from "@angular/common";
-import { trigger } from "@angular/animations";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.html",
   styleUrl: "./app.scss",
   imports: [RouterOutlet, NavComponent, Modal, CommonModule],
-  animations: [trigger("openClose", [])],
 })
 export class App {
   protected title = "Finance";
