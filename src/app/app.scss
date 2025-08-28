@@ -1,11 +1,12 @@
 @use "../styles/variables" as *;
 
-.data-container {
+.app-container {
   min-height: 100vh;
   padding: 0;
   margin: 0 auto;
   display: flex;
   flex-direction: column-reverse;
+  background-color: map-get($theme-colors, "beige-100");
 
   @media (min-width: $desktopAndUp) {
     height: 100vh;
@@ -14,8 +15,21 @@
   }
 }
 
-.header {
+.logo-container {
+  display: none;
+
   @media (min-width: $desktopAndUp) {
+    display: block;
+  }
+}
+
+.header {
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  @media (min-width: $desktopAndUp) {
+    border-top-left-radius: revert;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
     width: 300px;
   }
 }
@@ -27,4 +41,13 @@
   @media (min-width: $desktopAndUp) {
     overflow-y: scroll;
   }
+}
+
+.toggle:hover {
+  cursor: pointer;
+  color: white !important;
+}
+
+.toggle:hover .icon path {
+  fill: white;
 }

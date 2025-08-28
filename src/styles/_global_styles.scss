@@ -3,16 +3,6 @@ body {
   height: 100vh;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: $desktopAndUp) {
-    display: revert;
-    flex-grow: revert;
-  }
-}
-
 // Bootstrap class overrides
 .list-group-item {
   background-color: transparent;

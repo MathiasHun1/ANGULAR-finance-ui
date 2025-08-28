@@ -1,10 +1,17 @@
-import { Component } from "@angular/core";
+import { Component, effect, input } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
   selector: "app-navigation",
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, CommonModule],
   templateUrl: "./navigation.html",
   styleUrl: "./navigation.scss",
 })
-export class Navigation {}
+export class Navigation {
+  menuOpen = input.required<boolean>();
+
+  constructor() {
+    effect(() => console.log(this.menuOpen()));
+  }
+}

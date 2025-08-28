@@ -33,6 +33,11 @@
 
 .nav-item:hover {
   cursor: pointer;
+  color: white;
+}
+
+.nav-item:hover .icon path {
+  fill: white;
 }
 
 .nav-item.active {
@@ -47,4 +52,9 @@
 
 .icon path {
   fill: map-get($theme-colors, grey-300);
+}
+
+.isHidden {
+  // display: none !important;
+  width: 0;
 }
