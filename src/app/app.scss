@@ -26,12 +26,21 @@
 .header {
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
+
   @media (min-width: $desktopAndUp) {
     border-top-left-radius: revert;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
     width: 300px;
+    transition: width 600ms ease;
+    padding-right: 1.5rem;
   }
+}
+
+.shrink-header {
+  width: 100px;
+  padding-right: 0.5rem;
+  transition: width 600ms ease;
 }
 
 .main {
@@ -43,6 +52,10 @@
   }
 }
 
+.toggle {
+  position: relative;
+}
+
 .toggle:hover {
   cursor: pointer;
   color: white !important;
@@ -50,4 +63,21 @@
 
 .toggle:hover .icon path {
   fill: white;
+}
+
+.minimize-text {
+  position: absolute;
+  left: 60px;
+  text-wrap: none;
+  white-space: nowrap;
+}
+
+.icon {
+  transform: rotate(0deg);
+  transition: transform 300ms ease;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+  transition: transform 300ms ease;
 }

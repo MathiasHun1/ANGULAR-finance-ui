@@ -69,3 +69,40 @@ html.modal.visible {
   padding-block: 1rem;
   padding-inline: 0;
 }
+
+// animations
+
+.enter {
+  animation: fade-in 1500ms;
+}
+
+.leave {
+  animation: fade-out 350ms;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes shrink-header {
+  from {
+    width: 300px;
+  }
+  to {
+    width: auto;
+  }
+}

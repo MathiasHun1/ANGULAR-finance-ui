@@ -1,4 +1,4 @@
-import { Component, effect, input } from "@angular/core";
+import { Component, effect, input, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
@@ -10,6 +10,9 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
 })
 export class Navigation {
   menuOpen = input.required<boolean>();
+
+  isVisible = signal(true);
+  opened = signal(true);
 
   constructor() {
     effect(() => console.log(this.menuOpen()));

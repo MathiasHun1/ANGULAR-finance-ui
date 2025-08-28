@@ -54,7 +54,15 @@
   fill: map-get($theme-colors, grey-300);
 }
 
-.isHidden {
-  // display: none !important;
-  width: 0;
+.nav-item-title {
+  display: none;
+
+  @media (min-width: $desktopAndUp) {
+    position: absolute;
+    left: 0;
+    transform: translateX(80px);
+  }
+}
+
+.nav-item-title:hover {
 }
