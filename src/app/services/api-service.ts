@@ -18,12 +18,13 @@ import {
   BalanceModel,
 } from "../models/models";
 import { joinBudgetsAndTransactions } from "../shared/utils/utils";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class ApiService {
-  private baseUrl = "http://localhost:3000";
+  private baseUrl = `${environment.apiUrl}`;
   private http = inject(HttpClient);
   private delay = 1000;
 
