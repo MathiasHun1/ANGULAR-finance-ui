@@ -27,6 +27,14 @@
             @if (currentFormType() === 'delete-pot') {
             Delete '{{potService.activePot().name}}'?
             }
+
+            @if (currentFormType() === 'add-to-pot') {
+            Add to '{{potService.activePot().name}}'?
+            }
+
+            @if (currentFormType() === 'withdraw-from-pot') {
+            Withdraw from '{{potService.activePot().name}}'?
+            }
           </p>
           <button type="button" class="button btn-close border border-2 border-black rounded-circle p-2"
             aria-label="Close" (click)="closeModal()"></button>

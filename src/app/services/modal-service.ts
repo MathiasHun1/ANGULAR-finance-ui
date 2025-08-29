@@ -1,12 +1,5 @@
 import { Injectable, signal } from "@angular/core";
-
-type ModalFormType =
-  | "add-budget"
-  | "add-pot"
-  | "edit-budget"
-  | "edit-pot"
-  | "delete-budget"
-  | "delete-pot";
+import { ModalFormType } from "../models/models";
 
 @Injectable({
   providedIn: "root",

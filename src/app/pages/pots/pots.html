@@ -1,6 +1,6 @@
 <div class="page-title-container d-flex justify-content-between align-items-center">
   <h1 class="page-title">Pots</h1>
-  <button class="btn btn-dark p-3" (click)="openModal()">
+  <button class="btn btn-dark p-3" (click)="openModal('add-pot')">
     + Add new Pot
   </button>
 </div>
@@ -43,8 +43,8 @@
 
       <!-- Buttons -->
       <div class="d-flex gap-3">
-        <div class="btn bg-beige-100 w-100">Add money</div>
-        <div class="btn bg-beige-100 w-100">Withdraw</div>
+        <div class="btn bg-beige-100 w-100" (click)="onAddMoneyClick(pot.id)">Add money</div>
+        <div class="btn bg-beige-100 w-100" (click)="onWithdrawClick(pot.id)">Withdraw</div>
       </div>
 
     </div>

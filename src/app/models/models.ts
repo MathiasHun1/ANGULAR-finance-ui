@@ -61,3 +61,13 @@ export interface ThemeOption {
   color: string;
   inUse: boolean;
 }
+
+export type ModalFormType =
+  | "add-budget"
+  | "add-pot"
+  | "edit-budget"
+  | "edit-pot"
+  | "delete-budget"
+  | "delete-pot"
+  | "add-to-pot"
+  | "withdraw-from-pot";
