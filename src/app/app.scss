@@ -17,10 +17,16 @@
 
 .logo-container {
   display: none;
+  position: relative;
 
   @media (min-width: $desktopAndUp) {
     display: block;
   }
+}
+
+.logo {
+  position: absolute;
+  left: 2rem;
 }
 
 .header {

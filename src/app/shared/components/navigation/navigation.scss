@@ -12,6 +12,7 @@
   border-bottom: 3px solid transparent;
   font-size: 12px;
   gap: 0.5rem;
+  position: relative;
 
   @media (min-width: $desktopAndUp) {
     border-radius: revert;
@@ -62,7 +63,4 @@
     left: 0;
     transform: translateX(80px);
   }
-}
-
-.nav-item-title:hover {
 }

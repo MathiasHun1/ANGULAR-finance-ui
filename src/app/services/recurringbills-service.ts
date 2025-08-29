@@ -1,8 +1,7 @@
 import { inject, Injectable, computed, signal } from "@angular/core";
 import { ApiService } from "./api-service";
 import { toSignal } from "@angular/core/rxjs-interop";
-import { map, take, tap } from "rxjs";
-import { TransactionModel } from "../models/models";
+import { map } from "rxjs";
 import { RecurringBill } from "../models/models";
 import { Signal } from "@angular/core";
 import { SortOptions } from "../models/models";

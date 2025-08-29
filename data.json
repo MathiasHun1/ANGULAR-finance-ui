@@ -467,15 +467,9 @@
       "id": "242f"
     },
     {
-      "id": "e7af0b17-0f68-4349-90c0-13dd64636d4f",
-      "category": "Shopping",
-      "maximum": 130,
-      "theme": "#c94736"
-    },
-    {
-      "id": "d9857fd8-cc17-468f-8387-187f23ba9718",
-      "category": "Groceries",
-      "maximum": 200,
+      "id": "67e70db4-aa44-48c8-a391-0b2dc45394c4",
+      "category": "Lifestyle",
+      "maximum": 54,
       "theme": "#626070"
     }
   ],
@@ -502,11 +496,11 @@
       "id": "3e41"
     },
     {
-      "name": "bla",
-      "target": 5000,
+      "id": "f15fbeae-26a4-4487-a62e-7d5e0c918ff7",
+      "name": "asdasdasd",
+      "target": 3211,
       "total": 0,
-      "theme": "#3f82b2",
-      "id": "e3344996-41ba-47fc-b1c4-a524f98fd6c6"
+      "theme": "#826cb0"
     }
   ]
 }

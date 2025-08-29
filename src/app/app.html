@@ -2,13 +2,13 @@
   <header class="header shrink-header bg-grey-900  d-flex flex-column justify-content-between pb-xl-5"
     [ngClass]="{'shrink-header': !menuOpen()}">
     <div>
-      <div class="logo-container py-5 ps-5">
+      <div class="logo-container py-5 ps-5 mb-5">
         @if(menuOpen()) {
-        <img class="ms-2" src='images/logo-large.svg' alt="">
+        <img class=" logo ms-2" src='images/logo-large.svg' alt="" animate.enter="enter" animate.leave="leave">
         }
 
         @if(!menuOpen()) {
-        <img class="ms-2" src='images/logo-small.svg' alt="">
+        <img class=" logo ms-2" src='images/logo-small.svg' alt="" animate.enter="enter" animate.leave="leave">
         }
 
 
