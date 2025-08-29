@@ -12,30 +12,34 @@ import { SortOptions } from "../models/models";
 export class RecurringbillsService {
   private apiService = inject(ApiService);
 
-  billTypes: Signal<RecurringBill[]> = toSignal(
-    this.apiService.getRecurringTypeBills().pipe(
-      // tap((res) => console.log("LOG bills from service: ", res)),
-      map((result) =>
-        result.map((t) => {
-          return { ...t, avatar: t.avatar.replace("./assets", "") };
-        })
-      )
-    ),
-    { initialValue: [] }
-  );
+  dataLoaded = signal(false);
+  billTypes = signal<RecurringBill[] | null>(null);
 
   sortedBills = computed(() => {
-    return this.sort(this.sortValue(), this.billTypes());
+    if (!this.billTypes()) {
+      return null;
+    }
+    return this.sort(this.sortValue(), this.billTypes()!);
   });
+
   paidBills = computed(() => {
+    if (!this.billTypes()) {
+      return null;
+    }
+
     return {
-      bills: this.billTypes().filter((b) => b.dueDate < new Date().getDate()),
+      bills: this.billTypes()!.filter((b) => b.dueDate < new Date().getDate()),
       theme: "#277C78",
     };
   });
+
   dueSoonBills = computed(() => {
+    if (!this.billTypes()) {
+      return null;
+    }
+
     return {
-      bills: this.billTypes().filter((b) => {
+      bills: this.billTypes()!.filter((b) => {
         const today = new Date().getDate();
         return today <= b.dueDate && today >= b.dueDate - 3;
       }),
@@ -43,14 +47,37 @@ export class RecurringbillsService {
     };
   });
   upcomingBills = computed(() => {
+    if (!this.billTypes()) {
+      return null;
+    }
+
     return {
-      bills: this.billTypes().filter((b) => new Date().getDate() <= b.dueDate),
+      bills: this.billTypes()!.filter((b) => new Date().getDate() <= b.dueDate),
       theme: "#F2CDAC",
     };
   });
 
   sortValue = signal<SortOptions>("date");
   searchFieldValue = signal("");
+
+  getRecurringBills() {
+    this.apiService
+      .getRecurringTypeBills()
+      .pipe(
+        map((result) =>
+          result.map((t) => {
+            return { ...t, avatar: t.avatar.replace("./assets", "") };
+          })
+        )
+      )
+      .subscribe({
+        next: (bills) => {
+          this.billTypes.set(bills);
+          this.dataLoaded.set(true);
+        },
+        error: (err) => console.error("Error fetching recurring bills", err),
+      });
+  }
 
   sort(value: SortOptions, transactions: RecurringBill[]): RecurringBill[] {
     if (!value) {
@@ -88,7 +115,11 @@ export class RecurringbillsService {
     }
   }
 
-  getTotalAmount(bills: RecurringBill[]) {
+  getTotalAmount(bills: RecurringBill[] | null) {
+    if (!bills) {
+      return 0;
+    }
+
     return Number(
       bills
         .reduce((total, bill) => {
@@ -96,5 +127,9 @@ export class RecurringbillsService {
         }, 0)
         .toFixed(2)
     );
+  }
+
+  loadData() {
+    this.getRecurringBills();
   }
 }

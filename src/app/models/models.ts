@@ -28,6 +28,11 @@ export interface BudgetModel {
   id: string;
 }
 
+export interface ExtendedBudget extends BudgetModel {
+  transactions: TransactionModel[];
+  spentThisMonth: number;
+}
+
 export interface PotModel {
   name: string;
   target: number;
@@ -50,11 +55,6 @@ export type SortOptions =
   | "amountReverse"
   | "name"
   | "nameReverse";
-
-export interface ExtendedBudget extends BudgetModel {
-  transactions: TransactionModel[];
-  spentThisMonth: number;
-}
 
 export interface ThemeOption {
   name: string;

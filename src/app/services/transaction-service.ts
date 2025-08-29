@@ -10,11 +10,6 @@ import { SortOptions } from "../models/models";
 export class TransactionService {
   private apiService = inject(ApiService);
 
-  // Private signals for state management
-  allTransactions: Signal<TransactionModel[] | undefined> = toSignal(
-    this.apiService.getTransactions()
-  );
-
   private searchValue = signal("");
   private sortValue = signal<SortOptions>("date");
   private categoryValue = signal("");
@@ -95,10 +90,26 @@ export class TransactionService {
    * Public API
    ************/
 
+  dataLoaded = signal(false);
+  allTransactions = signal<TransactionModel[] | null>(null);
+
+  computedTransactions = computed(() => {
+    const transactions = this.allTransactions();
+    if (!transactions) {
+      return null;
+    }
+    return this.formatData(
+      this.searchValue(),
+      this.categoryValue(),
+      this.sortValue(),
+      transactions
+    );
+  });
+
   categories = computed(() => {
     const transactions = this.allTransactions();
     if (!transactions) {
-      return undefined;
+      return null;
     }
     let categoryList: string[] = [];
     transactions.map((t) => {
@@ -107,19 +118,6 @@ export class TransactionService {
       }
     });
     return categoryList;
-  });
-
-  computedTransactions = computed(() => {
-    const transactions = this.allTransactions();
-    if (!transactions) {
-      return undefined;
-    }
-    return this.formatData(
-      this.searchValue(),
-      this.categoryValue(),
-      this.sortValue(),
-      transactions
-    );
   });
 
   income = computed(() => {
@@ -141,6 +139,19 @@ export class TransactionService {
     }
     return 0;
   });
+
+  getTransactions() {
+    this.apiService.getTransactions().subscribe({
+      next: (data) => {
+        this.allTransactions.set(data);
+        this.dataLoaded.set(true);
+      },
+      error: (err) => {
+        console.error("Error fetching transactions:", err);
+        this.allTransactions.set(null);
+      },
+    });
+  }
 
   setSearchValue(value: string) {
     this.searchValue.set(value);
@@ -165,5 +176,10 @@ export class TransactionService {
           (t) => t.category.toLowerCase() === category.toLowerCase()
         )
       : undefined;
+  }
+
+  loadData() {
+    this.getTransactions();
+    this.dataLoaded.set(true);
   }
 }

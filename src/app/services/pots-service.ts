@@ -9,6 +9,8 @@ import { v4 as uuidv4 } from "uuid";
 })
 export class PotsService {
   private apiService = inject(ApiService);
+
+  dataLoaded = signal(false);
   pots = signal<PotModel[] | null>(null);
 
   totalSavedPots = computed(() => {
@@ -42,7 +44,10 @@ export class PotsService {
     this.apiService.getPots().subscribe({
       next: (pots) => {
         this.pots.set(pots);
+        this.dataLoaded.set(true);
       },
+
+      error: (err) => console.error("Error fetching pots", err),
     });
   }
 
@@ -111,5 +116,9 @@ export class PotsService {
       theme: "",
       id: "",
     });
+  }
+
+  loadData() {
+    this.getPots();
   }
 }

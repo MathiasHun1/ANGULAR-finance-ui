@@ -1,4 +1,11 @@
-import { Component, computed, effect, inject, signal } from "@angular/core";
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  OnInit,
+  signal,
+} from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { TransactionService } from "../../services/transaction-service";
@@ -10,11 +17,17 @@ import { SortOptions } from "../../models/models";
   templateUrl: "./transactions.html",
   styleUrl: "./transactions.scss",
 })
-export class Transactions {
+export class Transactions implements OnInit {
   /**
    * Services
    */
   private transactionsService = inject(TransactionService);
+
+  ngOnInit(): void {
+    if (!this.transactions()) {
+      this.transactionsService.getTransactions();
+    }
+  }
 
   /**
    * Private state variables

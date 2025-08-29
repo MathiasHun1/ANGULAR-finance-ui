@@ -16,6 +16,5 @@ export class App {
 
   toggleNavState() {
     this.menuOpen.set(!this.menuOpen());
-    console.log("clicked");
   }
 }

@@ -1,6 +1,15 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { delay, distinct, map, mergeAll, Observable, tap, toArray } from "rxjs";
+import {
+  delay,
+  distinct,
+  forkJoin,
+  map,
+  mergeAll,
+  Observable,
+  tap,
+  toArray,
+} from "rxjs";
 import {
   BudgetModel,
   TransactionModel,
@@ -8,6 +17,7 @@ import {
   RecurringBill,
   BalanceModel,
 } from "../models/models";
+import { joinBudgetsAndTransactions } from "../shared/utils/utils";
 
 @Injectable({
   providedIn: "root",
@@ -86,6 +96,18 @@ export class ApiService {
     return this.http.put<BudgetModel>(
       `${this.baseUrl}/budgets/${budget.id}`,
       budget
+    );
+  }
+
+  // join budgets objects with the corrsponding transactions, and the actual month spending sum
+  getExtendedBudgets() {
+    return forkJoin({
+      budgets: this.getBudgets(),
+      transactions: this.getTransactions(),
+    }).pipe(
+      map(({ budgets, transactions }) => {
+        return joinBudgetsAndTransactions(budgets, transactions);
+      })
     );
   }
 

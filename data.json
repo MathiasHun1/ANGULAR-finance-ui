@@ -455,22 +455,16 @@
       "id": "0b26"
     },
     {
-      "category": "Bills",
-      "maximum": 750,
-      "theme": "#82C9D7",
-      "id": "3097"
+      "id": "ebea58f6-d022-4979-b49e-da472b3dcff4",
+      "category": "Groceries",
+      "maximum": 120,
+      "theme": "#c94736"
     },
     {
-      "category": "Dining Out",
-      "maximum": 75,
-      "theme": "#F2CDAC",
-      "id": "242f"
-    },
-    {
-      "id": "67e70db4-aa44-48c8-a391-0b2dc45394c4",
-      "category": "Lifestyle",
-      "maximum": 54,
-      "theme": "#626070"
+      "id": "fb2f3125-1a27-470d-b0cc-5062cd1fc3c1",
+      "category": "Personal care",
+      "maximum": 100,
+      "theme": "#277c78"
     }
   ],
   "pots": [
@@ -494,13 +488,6 @@
       "total": 110,
       "theme": "#82c9d7",
       "id": "3e41"
-    },
-    {
-      "id": "f15fbeae-26a4-4487-a62e-7d5e0c918ff7",
-      "name": "asdasdasd",
-      "target": 3211,
-      "total": 0,
-      "theme": "#826cb0"
     }
   ]
 }

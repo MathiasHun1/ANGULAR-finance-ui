@@ -1,11 +1,20 @@
 import { CommonModule } from "@angular/common";
-import { Component, inject, OnInit, signal, viewChild } from "@angular/core";
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+  viewChild,
+} from "@angular/core";
 import { BudgetCard } from "./components/budget-card/budget-card";
 import { Chart } from "../../shared/components/chart/chart";
 import { BudgetService } from "../../services/budget-service";
 import { FormsModule, NgForm } from "@angular/forms";
-import { BudgetModel, ThemeOption } from "../../models/models";
+import { BudgetModel, ExtendedBudget, ThemeOption } from "../../models/models";
 import { ModalService } from "../../services/modal-service";
+import { TransactionService } from "../../services/transaction-service";
+import { getActualMonthTransactions } from "../../shared/utils/utils";
 
 @Component({
   selector: "app-budgets",
@@ -13,22 +22,30 @@ import { ModalService } from "../../services/modal-service";
   templateUrl: "./budgets.html",
   styleUrl: "./budgets.scss",
 })
-export class Budgets {
+export class Budgets implements OnInit {
   private budgetService = inject(BudgetService);
   private modalService = inject(ModalService);
+  private transactionService = inject(TransactionService);
 
+  // Load data on init
   ngOnInit(): void {
-    const budgets = this.budgetService.budgets();
-    if (budgets) {
-      return;
+    if (!this.budgetService.dataLoaded()) {
+      this.budgetService.loadData();
     }
-    this.budgetService.getBudgets();
+
+    if (!this.transactionService.dataLoaded()) {
+      this.transactionService.getTransactions();
+    }
   }
 
-  extendedBudgets = this.budgetService.extendedBudgets;
   modalOpened = signal(false);
+  dataLoaded = computed(
+    () =>
+      this.transactionService.dataLoaded() && this.budgetService.dataLoaded()
+  );
+  extendedBudgets = this.budgetService.extendedBudgets;
+
   openModal() {
-    // this.modalOpened.set(true);
     this.modalService.openModal("add-budget");
   }
   budgetOptions = this.budgetService.availableCategories;

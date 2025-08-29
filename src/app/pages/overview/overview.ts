@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject } from "@angular/core";
+import { Component, computed, effect, inject, signal } from "@angular/core";
 import { ApiService } from "../../services/api-service";
 import { toSignal } from "@angular/core/rxjs-interop";
 import {
@@ -14,6 +14,8 @@ import { TransactionService } from "../../services/transaction-service";
 import { Chart } from "../../shared/components/chart/chart";
 import { BudgetService } from "../../services/budget-service";
 import { RecurringbillsService } from "../../services/recurringbills-service";
+import { OnInit } from "@angular/core";
+import { BalanceService } from "../../services/balance-service";
 
 @Component({
   selector: "app-overview",
@@ -21,17 +23,48 @@ import { RecurringbillsService } from "../../services/recurringbills-service";
   templateUrl: "./overview.html",
   styleUrl: "./overview.scss",
 })
-export class Overview {
-  apiService = inject(ApiService);
-  potsService = inject(PotsService);
-  transactionsService = inject(TransactionService);
-  budgetService = inject(BudgetService);
-  billsService = inject(RecurringbillsService);
+export class Overview implements OnInit {
+  private potsService = inject(PotsService);
+  private transactionsService = inject(TransactionService);
+  private budgetService = inject(BudgetService);
+  private billsService = inject(RecurringbillsService);
+  private balanceService = inject(BalanceService);
 
-  //pots related data
-  balance = toSignal<BalanceModel>(this.apiService.getBalance());
-  totalSavedPots = this.potsService.totalSavedPots;
-  potsData = this.potsService.pots;
+  //fetch all data on init if not already fetched
+  ngOnInit(): void {
+    if (!this.balanceService.balanceData()) {
+      this.balanceService.loadData();
+    }
+
+    if (!this.potsService.pots()) {
+      this.potsService.loadData();
+    }
+
+    if (!this.budgetService.budgets()) {
+      this.budgetService.loadData();
+    }
+
+    if (!this.billsService.billTypes()) {
+      this.billsService.loadData();
+    }
+
+    if (!this.transactionsService.allTransactions()) {
+      this.transactionsService.loadData();
+    }
+  }
+
+  //check if  all data is loaded
+  allLoaded = computed(() => {
+    return (
+      this.balanceService.balanceLoaded() &&
+      this.potsService.dataLoaded() &&
+      this.budgetService.dataLoaded() &&
+      this.billsService.dataLoaded() &&
+      this.transactionsService.dataLoaded()
+    );
+  });
+  //balance related data
+  balanceData = this.balanceService.balanceData;
 
   //transactions related data
   transactions = computed<TransactionModel[]>(() => {
@@ -53,15 +86,20 @@ export class Overview {
     return budgetsAll.slice(0, 4);
   });
 
+  //pots related data
+  totalSavedPots = this.potsService.totalSavedPots;
+  pots = computed(() => {
+    const potsData = this.potsService.pots();
+    if (!potsData) {
+      return [];
+    }
+
+    return potsData.slice(0, 4);
+  });
+
   //Recurring-bills related data
   paidBills = this.billsService.paidBills;
   upcomingBills = this.billsService.upcomingBills;
   dueSoonBills = this.billsService.dueSoonBills;
   getTotalAmount = this.billsService.getTotalAmount;
-
-  constructor() {
-    effect(() => {
-      console.log(this.transactionsService.income());
-    });
-  }
 }

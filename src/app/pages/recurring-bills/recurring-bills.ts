@@ -1,4 +1,11 @@
-import { Component, computed, effect, inject, signal } from "@angular/core";
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  OnInit,
+  signal,
+} from "@angular/core";
 import { RecurringbillsService } from "../../services/recurringbills-service";
 import { CommonModule } from "@angular/common";
 import { RecurringBill, SortOptions } from "../../models/models";
@@ -10,7 +17,7 @@ import { FormsModule, FormControl } from "@angular/forms";
   templateUrl: "./recurring-bills.html",
   styleUrl: "./recurring-bills.scss",
 })
-export class RecurringBills {
+export class RecurringBills implements OnInit {
   private billsService = inject(RecurringbillsService);
 
   sortedBills = this.billsService.sortedBills;
@@ -54,5 +61,11 @@ export class RecurringBills {
     return bills.filter((b) =>
       b.name.toLowerCase().trim().includes(this.searchFieldValue())
     );
+  }
+
+  ngOnInit(): void {
+    if (!this.billsService.billTypes()) {
+      this.billsService.getRecurringBills();
+    }
   }
 }

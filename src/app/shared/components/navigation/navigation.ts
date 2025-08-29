@@ -13,8 +13,4 @@ export class Navigation {
 
   isVisible = signal(true);
   opened = signal(true);
-
-  constructor() {
-    effect(() => console.log(this.menuOpen()));
-  }
 }

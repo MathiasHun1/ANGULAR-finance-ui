@@ -2,18 +2,14 @@
   <h1 class="page-title">Recurring Bills</h1>
 </div>
 
-@if (sortedBills().length === 0) {
+@if (!sortedBills()) {
 <p class="h2 text-center py-5">Loading..</p>
 } @else {
 
 <div class="d-xl-flex flex-row">
-  <section
-    class="d-flex flex-column gap-3 gap-sm-4 flex-sm-row flex-xl-column px-xl-4 flex-grow-1"
-  >
+  <section class="d-flex flex-column gap-3 gap-sm-4 flex-sm-row flex-xl-column px-xl-4 flex-grow-1">
     <!-- Bills Card -->
-    <div
-      class="custom-card bg-grey-900 text-white d-flex flex-column gap-4 flex-grow-1 flex-xl-grow-0"
-    >
+    <div class="custom-card bg-grey-900 text-white d-flex flex-column gap-4 flex-grow-1 flex-xl-grow-0">
       <div class="d-none d-sm-block pt-3">
         <img src="/images/icon-recurring-bills.svg" alt="" />
       </div>
@@ -34,22 +30,29 @@
         <div class="list-group-item">
           <span class="text-grey-500">Paid bills</span>
           <div class="fw-bolder">
-            <span class="pe-1">{{ paidBills().bills.length }}</span
-            >(${{ getTotalAmount(paidBills().bills) * -1 }})<span></span>
+            @if (paidBills()) {
+            <span class="pe-1">{{paidBills()!.bills.length }}</span>
+            <span>
+              $({{ getTotalAmount(paidBills()!.bills) * -1}})</span>
+            }
           </div>
         </div>
         <div class="list-group-item">
           <span class="text-grey-500">Total upcoming</span>
           <div class="fw-bolder">
-            <span class="pe-1">{{ upcomingBills().bills.length }}</span>
-            <span>(${{ getTotalAmount(upcomingBills().bills) * -1 }})</span>
+            @if(upcomingBills()) {
+            <span class="pe-1">{{ upcomingBills()!.bills.length }}</span>
+            <span>(${{ getTotalAmount(upcomingBills()!.bills) * -1 }})</span>
+            }
           </div>
         </div>
         <div class="list-group-item text-red">
           <span class="">Due soon</span>
           <div class="fw-bolder">
-            <span class="pe-1">{{ dueSoonBills().bills.length }}</span>
-            <span>(${{ getTotalAmount(dueSoonBills().bills) * -1 }})</span>
+            @if (dueSoonBills()) {
+            <span class="pe-1">{{ dueSoonBills()!.bills.length }}</span>
+            <span>(${{ getTotalAmount(dueSoonBills()!.bills) * -1 }})</span>
+            }
           </div>
         </div>
       </div>
@@ -60,12 +63,7 @@
   <section class="custom-card mt-4 mt-xl-0 px-3 flex-grow-1">
     <div class="row">
       <div class="col">
-        <input
-          type="text"
-          class="form-control w-75"
-          placeholder="Search bills"
-          [(ngModel)]="searchFieldValue"
-        />
+        <input type="text" class="form-control w-75" placeholder="Search bills" [(ngModel)]="searchFieldValue" />
       </div>
 
       <div class="col d-flex justify-content-end align-items-center gap-2 mb-4">
@@ -88,16 +86,15 @@
     </div>
 
     <div class="list-group">
-      @for (bill of filterBills(sortedBills()); track bill) {
+      @if (sortedBills()) {
+      @for (bill of filterBills(sortedBills()!); track bill) {
       <div class="bill-line list-group-item">
         <div>
           <img class="icon" [src]="bill.avatar" alt="" />
           <span class="ps-3 fs-7 fw-bolder">{{ bill.name }}</span>
 
           <div class="d-sm-none">
-            <span class="fs-8 text-green pe-3"
-              >Monthly - {{ bill.dueDate + 1 }}th</span
-            >
+            <span class="fs-8 text-green pe-3">Monthly - {{ bill.dueDate + 1 }}th</span>
             @if (getDueDateInfo(bill.dueDate).path) {
             <img [src]="getDueDateInfo(bill.dueDate).path" alt="" />
             }
@@ -105,23 +102,19 @@
         </div>
 
         <div class="d-none d-sm-block">
-          <span class="fs-8 text-green pe-3"
-            >Monthly - {{ bill.dueDate + 1 }}th</span
-          >
+          <span class="fs-8 text-green pe-3">Monthly - {{ bill.dueDate + 1 }}th</span>
           @if (getDueDateInfo(bill.dueDate).path) {
           <img [src]="getDueDateInfo(bill.dueDate).path" alt="" />
           }
         </div>
 
-        <p
-          class="text-end fs-7 fw-bolder align-self-end align-self-sm-start m-0"
-          [ngClass]="{
-            'text-red': getDueDateInfo(bill.dueDate).isClose
-          }"
-        >
+        <p class="text-end fs-7 fw-bolder align-self-end align-self-sm-start m-0" [ngClass]="{
+        'text-red': getDueDateInfo(bill.dueDate).isClose
+      }">
           ${{ bill.amount * -1 }}
         </p>
       </div>
+      }
       }
     </div>
   </section>
