@@ -76,6 +76,7 @@ export class Transactions implements OnInit {
     const transactions = this.transactions();
     return transactions ? transactions.slice(firstIndex, lastIndex) : undefined;
   });
+
   pageNumbers = computed<number[]>(() => {
     const pagesCount = this.pagesCount();
 

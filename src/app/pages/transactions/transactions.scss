@@ -79,3 +79,16 @@
 .form-control {
   background-color: transparent;
 }
+
+.avatar-container {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}

@@ -6,18 +6,11 @@
 <p class="h2 text-center py-5">Loading..</p>
 } @else {
 
-<div
-  class="custom-card d-flex flex-column justify-content-between text-grey-500"
->
+<div class="custom-card d-flex flex-column justify-content-between text-grey-500">
   <!-- INput fields -->
   <div class="input-section row pt-2 pb-3">
     <div class="col">
-      <input
-        type="text"
-        class="form-control w-75"
-        placeholder="Search transaction"
-        [(ngModel)]="searchFieldValue"
-      />
+      <input type="text" class="form-control w-75" placeholder="Search transaction" [(ngModel)]="searchFieldValue" />
     </div>
 
     <div class="col row">
@@ -55,14 +48,13 @@
 
     <!-- Transaction elements -->
 
-    @for (transaction of paginatedData(); track transaction.date) {
+    @for (transaction of paginatedData(); track transaction.id) {
     <div class="transaction-item list-group-item">
       <div>
-        <img
-          [src]="transaction.avatar"
-          alt=""
-          class="profile-image rounded-circle"
-        />
+        <div class="avatar-container">
+          <img class="avatar" [src]="transaction.avatar" alt="" class="profile-image rounded-circle" width="40"
+            height="40" />
+        </div>
         <span class="ms-2 fw-bold fs-6 text-black">
           {{ transaction.name }}
         </span>
@@ -70,13 +62,10 @@
 
       <span> {{ transaction.category }} </span>
       <span> {{ transaction.date | date : "dd MMM yyyy" }} </span>
-      <span
-        class="amount"
-        [ngClass]="{
+      <span class="amount" [ngClass]="{
           'text-green': transaction.amount >= 0,
           'text-black': transaction.amount < 0
-        }"
-      >
+        }">
         {{ transaction.amount | currency }}
       </span>
     </div>
@@ -95,10 +84,7 @@
       <div class="d-flex">
         @for (number of pageNumbers(); track number) {
         <li class="page-item" (click)="stepToPage(number)">
-          <span
-            class="page-link"
-            [ngClass]="{ active: number === currentPage() }"
-          >
+          <span class="page-link" [ngClass]="{ active: number === currentPage() }">
             {{ number }}
           </span>
         </li>

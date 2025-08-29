@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import {
   Component,
   computed,
+  effect,
   inject,
   OnInit,
   signal,
@@ -34,20 +35,24 @@ export class Budgets implements OnInit {
     }
 
     if (!this.transactionService.dataLoaded()) {
-      this.transactionService.getTransactions();
+      this.transactionService.loadData();
     }
   }
 
   modalOpened = signal(false);
-  dataLoaded = computed(
-    () =>
+  dataLoaded = computed(() => {
+    return (
       this.transactionService.dataLoaded() && this.budgetService.dataLoaded()
-  );
-  extendedBudgets = this.budgetService.extendedBudgets;
+    );
+  });
 
-  openModal() {
-    this.modalService.openModal("add-budget");
+  constructor() {
+    effect(() => {
+      console.log(this.budgetService.dataLoaded());
+    });
   }
+
+  extendedBudgets = this.budgetService.extendedBudgets;
   budgetOptions = this.budgetService.availableCategories;
   themeOptions = this.budgetService.themeOptions;
 
@@ -56,6 +61,10 @@ export class Budgets implements OnInit {
   selectedCategory = signal<string>("");
 
   budgetForm = viewChild<NgForm>("budgetForm");
+
+  openModal() {
+    this.modalService.openModal("add-budget");
+  }
 
   onCloseModal(event: string) {
     this.modalOpened.set(false);

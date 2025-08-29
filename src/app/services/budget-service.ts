@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from "@angular/core";
+import { computed, effect, inject, Injectable, signal } from "@angular/core";
 import { ApiService } from "./api-service";
 import { BudgetModel, ExtendedBudget } from "../models/models";
 import { getCheckedThemeOptions } from "../shared/utils/utils";
