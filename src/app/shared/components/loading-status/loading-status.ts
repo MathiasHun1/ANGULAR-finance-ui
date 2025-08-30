@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  viewChild,
-  NgZone,
-} from "@angular/core";
+import { Component, ElementRef, OnInit, viewChild } from "@angular/core";
 
 @Component({
   selector: "app-loading-status",
