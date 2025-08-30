@@ -1,0 +1,14 @@
+@use "..%/../../../../../styles/variables" as *;
+
+.progress-bar {
+  transition: width 1s linear;
+}
+
+.progress {
+  width: 75%;
+  max-width: 300px;
+
+  @media (min-width: $tabletAndUp) {
+    width: 50%;
+  }
+}

@@ -16,10 +16,11 @@ import { BudgetService } from "../../services/budget-service";
 import { RecurringbillsService } from "../../services/recurringbills-service";
 import { OnInit } from "@angular/core";
 import { BalanceService } from "../../services/balance-service";
+import { LoadingStatus } from "../../shared/components/loading-status/loading-status";
 
 @Component({
   selector: "app-overview",
-  imports: [CommonModule, RouterLink, ListItem, Chart],
+  imports: [CommonModule, RouterLink, ListItem, Chart, LoadingStatus],
   templateUrl: "./overview.html",
   styleUrl: "./overview.scss",
 })

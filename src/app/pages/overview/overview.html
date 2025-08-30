@@ -2,10 +2,11 @@
   <h1 class="page-title">Overview</h1>
 </div>
 
-@if (!allLoaded()) {
-<p class="h2 text-center py-5">Loading..</p>
+@if (true) {
+<!-- <p class="h2 text-center py-5">Loading..</p>
 <p class="text-center text-red">(First load can take up <span class="fw-bold">30-60s</span>, because free-trier backend
-  deployment)</p>
+  deployment)</p> -->
+<app-loading-status></app-loading-status>
 } @else {
 
 <!-- Total balance cards line -->
