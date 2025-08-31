@@ -1,6 +1,6 @@
 {
   "balance": {
-    "current": 4836,
+    "current": 5367,
     "income": 3814.25,
     "expenses": 1700.5
   },
@@ -450,29 +450,35 @@
   "budgets": [
     {
       "category": "Entertainment",
-      "maximum": 75,
-      "theme": "#3f82b2",
+      "maximum": 50,
+      "theme": "#277C78",
       "id": "0b26"
     },
     {
-      "id": "ebea58f6-d022-4979-b49e-da472b3dcff4",
-      "category": "Groceries",
-      "maximum": 120,
-      "theme": "#c94736"
+      "category": "Bills",
+      "maximum": 750,
+      "theme": "#82C9D7",
+      "id": "3097"
     },
     {
-      "id": "fb2f3125-1a27-470d-b0cc-5062cd1fc3c1",
-      "category": "Personal care",
-      "maximum": 100,
-      "theme": "#277c78"
+      "category": "Dining Out",
+      "maximum": 75,
+      "theme": "#F2CDAC",
+      "id": "242f"
+    },
+    {
+      "id": "4d08983f-7b8c-4bf7-85d4-c47d575a634f",
+      "category": "Education",
+      "maximum": 200,
+      "theme": "#626070"
     }
   ],
   "pots": [
     {
       "name": "Savings",
-      "target": 1000,
+      "target": 2000,
       "total": 159,
-      "theme": "#277c78",
+      "theme": "#277C78",
       "id": "d0e1"
     },
     {
@@ -484,10 +490,17 @@
     },
     {
       "name": "Gift",
-      "target": 160,
+      "target": 150,
       "total": 110,
-      "theme": "#82c9d7",
+      "theme": "#82C9D7",
       "id": "3e41"
+    },
+    {
+      "name": "New Laptop",
+      "target": 1000,
+      "total": 10,
+      "theme": "#F2CDAC",
+      "id": "8374"
     }
   ]
 }

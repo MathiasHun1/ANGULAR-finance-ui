@@ -17,6 +17,8 @@ import { AddPotForm } from "../forms/add-pot-form/add-pot-form";
 import { PotsService } from "../../../services/pots-service";
 import { DeletePotForm } from "../forms/delete-pot-form/delete-pot-form";
 import { EditPotForm } from "../forms/edit-pot-form/edit-pot-form";
+import { AddToPotForm } from "../forms/add-to-pot-form/add-to-pot-form";
+import { WithdrawFromPotForm } from "../forms/withdraw-from-pot-form/withdraw-from-pot-form";
 
 @Component({
   selector: "app-modal",
@@ -27,6 +29,8 @@ import { EditPotForm } from "../forms/edit-pot-form/edit-pot-form";
     AddPotForm,
     DeletePotForm,
     EditPotForm,
+    AddToPotForm,
+    WithdrawFromPotForm,
   ],
   templateUrl: "./modal.html",
   styleUrl: "./modal.scss",

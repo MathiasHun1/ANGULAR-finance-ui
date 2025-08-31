@@ -76,6 +76,12 @@ export class ApiService {
       .pipe(delay(1000));
   }
 
+  updateBalance(newBalance: BalanceModel) {
+    return this.http
+      .put<BalanceModel>(`${this.baseUrl}/balance`, newBalance)
+      .pipe(delay(1000));
+  }
+
   /**
    * Budget related API calls
    */

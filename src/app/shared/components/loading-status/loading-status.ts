@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, viewChild } from "@angular/core";
+import { Component, OnInit, signal } from "@angular/core";
 
 @Component({
   selector: "app-loading-status",
@@ -7,18 +7,17 @@ import { Component, ElementRef, OnInit, viewChild } from "@angular/core";
   styleUrl: "./loading-status.scss",
 })
 export class LoadingStatus implements OnInit {
-  barElement = viewChild<ElementRef<HTMLDivElement>>("barElement");
+  progress = signal(0);
 
   ngOnInit(): void {
-    const duration = 60;
+    const duration = 30;
     let elapsed = 0;
 
     const update = () => {
-      elapsed++;
       const progress = (elapsed / duration) * 100;
+      this.progress.set(progress);
 
-      this.barElement()!.nativeElement.style.width = `${progress}%`;
-
+      elapsed++;
       if (elapsed < duration) {
         setTimeout(update, 1000);
       }
