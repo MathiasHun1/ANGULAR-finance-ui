@@ -109,4 +109,12 @@ export class Transactions implements OnInit {
     }
     this.currentPage.update((prev) => prev - 1);
   }
+
+  openMobileSortInput() {
+    alert("Sort options will be available soon!");
+  }
+
+  openMobileCategorySelect() {
+    alert("Category filter will be available soon!");
+  }
 }

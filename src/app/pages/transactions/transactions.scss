@@ -6,9 +6,19 @@
 
 .profile-image {
   width: 32px;
+  height: 32px;
 
   @media (min-width: $tabletAndUp) {
     width: 40px;
+    height: 40px;
+  }
+}
+
+.search-input {
+  width: 100%;
+
+  @media (min-width: $tabletAndUp) {
+    width: 75%;
   }
 }
 
@@ -24,9 +34,6 @@
     color: black;
     cursor: pointer;
   }
-}
-
-.page-item {
 }
 
 .page-link.active {
@@ -64,7 +71,7 @@
   color: inherit;
 
   display: grid;
-  grid-template-columns: 4fr 1.3fr 1.3fr 2.5fr;
+  grid-template-columns: 2fr 1fr;
   align-items: center;
 
   &:first-child {
@@ -73,6 +80,10 @@
 
   &:last-child {
     border-bottom: none;
+  }
+
+  @media (min-width: $tabletAndUp) {
+    grid-template-columns: 4fr 2fr 2fr 2.5fr;
   }
 }
 
@@ -83,7 +94,7 @@
 .avatar-container {
   width: 40px;
   height: 40px;
-  display: inline-block;
+  display: block;
 }
 
 .avatar {

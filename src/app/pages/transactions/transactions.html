@@ -7,14 +7,27 @@
 } @else {
 
 <div class="custom-card d-flex flex-column justify-content-between text-grey-500">
-  <!-- INput fields -->
+  <!-- Input fields -->
   <div class="input-section row pt-2 pb-3">
-    <div class="col">
-      <input type="text" class="form-control w-75" placeholder="Search transaction" [(ngModel)]="searchFieldValue" />
+    <div class="col-9 col-md-6 pe-0">
+      <input type="text" class="form-control search-input" placeholder="Search transaction"
+        [(ngModel)]="searchFieldValue" />
     </div>
 
-    <div class="col row">
-      <div class="col d-flex align-items-center text-nowrap gap-2">
+    <div class="col row ">
+      <!-- Only mobile input fields  -->
+      <div class="d-flex gap-3 px-0 pe-2 justify-content-end">
+        <button class="btn p-0 m-0 d-md-none d-md-grid align-self-center" (click)="openMobileSortInput()">
+          <img src="/images/icon-sort-mobile.svg" alt="">
+        </button>
+        <button class="btn p-0 m-0 d-md-none d-md-grid align-self-center" (click)="openMobileCategorySelect()">
+          <img src="/images/icon-filter-mobile.svg" alt="">
+        </button>
+      </div>
+
+
+      <!-- Only desktop input fields  -->
+      <div class="col d-none d-md-flex align-items-center text-nowrap gap-2">
         <label for="sortby">Sort by</label>
         <select id="sortby" class="form-select" [(ngModel)]="sortValue">
           <option value="date">Latest</option>
@@ -26,7 +39,7 @@
         </select>
       </div>
 
-      <div class="col d-flex align-items-center text-nowrap gap-2">
+      <div class="col d-none d-md-flex align-items-center text-nowrap gap-2">
         <label for="category">category</label>
         <select id="category" class="form-select" [(ngModel)]="categoryValue">
           <option value="">All</option>
@@ -38,8 +51,11 @@
     </div>
   </div>
 
-  <div class="list-group">
-    <div class="list-group-item">
+
+
+  <div class="list-group ">
+    <!-- Info line -->
+    <div class="list-group-item d-none d-md-grid">
       <span>Recipient/sender</span>
       <span>Category</span>
       <span>Transaction Date</span>
@@ -50,24 +66,32 @@
 
     @for (transaction of paginatedData(); track transaction.id) {
     <div class="transaction-item list-group-item">
-      <div>
+      <div class="d-flex ">
         <div class="avatar-container">
-          <img class="avatar" [src]="transaction.avatar" alt="" class="profile-image rounded-circle" width="40"
-            height="40" />
+          <img [src]="transaction.avatar" alt="" class="profile-image rounded-circle" width="40" height="40" />
         </div>
-        <span class="ms-2 fw-bold fs-6 text-black">
-          {{ transaction.name }}
-        </span>
+        <div class="d-flex flex-column justify-content-center ms-2">
+          <span class="fw-bold fs-7 text-black">
+            {{ transaction.name }}
+          </span>
+          <span class="d-sm-none"> {{ transaction.category }} </span>
+        </div>
       </div>
 
-      <span> {{ transaction.category }} </span>
-      <span> {{ transaction.date | date : "dd MMM yyyy" }} </span>
-      <span class="amount" [ngClass]="{
-          'text-green': transaction.amount >= 0,
-          'text-black': transaction.amount < 0
-        }">
-        {{ transaction.amount | currency }}
-      </span>
+      <span class="d-none d-sm-inline"> {{ transaction.category }} </span>
+
+      <span class="d-none d-sm-inline"> {{ transaction.date | date : "dd MMM yyyy" }} </span>
+
+      <div class="d-flex flex-column justify-content-center align-items-end">
+        <span class="amount" [ngClass]="{
+            'text-green': transaction.amount >= 0,
+            'text-black': transaction.amount < 0
+          }">
+          {{ transaction.amount | currency }}
+        </span>
+        <span class="d-sm-none"> {{ transaction.date | date : "dd MMM yyyy" }} </span>
+      </div>
+
     </div>
     }
   </div>
