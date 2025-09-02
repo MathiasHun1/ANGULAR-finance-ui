@@ -2,9 +2,12 @@ import {
   Component,
   computed,
   effect,
+  ElementRef,
+  HostListener,
   inject,
   OnInit,
   signal,
+  viewChild,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
@@ -88,6 +91,8 @@ export class Transactions implements OnInit {
   });
   categories = this.transactionsService.categories;
 
+  mobileSortOpen = signal(false);
+  mobileCategorySelectOpen = signal(false);
   /**
    * Event Handdlers
    */
@@ -116,5 +121,46 @@ export class Transactions implements OnInit {
 
   openMobileCategorySelect() {
     alert("Category filter will be available soon!");
+  }
+
+  clickOnSortOption(option: SortOptions) {
+    this.sortValue.set(option);
+  }
+
+  clickOnCategoryOption(option: string) {
+    this.categoryValue.set(option);
+  }
+
+  toggleMobileSortOpen() {
+    this.mobileSortOpen.update((prev) => !prev);
+  }
+
+  toggleMobileCategorySelectOpen() {
+    this.mobileCategorySelectOpen.update((prev) => !prev);
+  }
+
+  mobileSortMenu = viewChild<ElementRef<HTMLUListElement>>("mobileSortMenu");
+  categorySelectMenu =
+    viewChild<ElementRef<HTMLUListElement>>("categorySelectMenu");
+
+  // Close mobile sort menu when clicking outside of it
+  @HostListener("click", ["$event"])
+  onClickOutsideSortoptions(event: MouseEvent) {
+    if (
+      this.mobileSortOpen() &&
+      this.mobileSortMenu() &&
+      event.target instanceof Node &&
+      !this.mobileSortMenu()!.nativeElement.contains(event.target)
+    ) {
+      this.mobileSortOpen.set(false);
+    }
+    if (
+      this.mobileCategorySelectOpen() &&
+      this.categorySelectMenu() &&
+      event.target instanceof Node &&
+      !this.categorySelectMenu()!.nativeElement.contains(event.target)
+    ) {
+      this.mobileCategorySelectOpen.set(false);
+    }
   }
 }

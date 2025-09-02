@@ -16,13 +16,51 @@
 
     <div class="col row ">
       <!-- Only mobile input fields  -->
-      <div class="d-flex gap-3 px-0 pe-2 justify-content-end">
-        <button class="btn p-0 m-0 d-md-none d-md-grid align-self-center" (click)="openMobileSortInput()">
+      <div class="sort-icons-container d-flex gap-3 px-0 pe-2 justify-content-end">
+        <button class="btn p-0 m-0 d-md-none d-md-grid align-self-center" (click)="toggleMobileSortOpen()">
           <img src="/images/icon-sort-mobile.svg" alt="">
         </button>
-        <button class="btn p-0 m-0 d-md-none d-md-grid align-self-center" (click)="openMobileCategorySelect()">
+        <button class="btn p-0 m-0 d-md-none d-md-grid align-self-center" (click)="toggleMobileCategorySelectOpen()">
           <img src="/images/icon-filter-mobile.svg" alt="">
         </button>
+
+        @if (mobileSortOpen()) {
+
+        <!-- Sorting options popup -->
+        <ul class="sort-popup--order px-3 list-group fs-7" #mobileSortMenu>
+          <li class=" list-group-item">Sort by</li>
+          <li class="list-group-item pe-5" [ngClass]="{'fw-bold text-black': sortValue() === 'date'}"
+            (click)="clickOnSortOption('date')">Latest</li>
+          <li class="list-group-item pe-5" [ngClass]="{'fw-bold text-black': sortValue() === 'dateReverse'}"
+            (click)="clickOnSortOption('dateReverse')">Oldest
+          </li>
+          <li class="list-group-item pe-5" [ngClass]="{'fw-bold text-black': sortValue() === 'name'}"
+            (click)="clickOnSortOption('name')">A - Z</li>
+          <li class="list-group-item pe-5" [ngClass]="{'fw-bold text-black': sortValue() === 'nameReverse'}"
+            (click)="clickOnSortOption('nameReverse')">Z - A
+          </li>
+          <li class="list-group-item pe-5" [ngClass]="{'fw-bold text-black': sortValue() === 'amount'}"
+            (click)="clickOnSortOption('amount')">Highest</li>
+          <li class="list-group-item pe-5" [ngClass]="{'fw-bold text-black': sortValue() === 'amountReverse'}"
+            (click)="clickOnSortOption('amountReverse')">Oldest
+          </li>
+        </ul>
+        }
+
+        <!-- Category select popup -->
+        @if (mobileCategorySelectOpen()) {
+        <ul class="sort-popup--order px-3 list-group fs-7" #categorySelectMenu>
+          <li class=" list-group-item">Category</li>
+          <li class="list-group-item pe-5" [ngClass]="{'fw-bold': categoryValue() === ''}"
+            (click)="categoryValue.set('')">All</li>
+
+          @for (category of categories(); track category) {
+          <li class="list-group-item " [ngClass]="{'fw-bold': category === categoryValue()}"
+            (click)="clickOnCategoryOption(category)">{{category}}</li>
+
+          }
+        </ul>
+        }
       </div>
 
 

@@ -69,3 +69,12 @@ export const themeOptions = [
     color: "#be6c49",
   },
 ];
+
+export const sortOptions = [
+  "date",
+  "dateReverse",
+  "name",
+  "nameReverse",
+  "amount",
+  "amountReverse",
+];
