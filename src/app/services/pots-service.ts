@@ -3,12 +3,14 @@ import { ApiService } from "./api-service";
 import { PotModel } from "../models/models";
 import { getCheckedThemeOptions } from "../shared/utils/utils";
 import { v4 as uuidv4 } from "uuid";
+import { BalanceService } from "./balance-service";
 
 @Injectable({
   providedIn: "root",
 })
 export class PotsService {
   private apiService = inject(ApiService);
+  private balanceService = inject(BalanceService);
 
   dataLoaded = signal(false);
   pots = signal<PotModel[] | null>(null);
@@ -74,6 +76,8 @@ export class PotsService {
           if (!prev) {
             return null;
           }
+
+          this.balanceService.getBalance();
           return prev.filter((pot) => pot.id !== id);
         });
       },
@@ -84,10 +88,14 @@ export class PotsService {
   updatePot(pot: PotModel) {
     this.apiService.updatePot(pot).subscribe({
       next: (updatedPot) => {
+        console.log(updatedPot);
+
         this.pots.update((prev) => {
           if (!prev) {
             return null;
           }
+
+          this.balanceService.getBalance();
           return prev.map((originalPot) =>
             originalPot.id === updatedPot.id ? updatedPot : originalPot
           );

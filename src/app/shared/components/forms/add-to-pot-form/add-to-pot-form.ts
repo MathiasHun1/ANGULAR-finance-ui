@@ -87,8 +87,6 @@ export class AddToPotForm {
       return console.warn("Insufficient funds in current balance");
     }
 
-    this.balanceService.withdrawFromCurrent(amount);
-
     const updatedPot = { ...this.potsService.activePot() };
     updatedPot.total += Number(this.amount());
     this.potsService.updatePot(updatedPot);

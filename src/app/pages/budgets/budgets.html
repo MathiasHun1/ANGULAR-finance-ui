@@ -17,7 +17,7 @@
       <div class="w-100">
         <h2 class="h5 fw-bold">Spending Summary</h2>
         <ul class="list-group w-100">
-          @for (budget of extendedBudgets(); track budget.category) {
+          @for (budget of extendedBudgets(); track budget.id) {
           <li class="list-group-item w-100 px-0 py-3">
             <div class="custom-border" [style.borderColor]="budget.theme"></div>
             <div class="m-0 ps-4 fs-7 text-grey-500 d-flex justify-content-between align-items-center w-100">
@@ -37,7 +37,7 @@
 
   <!-- Cards Section -->
   <section class="d-flex flex-column gap-4">
-    @for (budget of extendedBudgets(); track budget.category) {
+    @for (budget of extendedBudgets(); track budget.id) {
 
     <app-budget-card [budget]="budget" />
 

@@ -26,7 +26,7 @@ import { environment } from "../../environments/environment";
 export class ApiService {
   private baseUrl = `${environment.apiUrl}`;
   private http = inject(HttpClient);
-  private delay = 1000;
+  private delay = 0;
 
   getTransactions() {
     return this.http

@@ -8,8 +8,7 @@ import {
 } from "@angular/core";
 import { PotsService } from "../../../../services/pots-service";
 import { ModalService } from "../../../../services/modal-service";
-import { FormsModule, NgControl, NgForm, NgModel } from "@angular/forms";
-import { BalanceService } from "../../../../services/balance-service";
+import { FormsModule, NgForm, NgModel } from "@angular/forms";
 
 @Component({
   selector: "app-withdraw-from-pot-form",
@@ -21,7 +20,6 @@ export class WithdrawFromPotForm {
   // --- Dependencies ---
   potsService = inject(PotsService);
   modalService = inject(ModalService);
-  balanceService = inject(BalanceService);
 
   // --- Template refs ---
   form = viewChild<NgForm>("addToPotForm");
@@ -107,7 +105,6 @@ export class WithdrawFromPotForm {
     updatedPot.total -= Number(this.amount());
 
     this.potsService.updatePot(updatedPot);
-    this.balanceService.addToCurrent(Number(this.amount()));
     this.closeForm();
   }
 
