@@ -1,4 +1,6 @@
 <div class="app-container container-xxl">
+
+  @if (showNavbar()) {
   <header class="header shrink-header bg-grey-900  d-flex flex-column justify-content-between pb-xl-5"
     [ngClass]="{'shrink-header': !menuOpen()}">
     <div>
@@ -28,8 +30,9 @@
       }
     </div>
   </header>
+  }
 
-  <main class="main bg-beige-100 p-3 p-lg-4 p-xl-5">
+  <main class="main bg-beige-100 p-3 p-lg-4 p-xl-5 position-relative">
     <router-outlet />
   </main>
 </div>

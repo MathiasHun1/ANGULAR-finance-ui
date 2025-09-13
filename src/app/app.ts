@@ -1,8 +1,9 @@
-import { Component, signal } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { Component, inject, signal, effect, OnInit } from "@angular/core";
+import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
 import { Navigation as NavComponent } from "./shared/components/navigation/navigation";
 import { Modal } from "./shared/components/modal/modal";
 import { CommonModule } from "@angular/common";
+import { AuthService } from "./services/auth-service";
 
 @Component({
   selector: "app-root",
@@ -10,11 +11,33 @@ import { CommonModule } from "@angular/common";
   styleUrl: "./app.scss",
   imports: [RouterOutlet, NavComponent, Modal, CommonModule],
 })
-export class App {
+export class App implements OnInit {
+  authService = inject(AuthService);
+  router = inject(Router);
+
   protected title = "Finance";
-  menuOpen = signal(true);
+  protected menuOpen = signal(true);
+  protected showNavbar = signal(true);
 
   toggleNavState() {
     this.menuOpen.set(!this.menuOpen());
+  }
+
+  constructor() {
+    effect(() => {
+      this.router.events.subscribe((event) => {
+        if (!(event instanceof NavigationEnd)) {
+          return;
+        }
+
+        this.showNavbar.set(this.router.url !== "/login"); // Hide navbar on login route
+      });
+    });
+  }
+
+  ngOnInit(): void {
+    if (!this.authService.isLoggedin()) {
+      this.router.navigate(["/login"]);
+    }
   }
 }

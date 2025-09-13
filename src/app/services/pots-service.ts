@@ -88,8 +88,6 @@ export class PotsService {
   updatePot(pot: PotModel) {
     this.apiService.updatePot(pot).subscribe({
       next: (updatedPot) => {
-        console.log(updatedPot);
-
         this.pots.update((prev) => {
           if (!prev) {
             return null;

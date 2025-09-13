@@ -65,7 +65,6 @@ export class ApiService {
             };
           })
         ),
-        // tap((res) => console.log("Log bills from API :", res)),
         delay(1000)
       );
   }
@@ -122,9 +121,7 @@ export class ApiService {
    * Pots related API calls
    */
   getPots() {
-    return this.http
-      .get<PotModel[]>(`${this.baseUrl}/pots`)
-      .pipe(delay(this.delay));
+    return this.http.get<PotModel[]>(`${this.baseUrl}/pots`);
   }
 
   addPot(pot: PotModel) {
@@ -137,5 +134,12 @@ export class ApiService {
 
   updatePot(pot: PotModel) {
     return this.http.put<PotModel>(`${this.baseUrl}/pots/${pot.id}`, pot);
+  }
+
+  /**
+   * Login
+   */
+  login(credentials: { username: string; password: string }) {
+    return this.http.post(`${this.baseUrl}/login`, credentials);
   }
 }

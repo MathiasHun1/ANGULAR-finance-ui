@@ -1,0 +1,45 @@
+<header class="header">
+  <img class="logo" src="/images/logo-large.svg" alt="">
+</header>
+
+<div class="content-container">
+
+  <div class="image-container">
+    <img class="image" src="/images/hero.svg" alt="">
+    <div class="image-overlay">
+      <div>
+        <img src="/images/logo-large.svg" alt="">
+      </div>
+
+      <div>
+        <p class="fs-2 text-white fw-bold ">
+          <span class="d-block" [style.lineHeight]="1">Keep track of your money</span>
+          <span class="d-block">and save for your future</span>
+        </p>
+
+        <p class="text-white fs-7">
+          <span class="d-block"> Personal finance app puts you in control of your
+            spending.</span>
+          <span class="d-block">
+            Track transactions, set
+            budgets, and add to savings pots
+            easily.
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <form class="custom-card login-form " #form="ngForm" (ngSubmit)="login(form)">
+      <p class="fs-2 fw-bold">Login</p>
+      <label class="form-label" for="username">Username</label>
+      <input class="form-control mb-3" type="text" id="username" name="username" [(ngModel)]="usernameInput" />
+
+      <label class="form-label" for="password">Password</label>
+      <input class="form-control mb-5" type="password" id="password" name="password" [(ngModel)]="passwordInput" />
+
+      <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-5">Login</button>
+    </form>
+  </div>
+</div>

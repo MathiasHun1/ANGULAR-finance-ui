@@ -46,12 +46,6 @@ export class Budgets implements OnInit {
     );
   });
 
-  constructor() {
-    effect(() => {
-      console.log(this.budgetService.dataLoaded());
-    });
-  }
-
   extendedBudgets = this.budgetService.extendedBudgets;
   budgetOptions = this.budgetService.availableCategories;
   themeOptions = this.budgetService.themeOptions;

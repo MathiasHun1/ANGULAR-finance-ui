@@ -26,8 +26,6 @@ export class EditPotForm {
   targetValue = signal(this.activePot.target);
 
   submitForm() {
-    console.log(this.selectedTheme);
-
     if (!this.categoryName || !this.targetValue || !this.selectedTheme) {
       return;
     }
