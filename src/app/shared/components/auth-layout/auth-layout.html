@@ -1,0 +1,35 @@
+<header class="header">
+  <img class="logo" src="/images/logo-large.svg" alt="">
+</header>
+
+<div class="content-container">
+  <div class="image-container">
+    <img class="image" src="/images/hero.svg" alt="">
+    <div class="image-overlay">
+      <div>
+        <img src="/images/logo-large.svg" alt="">
+      </div>
+
+      <div>
+        <p class="fs-2 text-white fw-bold ">
+          <span class="d-block" [style.lineHeight]="1">Keep track of your money</span>
+          <span class="d-block">and save for your future</span>
+        </p>
+
+        <p class="text-white fs-7">
+          <span class="d-block"> Personal finance app puts you in control of your
+            spending.</span>
+          <span class="d-block">
+            Track transactions, set
+            budgets, and add to savings pots
+            easily.
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <ng-content></ng-content>
+  </div>
+</div>

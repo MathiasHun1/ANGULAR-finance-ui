@@ -1,6 +1,7 @@
 import { computed, inject, Injectable, signal } from "@angular/core";
 import { ApiService } from "./api-service";
 import { Router } from "@angular/router";
+import { tap } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -50,5 +51,16 @@ export class AuthService {
 
   removeToken() {
     localStorage.removeItem("token");
+  }
+
+  register(credentials: { username: string; password: string }) {
+    this.apiService.register(credentials).subscribe({
+      next: (result) => {
+        this.router.navigate(["/login"]);
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 }

@@ -5,11 +5,13 @@ import { Budgets } from "./pages/budgets/budgets";
 import { Pots } from "./pages/pots/pots";
 import { RecurringBills } from "./pages/recurring-bills/recurring-bills";
 import { Login } from "./pages/login/login";
+import { Register } from "./pages/register/register";
 import { loggedInGuard } from "./guards/loggedInGuard";
 import { notLoggedInGuard } from "./guards/notLoggedINGuard";
 
 export const routes: Routes = [
   { path: "login", component: Login, canActivate: [loggedInGuard] },
+  { path: "register", component: Register, canActivate: [loggedInGuard] },
   { path: "", component: Overview, canActivate: [notLoggedInGuard] },
   {
     path: "transactions",

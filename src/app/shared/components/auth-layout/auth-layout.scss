@@ -1,0 +1,62 @@
+@use "../../../../styles/variables" as *;
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: map-get($theme-colors, "grey-900");
+  padding-block: 1.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  @media (min-width: $desktopAndUp) {
+    display: none;
+  }
+}
+
+.content-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  height: 100vh;
+
+  @media (min-width: $desktopAndUp) {
+    padding: 20px;
+    padding-right: 0;
+  }
+}
+
+.image-container {
+  display: none;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+
+  @media (min-width: $desktopAndUp) {
+    display: block;
+  }
+}
+
+.image {
+  height: 100%;
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-container {
+  flex: 1;
+  display: grid;
+  place-content: center;
+}

@@ -18,7 +18,7 @@
         <img src="/images/icon-recurring-bills.svg" alt="" class="d-sm-none" />
         <div>
           <h2 class="m-0 fs-7 pb-2">Total Bills</h2>
-          <p class="m-0 fs-3 fw-bolder">$560</p>
+          <p class="m-0 fs-3 fw-bolder">${{ (getTotalAmount(sortedBills()) * -1).toFixed(0) }}</p>
         </div>
       </div>
     </div>

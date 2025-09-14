@@ -1,9 +1,10 @@
-import { computed, inject, Injectable, signal } from "@angular/core";
+import { computed, effect, inject, Injectable, signal } from "@angular/core";
 import { ApiService } from "./api-service";
 import { PotModel } from "../models/models";
 import { getCheckedThemeOptions } from "../shared/utils/utils";
 import { v4 as uuidv4 } from "uuid";
 import { BalanceService } from "./balance-service";
+import { AuthService } from "./auth-service";
 
 @Injectable({
   providedIn: "root",
@@ -11,6 +12,15 @@ import { BalanceService } from "./balance-service";
 export class PotsService {
   private apiService = inject(ApiService);
   private balanceService = inject(BalanceService);
+  private authService = inject(AuthService);
+
+  constructor() {
+    effect(() => {
+      if (this.authService.isLoggedin()) {
+        this.clearData();
+      }
+    });
+  }
 
   dataLoaded = signal(false);
   pots = signal<PotModel[] | null>(null);
@@ -126,5 +136,17 @@ export class PotsService {
 
   loadData() {
     this.getPots();
+  }
+
+  clearData() {
+    this.pots.set(null);
+    this.activePot.set({
+      name: "",
+      target: 0,
+      total: 0,
+      theme: "",
+      id: "",
+    });
+    this.dataLoaded.set(false);
   }
 }

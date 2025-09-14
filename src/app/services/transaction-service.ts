@@ -1,14 +1,23 @@
-import { inject, Injectable, computed, Signal, signal } from "@angular/core";
+import { inject, Injectable, computed, effect, signal } from "@angular/core";
 import { ApiService } from "./api-service";
-import { toSignal } from "@angular/core/rxjs-interop";
 import { TransactionModel } from "../models/models";
 import { SortOptions } from "../models/models";
+import { AuthService } from "./auth-service";
 
 @Injectable({
   providedIn: "root",
 })
 export class TransactionService {
   private apiService = inject(ApiService);
+  private authService = inject(AuthService);
+
+  constructor() {
+    effect(() => {
+      if (this.authService.isLoggedin()) {
+        this.clearData();
+      }
+    });
+  }
 
   private searchValue = signal("");
   private sortValue = signal<SortOptions>("date");
@@ -181,5 +190,13 @@ export class TransactionService {
   loadData() {
     this.getTransactions();
     this.dataLoaded.set(true);
+  }
+
+  clearData() {
+    this.searchValue.set("");
+    this.sortValue.set("date");
+    this.categoryValue.set("");
+    this.allTransactions.set(null);
+    this.dataLoaded.set(false);
   }
 }

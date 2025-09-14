@@ -4,12 +4,22 @@ import { BudgetModel, ExtendedBudget } from "../models/models";
 import { getCheckedThemeOptions } from "../shared/utils/utils";
 import { budgetOptions } from "../shared/constants";
 import { v4 as uuidv4 } from "uuid";
+import { AuthService } from "./auth-service";
 
 @Injectable({
   providedIn: "root",
 })
 export class BudgetService {
   private apiService = inject(ApiService);
+  private authService = inject(AuthService);
+
+  constructor() {
+    effect(() => {
+      if (this.authService.isLoggedin()) {
+        this.clearData();
+      }
+    });
+  }
 
   dataLoaded = signal(false);
   budgets = signal<BudgetModel[] | null>(null);
@@ -118,5 +128,17 @@ export class BudgetService {
     this.getBudgets();
     this.getExtendedBudgets();
     this.dataLoaded.set(true);
+  }
+
+  clearData() {
+    this.budgets.set(null);
+    this.dataLoaded.set(false);
+    this.extendedBudgets.set(null);
+    this.activeBudget.set({
+      category: "",
+      id: "",
+      maximum: 0,
+      theme: "",
+    });
   }
 }

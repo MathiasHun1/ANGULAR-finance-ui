@@ -7,7 +7,6 @@ import {
   map,
   mergeAll,
   Observable,
-  tap,
   toArray,
 } from "rxjs";
 import {
@@ -69,15 +68,12 @@ export class ApiService {
       );
   }
 
+  /**
+   * Balance related API calls
+   */
   getBalance() {
     return this.http
       .get<BalanceModel>(`${this.baseUrl}/balance`)
-      .pipe(delay(1000));
-  }
-
-  updateBalance(newBalance: BalanceModel) {
-    return this.http
-      .put<BalanceModel>(`${this.baseUrl}/balance`, newBalance)
       .pipe(delay(1000));
   }
 
@@ -141,5 +137,12 @@ export class ApiService {
    */
   login(credentials: { username: string; password: string }) {
     return this.http.post(`${this.baseUrl}/login`, credentials);
+  }
+
+  /**
+   * Registration
+   */
+  register(credentials: { username: string; password: string }) {
+    return this.http.post(`${this.baseUrl}/users`, credentials);
   }
 }

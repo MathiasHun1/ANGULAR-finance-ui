@@ -1,53 +1,20 @@
-<header class="header">
-  <img class="logo" src="/images/logo-large.svg" alt="">
-</header>
+<app-auth-layout>
 
-<div class="content-container">
+  <form class="custom-card login-form " #form="ngForm" (ngSubmit)="login(form)">
+    <p class="fs-2 fw-bold">Login</p>
+    <label class="form-label" for="username">Username</label>
+    <input class="form-control mb-3" type="text" id="username" name="username" [(ngModel)]="usernameInput" />
 
-  <div class="image-container">
-    <img class="image" src="/images/hero.svg" alt="">
-    <div class="image-overlay">
-      <div>
-        <img src="/images/logo-large.svg" alt="">
-      </div>
+    <label class="form-label" for="password">Password</label>
+    <input class="form-control mb-5" type="password" id="password" name="password" [(ngModel)]="passwordInput" />
 
-      <div>
-        <p class="fs-2 text-white fw-bold ">
-          <span class="d-block" [style.lineHeight]="1">Keep track of your money</span>
-          <span class="d-block">and save for your future</span>
-        </p>
+    <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4">Login</button>
+    <p class="mb-1">Not a user yet?</p>
+    <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4" (click)="goToRegister()">Register new account</button>
 
-        <p class="text-white fs-7">
-          <span class="d-block"> Personal finance app puts you in control of your
-            spending.</span>
-          <span class="d-block">
-            Track transactions, set
-            budgets, and add to savings pots
-            easily.
-          </span>
-        </p>
-      </div>
-    </div>
-  </div>
 
-  <div class="form-container">
-    <form class="custom-card login-form " #form="ngForm" (ngSubmit)="login(form)">
-      <p class="fs-2 fw-bold">Login</p>
-      <label class="form-label" for="username">Username</label>
-      <input class="form-control mb-3" type="text" id="username" name="username" [(ngModel)]="usernameInput" />
-
-      <label class="form-label" for="password">Password</label>
-      <input class="form-control mb-5" type="password" id="password" name="password" [(ngModel)]="passwordInput" />
-
-      <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4">Login</button>
-      <div class="text-center fs-7">
-        <p class="mb-0">Not a user yet?</p>
-        <p class="mb-0">Just want to try?</p>
-        <p class="mb-2">Try app with example user!</p>
-      </div>
-      <button type="button" class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-2" (click)="exapmleLogin()">Example
-        Login</button>
-    </form>
-
-  </div>
-</div>
+    <p class="mb-1">Just want to try? (No account required)</p>
+    <button type="button" class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-2" (click)="exapmleLogin()">Example
+      Login</button>
+  </form>
+</app-auth-layout>

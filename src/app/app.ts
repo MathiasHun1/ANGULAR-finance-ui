@@ -35,7 +35,9 @@ export class App {
           return;
         }
 
-        this.showNavbar.set(this.router.url !== "/login"); // Hide navbar on login route
+        this.showNavbar.set(
+          this.router.url !== "/login" && this.router.url !== "/register"
+        ); // Hide navbar on login or register route
       });
     });
   }

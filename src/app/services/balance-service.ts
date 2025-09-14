@@ -1,16 +1,22 @@
-import { inject, Injectable, signal } from "@angular/core";
+import { inject, Injectable, signal, effect } from "@angular/core";
 import { BalanceModel } from "../models/models";
 import { ApiService } from "./api-service";
+import { AuthService } from "./auth-service";
 
 @Injectable({
   providedIn: "root",
 })
 export class BalanceService {
   apiService = inject(ApiService);
+  authService = inject(AuthService);
 
   constructor() {
-    this.getBalance();
-  } // Load the balance data on service initialization
+    effect(() => {
+      if (this.authService.isLoggedin()) {
+        this.clearData();
+      }
+    });
+  }
 
   balanceLoaded = signal(false);
   balanceData = signal<BalanceModel | null>(null);
@@ -30,5 +36,10 @@ export class BalanceService {
 
   loadData() {
     this.getBalance();
+  }
+
+  clearData() {
+    this.balanceLoaded.set(false);
+    this.balanceData.set(null);
   }
 }

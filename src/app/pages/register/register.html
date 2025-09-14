@@ -1,1 +1,15 @@
-<p>register works!</p>
+<app-auth-layout>
+
+  <form class="custom-card login-form " #form="ngForm" (ngSubmit)="register(form)">
+    <p class="fs-2 fw-bold">Register</p>
+    <label class="form-label" for="username">Username</label>
+    <input class="form-control mb-3" type="text" id="username" name="username" [(ngModel)]="usernameInput" />
+
+    <label class="form-label" for="password">Password</label>
+    <input class="form-control mb-5" type="password" id="password" name="password" [(ngModel)]="passwordInput" />
+
+    <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4">Register</button>
+
+  </form>
+
+</app-auth-layout>

@@ -1,19 +1,31 @@
-import { inject, Injectable, computed, signal } from "@angular/core";
+import { inject, Injectable, computed, signal, effect } from "@angular/core";
 import { ApiService } from "./api-service";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { map } from "rxjs";
 import { RecurringBill } from "../models/models";
 import { Signal } from "@angular/core";
 import { SortOptions } from "../models/models";
+import { AuthService } from "./auth-service";
 
 @Injectable({
   providedIn: "root",
 })
 export class RecurringbillsService {
   private apiService = inject(ApiService);
+  private authService = inject(AuthService);
+
+  constructor() {
+    effect(() => {
+      if (this.authService.isLoggedin()) {
+        this.clearData();
+      }
+    });
+  }
 
   dataLoaded = signal(false);
   billTypes = signal<RecurringBill[] | null>(null);
+  sortValue = signal<SortOptions>("date");
+  searchFieldValue = signal("");
 
   sortedBills = computed(() => {
     if (!this.billTypes()) {
@@ -56,9 +68,6 @@ export class RecurringbillsService {
       theme: "#F2CDAC",
     };
   });
-
-  sortValue = signal<SortOptions>("date");
-  searchFieldValue = signal("");
 
   getRecurringBills() {
     this.apiService
@@ -131,5 +140,12 @@ export class RecurringbillsService {
 
   loadData() {
     this.getRecurringBills();
+  }
+
+  clearData() {
+    this.billTypes.set(null);
+    this.dataLoaded.set(false);
+    this.sortValue.set("date");
+    this.searchFieldValue.set("");
   }
 }

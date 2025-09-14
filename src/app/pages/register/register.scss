@@ -1,0 +1,10 @@
+@use "../../../styles/variables" as *;
+
+.login-form {
+  width: 90vw;
+  max-width: 460px;
+
+  @media (min-width: $tabletAndUp) {
+    width: 460px;
+  }
+}
