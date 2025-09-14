@@ -11,7 +11,7 @@ import { AuthService } from "./services/auth-service";
   styleUrl: "./app.scss",
   imports: [RouterOutlet, NavComponent, Modal, CommonModule],
 })
-export class App implements OnInit {
+export class App {
   authService = inject(AuthService);
   router = inject(Router);
 
@@ -21,6 +21,11 @@ export class App implements OnInit {
 
   toggleNavState() {
     this.menuOpen.set(!this.menuOpen());
+  }
+
+  logOut() {
+    this.authService.logOut();
+    this.router.navigate(["/login"]);
   }
 
   constructor() {
@@ -33,11 +38,5 @@ export class App implements OnInit {
         this.showNavbar.set(this.router.url !== "/login"); // Hide navbar on login route
       });
     });
-  }
-
-  ngOnInit(): void {
-    if (!this.authService.isLoggedin()) {
-      this.router.navigate(["/login"]);
-    }
   }
 }

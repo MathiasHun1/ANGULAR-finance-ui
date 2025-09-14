@@ -1,6 +1,5 @@
 import { Component, inject } from "@angular/core";
 import { ApiService } from "../../services/api-service";
-import { tap } from "rxjs";
 import { FormsModule, NgForm } from "@angular/forms";
 import { AuthService } from "../../services/auth-service";
 
@@ -20,5 +19,9 @@ export class Login {
   login(form: NgForm) {
     const credentials = form.value;
     this.authService.login(credentials);
+  }
+
+  exapmleLogin() {
+    this.authService.login({ username: "Lajos", password: "valami" });
   }
 }

@@ -87,3 +87,11 @@
   transform: rotate(180deg);
   transition: transform 300ms ease;
 }
+
+.logout-button {
+  display: none;
+
+  @media (min-width: $desktopAndUp) {
+    display: block;
+  }
+}

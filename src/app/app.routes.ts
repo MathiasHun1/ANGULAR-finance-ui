@@ -5,12 +5,22 @@ import { Budgets } from "./pages/budgets/budgets";
 import { Pots } from "./pages/pots/pots";
 import { RecurringBills } from "./pages/recurring-bills/recurring-bills";
 import { Login } from "./pages/login/login";
+import { loggedInGuard } from "./guards/loggedInGuard";
+import { notLoggedInGuard } from "./guards/notLoggedINGuard";
 
 export const routes: Routes = [
-  { path: "", component: Overview },
-  { path: "login", component: Login },
-  { path: "transactions", component: Transactions },
-  { path: "budgets", component: Budgets },
-  { path: "pots", component: Pots },
-  { path: "recurring-bills", component: RecurringBills },
+  { path: "login", component: Login, canActivate: [loggedInGuard] },
+  { path: "", component: Overview, canActivate: [notLoggedInGuard] },
+  {
+    path: "transactions",
+    component: Transactions,
+    canActivate: [notLoggedInGuard],
+  },
+  { path: "budgets", component: Budgets, canActivate: [notLoggedInGuard] },
+  { path: "pots", component: Pots, canActivate: [notLoggedInGuard] },
+  {
+    path: "recurring-bills",
+    component: RecurringBills,
+    canActivate: [notLoggedInGuard],
+  },
 ];

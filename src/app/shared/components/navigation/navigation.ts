@@ -1,4 +1,4 @@
-import { Component, effect, input, signal } from "@angular/core";
+import { Component, input, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
