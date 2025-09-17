@@ -2,7 +2,7 @@ import { Component, signal, inject, viewChild } from "@angular/core";
 import { CustomSelectInput } from "../../custom-select-input/custom-select-input";
 import { FormsModule, NgForm } from "@angular/forms";
 import { BudgetService } from "../../../../services/budget-service";
-import { ThemeOption, BudgetModel } from "../../../../models/models";
+import { BudgetModel } from "../../../../models/models";
 import { ModalService } from "../../../../services/modal-service";
 
 @Component({

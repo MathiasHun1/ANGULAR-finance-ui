@@ -1,5 +1,8 @@
-<div class="page-title-container">
+<div class="page-title-container  d-flex justify-content-between align-items-center">
   <h1 class="page-title">Transactions</h1>
+  <button class="btn btn-dark p-3" (click)="openModal()">
+    + Add Transaction
+  </button>
 </div>
 
 @if (!paginatedData()) {

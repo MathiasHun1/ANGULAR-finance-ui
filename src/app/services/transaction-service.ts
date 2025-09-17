@@ -3,6 +3,7 @@ import { ApiService } from "./api-service";
 import { TransactionModel } from "../models/models";
 import { SortOptions } from "../models/models";
 import { AuthService } from "./auth-service";
+import { tap } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -185,6 +186,22 @@ export class TransactionService {
           (t) => t.category.toLowerCase() === category.toLowerCase()
         )
       : undefined;
+  }
+
+  addTransaction(newTransaction: Omit<TransactionModel, "date">) {
+    this.apiService.addTransaction(newTransaction).subscribe({
+      next: (returnedTrans) => {
+        this.allTransactions.update((prev) => {
+          if (!prev) {
+            return [returnedTrans];
+          }
+          return prev.concat(returnedTrans);
+        });
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   loadData() {

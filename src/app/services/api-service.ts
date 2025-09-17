@@ -41,6 +41,13 @@ export class ApiService {
       );
   }
 
+  addTransaction(transaction: Omit<TransactionModel, "date">) {
+    return this.http.post<TransactionModel>(
+      `${this.baseUrl}/transactions`,
+      transaction
+    );
+  }
+
   getRecurringTypeBills(): Observable<RecurringBill[]> {
     return this.http
       .get<TransactionModel[]>(`${this.baseUrl}/transactions`)

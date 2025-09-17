@@ -12,7 +12,8 @@ import {
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { TransactionService } from "../../services/transaction-service";
-import { SortOptions } from "../../models/models";
+import { ModalFormType, SortOptions } from "../../models/models";
+import { ModalService } from "../../services/modal-service";
 
 @Component({
   selector: "app-transactions",
@@ -25,6 +26,7 @@ export class Transactions implements OnInit {
    * Services
    */
   private transactionsService = inject(TransactionService);
+  private modalService = inject(ModalService);
 
   ngOnInit(): void {
     if (!this.transactions()) {
@@ -96,6 +98,10 @@ export class Transactions implements OnInit {
   /**
    * Event Handdlers
    */
+
+  openModal() {
+    this.modalService.openModal("add-transaction");
+  }
 
   stepToPage(page: number) {
     this.currentPage.set(page);

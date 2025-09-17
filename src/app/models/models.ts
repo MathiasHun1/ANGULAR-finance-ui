@@ -12,7 +12,7 @@ export interface TransactionModel {
   date: string;
   amount: number;
   recurring: boolean;
-  id: string;
+  id?: string;
 }
 
 export interface BalanceModel {
@@ -70,4 +70,17 @@ export type ModalFormType =
   | "delete-budget"
   | "delete-pot"
   | "add-to-pot"
-  | "withdraw-from-pot";
+  | "withdraw-from-pot"
+  | "add-transaction";
+
+export type TransactionCategoryOption =
+  | "General"
+  | "Dining Out"
+  | "Entertainment"
+  | "Lifestyle"
+  | "Transportation"
+  | "Groceries"
+  | "Personal Care"
+  | "Education"
+  | "Bills"
+  | "Shopping";

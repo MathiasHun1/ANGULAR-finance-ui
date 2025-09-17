@@ -1,0 +1,37 @@
+<form class="transaction-form" #transactionForm="ngForm" (ngSubmit)="submitForm()">
+  <!-- Avatar -->
+  <label class="form-label" for="avatar">Select partner type</label>
+  <select name="avatar" id="avatar" class="d-block mb-3 form-select" [(ngModel)]="formData.avatar">
+    <option value="/images/avatars/company.png">Company</option>
+    <option value="/images/avatars/person.png">Person</option>
+  </select>
+
+  <!-- Name -->
+  <label class="form-label" for="name">Name of recipient/sender</label>
+  <input class="form-control mb-3" type="text" id="name" name="name" [(ngModel)]="formData.name" [maxlength]="20" />
+
+  <!-- Category -->
+  <label class="form-label" for="category">Category</label>
+  <select class="form-control mb-3" name="category" id="category" [(ngModel)]="formData.category">
+    @for(category of categoryTypes; track category) {
+    <option [value]="category">{{category}}</option>
+    }
+  </select>
+
+  <!-- Amount -->
+  <label class="form-label" for="amount">Amount *</label>
+  <input type="text" class="form-control mb-3" id="amount" name="amount" pattern="^-?\d+$" [(ngModel)]="formData.amount"
+    #amountInstance="ngModel" required />
+
+  @if (amountInstance.invalid && (amountInstance.dirty || amountInstance.touched)) {
+  <p class="text-red">Field invalid! Fromat: "123" or "-123"</p>
+  }
+
+  <div class="d-flex align-items-center mb-5 gap-2">
+    <label class="form-label mb-0" for="recurring">Recurring?</label>
+    <input class="form-check-inline" type="checkbox" name="recurring" id="recurring" [(ngModel)]="formData.recurring" />
+  </div>
+
+  <button class="btn btn-dark w-100" [disabled]="!transactionForm.valid">Submit form</button>
+
+</form>

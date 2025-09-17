@@ -35,6 +35,10 @@
             @if (currentFormType() === 'withdraw-from-pot') {
             Withdraw from '{{potService.activePot().name}}'?
             }
+
+            @if (currentFormType() === 'add-transaction') {
+            Add a transaction
+            }
           </p>
           <button type="button" class="button btn-close border border-2 border-black rounded-circle p-2"
             aria-label="Close" (click)="closeModal()"></button>
@@ -79,6 +83,9 @@
           Withdraw from your pot to put money back in your main balance. This will reduce the amount you have in this
           pot.
           }
+
+          @if (currentFormType() === 'add-transaction') {
+          Add a new transaction to keep track of your spending and income.}
         </p>
       </header>
 
@@ -114,6 +121,10 @@
 
         @if (currentFormType() === 'withdraw-from-pot') {
         <app-withdraw-from-pot-form />
+        }
+
+        @if (currentFormType() === 'add-transaction') {
+        <app-add-transaction-form />
         }
 
       </div>
