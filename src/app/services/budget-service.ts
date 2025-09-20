@@ -5,6 +5,7 @@ import { getCheckedThemeOptions } from "../shared/utils/utils";
 import { budgetOptions } from "../shared/constants";
 import { v4 as uuidv4 } from "uuid";
 import { AuthService } from "./auth-service";
+import { tap } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -117,11 +118,14 @@ export class BudgetService {
   }
 
   getExtendedBudgets() {
-    this.apiService.getExtendedBudgets().subscribe({
-      next: (result) => this.extendedBudgets.set(result),
-      error: (err) =>
-        console.log("Couldn't join budgets with transactions", err),
-    });
+    this.apiService
+      .getExtendedBudgets()
+      .pipe(tap((res) => console.log("Ext BUGETS: ", res)))
+      .subscribe({
+        next: (result) => this.extendedBudgets.set(result),
+        error: (err) =>
+          console.log("Couldn't join budgets with transactions", err),
+      });
   }
 
   loadData() {

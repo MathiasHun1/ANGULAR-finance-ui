@@ -11,13 +11,18 @@ export class AuthService {
   private router = inject(Router);
   private token = signal<string>("");
 
+  exapmleUser = signal(false);
   isLoggedin = signal(false);
 
   // Init the token and the state on app start
   constructor() {
     const token = localStorage.getItem("token");
+    const user = localStorage.getItem("username");
     this.token.set(token || "");
     this.isLoggedin.set(!!token);
+    if (user === "ExampleUser") {
+      this.exapmleUser.set(true);
+    }
   }
 
   login(credentials: { username: string; password: string }) {
@@ -25,8 +30,14 @@ export class AuthService {
       next: (response: any) => {
         if (response.token) {
           localStorage.setItem("token", response.token);
+          localStorage.setItem("user", response.username);
           this.isLoggedin.set(true);
           this.router.navigate(["/"]);
+          if (credentials.username === "ExampleUser") {
+            this.exapmleUser.set(true);
+          } else {
+            this.exapmleUser.set(false);
+          }
         }
       },
       error: (err) => {
@@ -37,7 +48,9 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     this.token.set("");
+    this.exapmleUser.set(false);
     this.isLoggedin.set(false);
   }
 

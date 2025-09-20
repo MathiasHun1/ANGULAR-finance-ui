@@ -13,11 +13,21 @@ export class BudgetCard {
   transactionService = inject(TransactionService);
 
   budget = input<BudgetModel | undefined>(undefined);
-  transactions = computed(() =>
-    this.transactionService.getTransactionsByCategory(this.budget()?.category)
-  );
-  openedState = signal(false);
+  transactions = computed(() => {
+    const transactions = this.transactionService.getTransactionsByCategory(
+      this.budget()?.category
+    );
 
+    const sortedTransByDate = transactions?.sort((tr1, tr2) => {
+      const date1 = new Date(tr1.date);
+      const date2 = new Date(tr2.date);
+
+      return date2.getTime() - date1.getTime();
+    });
+    return sortedTransByDate;
+  });
+
+  openedState = signal(false);
   moneySpent = computed<number | undefined>(() => {
     const allTransactions = this.transactions();
     if (!allTransactions) {
@@ -27,7 +37,7 @@ export class BudgetCard {
     const monthTransactions = allTransactions.filter((t) => {
       const transactionMonth = new Date(t.date).getMonth();
 
-      return transactionMonth === 7; //hardcoded "august" for now
+      return transactionMonth === new Date().getMonth();
     });
 
     const result: number =

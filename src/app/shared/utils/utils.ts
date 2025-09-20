@@ -10,7 +10,8 @@ import { themeOptions } from "../constants";
 export const getActualMonthTransactions = (
   transactions: TransactionModel[]
 ) => {
-  const currentMonth = 7; //temporaroly harcoded value for august
+  // const currentMonth = 7; //temporaroly harcoded value for august
+  const currentMonth = new Date().getMonth();
   return transactions.filter(
     (t) => new Date(t.date).getMonth() === currentMonth
   );
@@ -43,8 +44,9 @@ export const getActualMonthSpendings = (
   transactions: TransactionModel[]
 ): number => {
   const acutalTransactions = transactions.filter((tr) => {
-    const actualMonth = 7; // Temporary hardcoded August
+    const actualMonth = new Date().getMonth();
     const transactionDate = new Date(tr.date).getMonth();
+
     return actualMonth === transactionDate;
   });
 

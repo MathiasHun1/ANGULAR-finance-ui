@@ -7,6 +7,7 @@ import {
   map,
   mergeAll,
   Observable,
+  tap,
   toArray,
 } from "rxjs";
 import {
@@ -36,8 +37,7 @@ export class ApiService {
             ...transaction,
             avatar: transaction.avatar.replace("./assets", ""),
           }))
-        ),
-        delay(this.delay)
+        )
       );
   }
 

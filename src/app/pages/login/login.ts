@@ -25,7 +25,7 @@ export class Login {
   }
 
   exapmleLogin() {
-    this.authService.login({ username: "Lajos", password: "valami" });
+    this.authService.login({ username: "ExampleUser", password: "valami" });
   }
 
   goToRegister() {
