@@ -118,14 +118,11 @@ export class BudgetService {
   }
 
   getExtendedBudgets() {
-    this.apiService
-      .getExtendedBudgets()
-      .pipe(tap((res) => console.log("Ext BUGETS: ", res)))
-      .subscribe({
-        next: (result) => this.extendedBudgets.set(result),
-        error: (err) =>
-          console.log("Couldn't join budgets with transactions", err),
-      });
+    this.apiService.getExtendedBudgets().subscribe({
+      next: (result) => this.extendedBudgets.set(result),
+      error: (err) =>
+        console.log("Couldn't join budgets with transactions", err),
+    });
   }
 
   loadData() {

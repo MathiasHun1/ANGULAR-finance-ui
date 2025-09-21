@@ -12,7 +12,7 @@ import {
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { TransactionService } from "../../services/transaction-service";
-import { ModalFormType, SortOptions } from "../../models/models";
+import { SortOptions } from "../../models/models";
 import { ModalService } from "../../services/modal-service";
 
 @Component({

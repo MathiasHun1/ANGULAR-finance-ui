@@ -2,14 +2,41 @@
 
   <form class="custom-card login-form " #form="ngForm" (ngSubmit)="register(form)">
     <p class="fs-2 fw-bold">Register</p>
-    <label class="form-label" for="username">Username</label>
-    <input class="form-control mb-3" type="text" id="username" name="username" [(ngModel)]="usernameInput" />
 
+    <!-- username -->
+    <label class="form-label" for="username">Username</label>
+    <input class="form-control mb-3" type="text" id="username" name="username" [(ngModel)]="usernameInput" required />
+    @if (submitted() && form.controls['username'].invalid) {
+    <p class="text-red mb-3 fs-7">Username is required</p>
+    }
+
+    <!-- password -->
     <label class="form-label" for="password">Password</label>
-    <input class="form-control mb-5" type="password" id="password" name="password" [(ngModel)]="passwordInput" />
+    <input class="form-control mb-3" type="password" id="password" name="password" [(ngModel)]="passwordInput" required
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$" />
+    @if (submitted()) {
+    @if (form.controls['password'].invalid) {
+    <p class="text-red mb-1 fs-7">Large and Small size characers</p>
+    <p class="text-red mb-1 fs-7">At least 6 characters</p>
+    <p class="text-red mb-3 fs-7">At least one number</p>
+    }
+    }
+
+    <!-- consfirm password -->
+    <label class="form-label" for="passwordConfirm">Confirm Password</label>
+    <input class="form-control mb-5" type="password" id="passwordConfirm" name="passwordConfirm"
+      [(ngModel)]="passwordConfirmInput" />
+    @if (submitted() && !validatePasswordConfirm()) {
+    <p class="text-red mb-3 fs-7">Passwords do not match</p>
+    }
 
     <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4">Register</button>
 
+    @if (error()) {
+    @if (error()!.type === "RegistrationError") {
+    <p class="text-red text-center">{{error()!.message}}</p>
+    }
+    }
   </form>
 
 </app-auth-layout>

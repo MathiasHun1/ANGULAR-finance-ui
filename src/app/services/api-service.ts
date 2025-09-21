@@ -7,7 +7,6 @@ import {
   map,
   mergeAll,
   Observable,
-  tap,
   toArray,
 } from "rxjs";
 import {
@@ -71,7 +70,7 @@ export class ApiService {
             };
           })
         ),
-        delay(1000)
+        delay(this.delay)
       );
   }
 
@@ -81,7 +80,7 @@ export class ApiService {
   getBalance() {
     return this.http
       .get<BalanceModel>(`${this.baseUrl}/balance`)
-      .pipe(delay(1000));
+      .pipe(delay(this.delay));
   }
 
   /**

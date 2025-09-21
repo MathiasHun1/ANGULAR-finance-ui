@@ -2,12 +2,18 @@
 
   <form class="custom-card login-form " #form="ngForm" (ngSubmit)="login(form)">
     <p class="fs-2 fw-bold">Login</p>
+
     <label class="form-label" for="username">Username</label>
     <input class="form-control mb-3" type="text" id="username" name="username" [(ngModel)]="usernameInput" />
 
     <label class="form-label" for="password">Password</label>
     <input class="form-control mb-5" type="password" id="password" name="password" [(ngModel)]="passwordInput" />
 
+    @if(error()) {
+    @if (error()!.type === 'LoginError') {
+    <p class="text-red text-center mt-3">{{error()!.message}}</p>
+    }
+    }
     <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4">Login</button>
     <p class="mb-1">Not a user yet?</p>
     <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4" (click)="goToRegister()">Register new account</button>
@@ -16,5 +22,6 @@
     <p class="mb-1">Just want to try? (No account required)</p>
     <button type="button" class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-2" (click)="exapmleLogin()">Example
       Login</button>
+
   </form>
 </app-auth-layout>

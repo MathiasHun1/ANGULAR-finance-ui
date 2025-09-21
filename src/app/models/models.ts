@@ -84,3 +84,8 @@ export type TransactionCategoryOption =
   | "Education"
   | "Bills"
   | "Shopping";
+
+export interface AuthError {
+  type: "LoginError" | "RegistrationError";
+  message: string;
+}

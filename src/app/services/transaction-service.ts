@@ -3,6 +3,7 @@ import { ApiService } from "./api-service";
 import { TransactionModel } from "../models/models";
 import { SortOptions } from "../models/models";
 import { AuthService } from "./auth-service";
+import { tap } from "rxjs";
 
 @Injectable({
   providedIn: "root",

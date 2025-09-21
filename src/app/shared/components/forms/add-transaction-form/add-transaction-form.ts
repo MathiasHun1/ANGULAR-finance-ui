@@ -3,6 +3,7 @@ import { TransactionCategoryOption } from "../../../../models/models";
 import { FormsModule, NgForm } from "@angular/forms";
 import { TransactionService } from "../../../../services/transaction-service";
 import { ModalService } from "../../../../services/modal-service";
+import { RecurringbillsService } from "../../../../services/recurringbills-service";
 
 @Component({
   selector: "app-add-transaction-form",
@@ -11,8 +12,9 @@ import { ModalService } from "../../../../services/modal-service";
   styleUrl: "./add-transaction-form.scss",
 })
 export class AddTransactionForm {
-  transactionService = inject(TransactionService);
   modalService = inject(ModalService);
+  transactionService = inject(TransactionService);
+  recurringBillService = inject(RecurringbillsService);
 
   categoryTypes: TransactionCategoryOption[] = [
     "General",
@@ -36,6 +38,7 @@ export class AddTransactionForm {
     category: "General",
     recurring: false,
   };
+
   submitForm() {
     if (!this.transactionForm()!.valid) {
       return console.log("Form invalid");
@@ -51,6 +54,7 @@ export class AddTransactionForm {
     };
 
     this.transactionService.addTransaction(sentData);
+    this.recurringBillService.clearData();
     this.transactionForm()!.resetForm();
     this.modalService.closeModal();
   }

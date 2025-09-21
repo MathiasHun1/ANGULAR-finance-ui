@@ -2,6 +2,7 @@ import { computed, inject, Injectable, signal } from "@angular/core";
 import { ApiService } from "./api-service";
 import { Router } from "@angular/router";
 import { tap } from "rxjs";
+import { AuthError } from "../models/models";
 
 @Injectable({
   providedIn: "root",
@@ -13,6 +14,7 @@ export class AuthService {
 
   exapmleUser = signal(false);
   isLoggedin = signal(false);
+  hasError = signal<AuthError | null>(null);
 
   // Init the token and the state on app start
   constructor() {
@@ -35,13 +37,19 @@ export class AuthService {
           this.router.navigate(["/"]);
           if (credentials.username === "ExampleUser") {
             this.exapmleUser.set(true);
+            this.hasError.set(null);
           } else {
             this.exapmleUser.set(false);
+            this.hasError.set(null);
           }
         }
       },
       error: (err) => {
         console.log(err.error);
+        this.hasError.set({
+          type: "LoginError",
+          message: "Invalid username or password",
+        });
       },
     });
   }
@@ -73,7 +81,17 @@ export class AuthService {
       },
       error: (err) => {
         console.error(err);
+        if (err.status === 409) {
+          this.hasError.set({
+            type: "RegistrationError",
+            message: "Username already in use",
+          });
+        }
       },
     });
+  }
+
+  clearError() {
+    this.hasError.set(null);
   }
 }

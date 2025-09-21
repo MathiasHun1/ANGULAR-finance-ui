@@ -36,7 +36,7 @@
     [(ngModel)]="formData.amount" #amountInstance="ngModel" required />
 
   @if (amountInstance.invalid && (amountInstance.dirty || amountInstance.touched)) {
-  <p class="text-red">Field invalid! Only numbers!"</p>
+  <p class="text-red">Field invalid! Only numbers!</p>
   }
 
   <!-- Recurring ? -->

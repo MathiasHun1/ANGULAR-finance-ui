@@ -16,6 +16,8 @@ export class Login {
   authService = inject(AuthService);
   router = inject(Router);
 
+  error = this.authService.hasError;
+
   usernameInput = "";
   passwordInput = "";
 
@@ -30,5 +32,6 @@ export class Login {
 
   goToRegister() {
     this.router.navigate(["/register"]);
+    this.authService.clearError();
   }
 }
