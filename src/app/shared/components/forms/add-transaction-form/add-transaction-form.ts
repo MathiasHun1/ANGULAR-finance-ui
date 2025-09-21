@@ -29,6 +29,7 @@ export class AddTransactionForm {
 
   transactionForm = viewChild<NgForm>("transactionForm");
   formData = {
+    isIncome: false,
     avatar: "/images/avatars/company.png",
     name: "",
     amount: "",
@@ -40,7 +41,14 @@ export class AddTransactionForm {
       return console.log("Form invalid");
     }
 
-    const sentData = { ...this.formData, amount: Number(this.formData.amount) };
+    const amount = Number(this.formData.amount);
+    const sentData = {
+      avatar: this.formData.avatar,
+      name: this.formData.name,
+      amount: this.formData.isIncome ? amount : amount * -1,
+      category: this.formData.category,
+      recurring: this.formData.recurring,
+    };
 
     this.transactionService.addTransaction(sentData);
     this.transactionForm()!.resetForm();

@@ -1,4 +1,16 @@
 <form class="transaction-form" #transactionForm="ngForm" (ngSubmit)="submitForm()">
+
+  <!-- Transaction type -->
+  <div class="form-check form-switch d-flex flex-row gap-5 align-items-center justify-content-start ps-0 mb-2">
+    <input class="checkbox form-check-input mb-2" type="checkbox" role="switch" id="switchCheckDefault"
+      [(ngModel)]="formData.isIncome" name="isIncome" />
+    @if (formData.isIncome) {
+    <p class="text-green mb-0 ps-4 fw-bold fs-4">INCOME</p>
+    } @else {
+    <p class="text-red mb-0 ps-4 fw-bold fs-4">EXPENSE</p>
+    }
+  </div>
+
   <!-- Avatar -->
   <label class="form-label" for="avatar">Select partner type</label>
   <select name="avatar" id="avatar" class="d-block mb-3 form-select" [(ngModel)]="formData.avatar">
@@ -20,13 +32,14 @@
 
   <!-- Amount -->
   <label class="form-label" for="amount">Amount *</label>
-  <input type="text" class="form-control mb-3" id="amount" name="amount" pattern="^-?\d+$" [(ngModel)]="formData.amount"
-    #amountInstance="ngModel" required />
+  <input type="text" class="form-control mb-3" id="amount" name="amount" pattern="^[1-9]\d*$"
+    [(ngModel)]="formData.amount" #amountInstance="ngModel" required />
 
   @if (amountInstance.invalid && (amountInstance.dirty || amountInstance.touched)) {
-  <p class="text-red">Field invalid! Fromat: "123" or "-123"</p>
+  <p class="text-red">Field invalid! Only numbers!"</p>
   }
 
+  <!-- Recurring ? -->
   <div class="d-flex align-items-center mb-5 gap-2">
     <label class="form-label mb-0" for="recurring">Recurring?</label>
     <input class="form-check-inline" type="checkbox" name="recurring" id="recurring" [(ngModel)]="formData.recurring" />

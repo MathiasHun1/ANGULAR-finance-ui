@@ -1,0 +1,11 @@
+.checkbox {
+  width: 60px;
+  height: 30px;
+  background-color: grey;
+  transform: translate(70%, 5%);
+  border-color: none;
+}
+
+.checkbox:checked {
+  // background-color: grey;
+}
