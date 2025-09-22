@@ -1,5 +1,6 @@
 <app-auth-layout>
 
+  @if (!succeed()) {
   <form class="custom-card login-form " #form="ngForm" (ngSubmit)="register(form)">
     <p class="fs-2 fw-bold">Register</p>
 
@@ -8,6 +9,14 @@
     <input class="form-control mb-3" type="text" id="username" name="username" [(ngModel)]="usernameInput" required />
     @if (submitted() && form.controls['username'].invalid) {
     <p class="text-red mb-3 fs-7">Username is required</p>
+    }
+
+    <!-- email -->
+    <label class="form-label" for="text">Email address</label>
+    <input class="form-control mb-3" type="email" id="email" name="email" [(ngModel)]="emailInput" required
+      pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z]{2,}$" />
+    @if (submitted() && form.controls['email'].invalid) {
+    <p class="text-red mb-3 fs-7">Email is invalid</p>
     }
 
     <!-- password -->
@@ -31,6 +40,7 @@
     }
 
     <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4">Register</button>
+    <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4" type="button" routerLink="/login">Back to login</button>
 
     @if (error()) {
     @if (error()!.type === "RegistrationError") {
@@ -38,5 +48,13 @@
     }
     }
   </form>
+  } @else {
+  <div class="custom-card">
+    <p class="text-green fs-3 text-center">Registered succesfully!</p>
+    <p class="mb-1">Verification link sent you <span class="fw-bold">by email</span>, check your account!</p>
+    <p class="fs-7">* If you don't find it, check your spam folder</p>
+    <a class="btn btn-dark w-100 fs-7 py-2 mt-4" routerLink="/login">Go to Login</a>
+  </div>
+  }
 
 </app-auth-layout>

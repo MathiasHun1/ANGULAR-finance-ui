@@ -4,6 +4,7 @@ import { TransactionModel } from "../models/models";
 import { SortOptions } from "../models/models";
 import { AuthService } from "./auth-service";
 import { tap } from "rxjs";
+import { BalanceService } from "./balance-service";
 
 @Injectable({
   providedIn: "root",
@@ -11,6 +12,7 @@ import { tap } from "rxjs";
 export class TransactionService {
   private apiService = inject(ApiService);
   private authService = inject(AuthService);
+  private balanceService = inject(BalanceService);
 
   constructor() {
     effect(() => {
@@ -197,6 +199,7 @@ export class TransactionService {
           }
           return prev.concat(returnedTrans);
         });
+        this.balanceService.getBalance();
       },
       error: (err) => {
         console.error(err);
