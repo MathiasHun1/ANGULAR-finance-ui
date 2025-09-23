@@ -23,6 +23,7 @@
 }
 
 .page-link {
+  width: 38px;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -34,6 +35,10 @@
     color: black;
     cursor: pointer;
   }
+}
+
+.page-link.stepper {
+  width: auto;
 }
 
 .page-link.active {

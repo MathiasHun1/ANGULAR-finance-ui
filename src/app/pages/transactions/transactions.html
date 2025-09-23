@@ -104,7 +104,6 @@
     </div>
 
     <!-- Transaction elements -->
-
     @for (transaction of paginatedData(); track transaction.id) {
     <div class="transaction-item list-group-item">
       <div class="d-flex ">
@@ -136,28 +135,116 @@
     </div>
     }
   </div>
-  <!-- Pagination -->
+
+
+  <!-- PAGINATION -->
+  <!-- For more than 4 pages -->
   <nav aria-label="pagination controls" class="pt-4">
     <ul class="pagination d-flex justify-content-between">
-      <li class="page-item" (click)="stepPrevPage()">
-        <div class="page-link">
+      <li class="" (click)="stepPrevPage()">
+        <div class="page-link stepper">
           <img class="arrow" src="/images/icon-caret-left.svg" alt="" />
           <span class="control-text">Previous</span>
         </div>
       </li>
       <!-- Pages -->
       <div class="d-flex">
-        @for (number of pageNumbers(); track number) {
-        <li class="page-item" (click)="stepToPage(number)">
-          <span class="page-link" [ngClass]="{ active: number === currentPage() }">
-            {{ number }}
+        @if (pageNumbers().length > 4) {
+        <!-- If current page is 1 or 2 -->
+        @if (currentPage() <= 2) { <li class="" (click)="stepToPage(1)">
+          <span class="page-link" [ngClass]="{ active: 1 === currentPage() }">
+            {{1}}
           </span>
-        </li>
-        }
+          </li>
+
+          <li class="" (click)="stepToPage(2)">
+            <span class="page-link" [ngClass]="{ active: 2 === currentPage() }">
+              {{2}}
+            </span>
+          </li>
+
+          <li class="">
+            <span class="page-link">
+              ...
+            </span>
+          </li>
+
+          <li class="" (click)="stepToPage(this.pageNumbers().length)">
+            <span class="page-link">
+              {{this.pageNumbers().length}}
+            </span>
+          </li>
+          }
+          <!-- If current page is between 2 and last-1 -->
+          @if (currentPage() > 2 && currentPage() < pageNumbers().length - 1) { <li class=""
+            (click)="stepToPage(currentPage() - 1)">
+            <span class="page-link">
+              {{currentPage() - 1}}
+            </span>
+            </li>
+
+            <li class="" (click)="stepToPage(currentPage())">
+              <span class="page-link active">
+                {{currentPage()}}
+              </span>
+            </li>
+
+            <li class="">
+              <span class="page-link">
+                ...
+              </span>
+            </li>
+
+            <li class="" (click)="stepToPage(this.pageNumbers().length)">
+              <span class="page-link">
+                {{this.pageNumbers().length}}
+              </span>
+            </li>
+            }
+
+            <!-- If current page is last or last-1  -->
+            @if (currentPage() >= pageNumbers().length - 1) {
+            <li class="" (click)="stepToPage(1)">
+              <span class="page-link ">
+                {{1}}
+              </span>
+            </li>
+
+            <li class="">
+              <span class="page-link">
+                ...
+              </span>
+            </li>
+
+            <li class="">
+              <span class="page-link" (click)="stepToPage(pageNumbers().length - 1)" [ngClass]="{
+                    active: pageNumbers().length - 1 === currentPage()
+                  }">
+                {{pageNumbers().length - 1}}
+              </span>
+            </li>
+
+            <li class="">
+              <span class="page-link" [ngClass]="{
+                    active: pageNumbers().length === currentPage()
+                  }" (click)="stepToPage(pageNumbers().length)">
+                {{pageNumbers().length}}
+              </span>
+            </li>
+            }
+            } @else {
+            @for (number of pageNumbers(); track number) {
+            <li class="" (click)="stepToPage(number)">
+              <span class="page-link" [ngClass]="{ active: number === currentPage() }">
+                {{ number }}
+              </span>
+            </li>
+            }
+            }
       </div>
 
-      <li class="page-item" (click)="stepNextPage()">
-        <div class="page-link">
+      <li class="" (click)="stepNextPage()">
+        <div class="page-link stepper">
           <span class="control-text">Next </span>
           <img class="arrow" src="/images/icon-caret-right.svg" alt="" />
         </div>
