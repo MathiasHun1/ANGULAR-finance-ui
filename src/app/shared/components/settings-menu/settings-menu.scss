@@ -1,0 +1,26 @@
+@use "../../../../styles/variables" as *;
+
+.settings-container {
+  width: 80px;
+  height: 80px;
+  background-color: rgba(black, 0.3);
+  border-radius: 100%;
+  display: grid;
+  place-content: center;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+
+  @media (min-width: $desktopAndUp) {
+    display: none;
+  }
+}
+
+.settings-popup {
+  position: absolute;
+  top: 0;
+  transform: translate(-120px, -110%);
+  box-shadow: 3px 3px 10px rgba(black, 0.2);
+  background-color: map-get($theme-colors, "grey-900");
+  text-wrap: nowrap;
+}

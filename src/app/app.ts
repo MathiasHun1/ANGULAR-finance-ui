@@ -4,12 +4,13 @@ import { Navigation as NavComponent } from "./shared/components/navigation/navig
 import { Modal } from "./shared/components/modal/modal";
 import { CommonModule } from "@angular/common";
 import { AuthService } from "./services/auth-service";
+import { SettingsMenu } from "./shared/components/settings-menu/settings-menu";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.html",
   styleUrl: "./app.scss",
-  imports: [RouterOutlet, NavComponent, Modal, CommonModule],
+  imports: [RouterOutlet, NavComponent, Modal, CommonModule, SettingsMenu],
 })
 export class App {
   authService = inject(AuthService);
