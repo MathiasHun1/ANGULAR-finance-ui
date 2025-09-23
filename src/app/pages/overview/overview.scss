@@ -1,5 +1,10 @@
 @use "../../../styles/variables" as *;
 
+.page-title {
+  padding-top: 6px;
+  padding-bottom: 16px;
+}
+
 .navlink {
   text-decoration: none;
   color: map-get($theme-colors, grey-500);

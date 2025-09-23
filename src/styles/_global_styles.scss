@@ -3,6 +3,10 @@ body {
   height: 100vh;
 }
 
+body {
+  background-image: linear-gradient(to right, #201f24 50%, #f8f4f0 60%);
+}
+
 // Bootstrap class overrides
 .list-group-item {
   background-color: transparent;
