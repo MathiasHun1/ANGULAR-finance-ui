@@ -19,6 +19,10 @@ body {
   color: map-get($theme-colors, "grey-500");
 }
 
+.btn {
+  // padding-block: 0px;
+}
+
 // Scrollbar hidden utility
 .overflow-scroll-hidden {
   @media (min-width: $desktopAndUp) {

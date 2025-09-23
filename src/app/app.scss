@@ -5,7 +5,7 @@
   padding: 0;
   margin: 0 auto;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   background-color: map-get($theme-colors, "beige-100");
 
   @media (min-width: $desktopAndUp) {
@@ -30,10 +30,18 @@
 }
 
 .header {
-  border-top-right-radius: 12px;
-  border-top-left-radius: 12px;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  padding-bottom: 4px;
+  padding-inline: 4px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 
   @media (min-width: $desktopAndUp) {
+    position: revert;
     border-top-left-radius: revert;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
@@ -52,8 +60,14 @@
 .main {
   min-height: 0;
   flex: 1;
+  padding-top: 70px !important;
+
+  @media (min-width: $tabletAndUp) {
+    padding-top: 100px !important;
+  }
 
   @media (min-width: $desktopAndUp) {
+    padding-top: 32px !important;
     overflow-y: scroll;
   }
 }
