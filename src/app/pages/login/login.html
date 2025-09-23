@@ -14,14 +14,35 @@
     <p class="text-red text-center mt-3">{{error()!.message}}</p>
     }
     }
-    <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4">Login</button>
+
+    <!-- login button -->
+    <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4" [disabled]="loginLoading()" type="submit">
+      <span class="container-span">
+        <span class="absolute-span">
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"
+            [ngClass]="{'invisible': !loginLoading()}"></span>
+        </span>
+        <span>Login</span>
+      </span>
+    </button>
+
+    <!-- register button -->
     <p class="form-label mb-1">Not a user yet?</p>
     <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4" (click)="goToRegister()">Register new account</button>
 
 
+    <!-- example login button -->
     <p class="form-label mb-1">Just want to try? (No account required)</p>
-    <button type="button" class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-2" (click)="exapmleLogin()">Example
-      Login</button>
+    <button type="button" class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-2" [disabled]="exampleLoading()"
+      (click)="exapmleLogin()">
+      <span class="container-span">
+        <span class="absolute-span">
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"
+            [ngClass]="{'invisible': !exampleLoading()}"></span>
+        </span>
+        <span>Examle Login</span>
+      </span>
+    </button>
 
   </form>
 </app-auth-layout>

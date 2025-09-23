@@ -16,6 +16,10 @@ export class AuthService {
   registrationSucceed = signal(false);
   hasError = signal<AuthError | null>(null);
 
+  isLoginLoading = signal(false);
+  isExampleLoginLoading = signal(false);
+  isRegisterLoading = signal(false);
+
   // Init the token and the state on app start
   constructor() {
     const token = localStorage.getItem("token");
@@ -34,10 +38,12 @@ export class AuthService {
           localStorage.setItem("token", response.token);
           localStorage.setItem("user", response.username);
           this.isLoggedin.set(true);
+          this.isLoginLoading.set(false);
           this.router.navigate(["/"]);
           if (credentials.username === "ExampleUser") {
             this.exapmleUser.set(true);
             this.hasError.set(null);
+            this.isExampleLoginLoading.set(false);
           } else {
             this.exapmleUser.set(false);
             this.hasError.set(null);
@@ -50,6 +56,8 @@ export class AuthService {
           type: "LoginError",
           message: err.error.error,
         });
+        this.isLoginLoading.set(false);
+        this.isExampleLoginLoading.set(false);
       },
     });
   }
@@ -78,9 +86,11 @@ export class AuthService {
     this.apiService.register(credentials).subscribe({
       next: (result) => {
         this.registrationSucceed.set(true);
+        this.isRegisterLoading.set(false);
       },
       error: (err) => {
         console.error(err);
+        this.isRegisterLoading.set(false);
         if (err.status === 409) {
           this.hasError.set({
             type: "RegistrationError",

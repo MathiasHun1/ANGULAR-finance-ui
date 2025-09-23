@@ -39,7 +39,17 @@
     <p class="text-red mb-3 fs-7">Passwords do not match</p>
     }
 
-    <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4">Register</button>
+    <!-- register button -->
+    <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4" [disabled]="registerLoading()" type="submit">
+      <span class="container-span">
+        <span class="absolute-span">
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"
+            [ngClass]="{'invisible': !registerLoading()}"></span>
+        </span>
+        <span>Register</span>
+      </span>
+    </button>
+
     <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4" type="button" routerLink="/login">Back to login</button>
 
     @if (error()) {

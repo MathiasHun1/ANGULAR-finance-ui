@@ -8,3 +8,16 @@
     width: 460px;
   }
 }
+
+.container-span {
+  display: inline-block;
+  position: relative;
+}
+
+.absolute-span {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-30px, 1px);
+}

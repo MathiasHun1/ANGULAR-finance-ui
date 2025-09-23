@@ -42,7 +42,8 @@
 
   @media (min-width: $desktopAndUp) {
     position: revert;
-    border-top-left-radius: revert;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
     width: 300px;
