@@ -139,16 +139,17 @@ export class ApiService {
   }
 
   /**
-   * Login - LogOut
+   * User related API calls
    */
   login(credentials: { username: string; password: string }) {
     return this.http.post(`${this.baseUrl}/login`, credentials);
   }
 
-  /**
-   * Registration
-   */
   register(credentials: { username: string; password: string }) {
     return this.http.post(`${this.baseUrl}/users`, credentials);
   }
+
+  deletUser() {
+    return this.http.delete(`${this.baseUrl}/users`);
+  } // No need to add id as query param, token is used to search the User
 }

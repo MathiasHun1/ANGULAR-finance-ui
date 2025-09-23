@@ -39,6 +39,10 @@
             @if (currentFormType() === 'add-transaction') {
             Add a transaction
             }
+
+            @if (currentFormType() === 'confirm-account-deletion') {
+            <span class="text-red">Confirm Account Deletion</span>
+            }
           </p>
           <button type="button" class="button btn-close border border-2 border-black rounded-circle p-2"
             aria-label="Close" (click)="closeModal()"></button>
@@ -87,6 +91,11 @@
           @if (currentFormType() === 'add-transaction') {
           <!-- Add a new transaction to keep track of your spending and income. -->
           }
+
+          @if (currentFormType() === 'confirm-account-deletion') {
+          User account deletion is irreversible. All your data will be permanently removed. Please confirm if you
+          wish to proceed.
+          }
         </p>
       </header>
 
@@ -126,6 +135,10 @@
 
         @if (currentFormType() === 'add-transaction') {
         <app-add-transaction-form />
+        }
+
+        @if (currentFormType() === 'confirm-account-deletion') {
+        <app-confirm-acount-deletion />
         }
 
       </div>

@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from "@angular/core";
+import { computed, effect, inject, Injectable, signal } from "@angular/core";
 import { ApiService } from "./api-service";
 import { Router } from "@angular/router";
 import { AuthError } from "../models/models";
@@ -10,6 +10,7 @@ export class AuthService {
   private apiService = inject(ApiService);
   private router = inject(Router);
   private token = signal<string>("");
+  private user = signal<string | null>(null);
 
   exapmleUser = signal(false);
   isLoggedin = signal(false);
@@ -19,17 +20,6 @@ export class AuthService {
   isLoginLoading = signal(false);
   isExampleLoginLoading = signal(false);
   isRegisterLoading = signal(false);
-
-  // Init the token and the state on app start
-  constructor() {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("username");
-    this.token.set(token || "");
-    this.isLoggedin.set(!!token);
-    if (user === "ExampleUser") {
-      this.exapmleUser.set(true);
-    }
-  }
 
   login(credentials: { username: string; password: string }) {
     this.apiService.login(credentials).subscribe({
@@ -41,11 +31,10 @@ export class AuthService {
           this.isLoginLoading.set(false);
           this.router.navigate(["/"]);
           if (credentials.username === "ExampleUser") {
-            this.exapmleUser.set(true);
             this.hasError.set(null);
             this.isExampleLoginLoading.set(false);
+            this.exapmleUser.set(true);
           } else {
-            this.exapmleUser.set(false);
             this.hasError.set(null);
           }
         }
@@ -66,20 +55,8 @@ export class AuthService {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     this.token.set("");
-    this.exapmleUser.set(false);
     this.isLoggedin.set(false);
-  }
-
-  getToken() {
-    const token = localStorage.getItem("token");
-    if (token) {
-      this.token.set(token);
-    }
-    return this.token();
-  }
-
-  removeToken() {
-    localStorage.removeItem("token");
+    this.exapmleUser.set(false);
   }
 
   register(credentials: { username: string; password: string }) {
@@ -101,7 +78,51 @@ export class AuthService {
     });
   }
 
+  deleteUserAccount() {
+    this.apiService.deletUser().subscribe({
+      next: (result) => {
+        this.logOut();
+        this.router.navigate(["/login"]);
+      },
+      error: (err) => {
+        if (err.status === 403) {
+          this.hasError.set({
+            type: "ForbiddenDeleteError",
+            message: err.error,
+          });
+        }
+      },
+    });
+  }
+
+  getToken() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.token.set(token);
+    }
+    return this.token();
+  }
+
+  removeToken() {
+    localStorage.removeItem("token");
+  }
+
   clearError() {
     this.hasError.set(null);
+  }
+
+  initAuth() {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+
+    this.token.set(token || "");
+    this.user.set(user);
+    this.isLoggedin.set(!!token);
+
+    if (user === "ExampleUser") {
+      this.exapmleUser.set(true);
+    } else {
+      this.exapmleUser.set(false);
+    }
   }
 }

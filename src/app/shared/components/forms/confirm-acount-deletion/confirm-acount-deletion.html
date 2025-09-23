@@ -1,0 +1,8 @@
+<div class="d-flex justify-content-center mb-3">
+  <button class="btn btn-red" (click)="deleteClick()">DELETE Account</button>
+</div>
+
+@if(exampleUserError()) {
+<p class="mb-0 fs-4 fw-bold text-center">Nice try!</p>
+<p class=" text-center">Example user cannot be deleted 😛</p>
+}

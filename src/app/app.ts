@@ -30,6 +30,8 @@ export class App {
   }
 
   constructor() {
+    this.authService.initAuth();
+
     effect(() => {
       this.router.events.subscribe((event) => {
         if (!(event instanceof NavigationEnd)) {

@@ -71,7 +71,8 @@ export type ModalFormType =
   | "delete-pot"
   | "add-to-pot"
   | "withdraw-from-pot"
-  | "add-transaction";
+  | "add-transaction"
+  | "confirm-account-deletion";
 
 export type TransactionCategoryOption =
   | "General"
@@ -86,6 +87,6 @@ export type TransactionCategoryOption =
   | "Shopping";
 
 export interface AuthError {
-  type: "LoginError" | "RegistrationError";
+  type: "LoginError" | "RegistrationError" | "ForbiddenDeleteError";
   message: string;
 }

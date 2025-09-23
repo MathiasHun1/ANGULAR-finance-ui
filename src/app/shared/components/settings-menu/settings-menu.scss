@@ -3,16 +3,12 @@
 .settings-container {
   width: 80px;
   height: 80px;
-  background-color: rgba(black, 0.3);
-  border-radius: 100%;
   display: grid;
   place-content: center;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
+  position: relative;
 
-  @media (min-width: $desktopAndUp) {
-    display: none;
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -23,4 +19,9 @@
   box-shadow: 3px 3px 10px rgba(black, 0.2);
   background-color: map-get($theme-colors, "grey-900");
   text-wrap: nowrap;
+
+  @media (min-width: $desktopAndUp) {
+    background-color: map-get($theme-colors, "grey-900");
+    transform: translate(100px, -100px);
+  }
 }

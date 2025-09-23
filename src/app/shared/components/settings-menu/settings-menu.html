@@ -1,9 +1,9 @@
 @if(showSettings()) {
 
-
+<!-- Small screen Settings -->
 <div class="settings-container" (click)="toggle()">
 
-  <img src="/images/icon-settings.svg" alt="">
+  <img [src]="imageUrl()" alt="">
 
   <!-- Popup -->
   @if(opened()) {
@@ -13,11 +13,12 @@
       <p class="mb-0">Log out</p>
     </button>
 
-    <button class="btn p-3 d-flex align-items-center gap-3" (click)="deleteClick()">
+    <button class="btn p-3 d-flex align-items-center gap-3" (click)="openDeleteModalClick()">
       <img src="/images/icon-delete.svg" alt="">
       <p class="mb-0 text-red">Delete My Account</p>
     </button>
   </div>
   }
 </div>
+
 }

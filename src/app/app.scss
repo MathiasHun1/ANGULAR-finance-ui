@@ -110,3 +110,23 @@
     display: block;
   }
 }
+
+.settings-mobile {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: rgba(black, 0.3);
+  border-radius: 100%;
+
+  @media (min-width: $desktopAndUp) {
+    display: none;
+  }
+}
+
+.settings-desktop {
+  display: none !important;
+
+  @media (min-width: $desktopAndUp) {
+    display: flex !important;
+  }
+}

@@ -22,7 +22,8 @@
 
     <div>
       <!-- Min menu button -->
-      <div class="toggle text-grey-300 d-none d-xl-flex align-items-center gap-3 ps-5 pb-5" (click)="toggleNavState()">
+      <div class="toggle text-grey-300 d-none d-xl-flex align-items-center gap-3 ps-5 ms-1 pb-3"
+        (click)="toggleNavState()">
         <svg class="icon" fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"
           [ngClass]="{'rotate-180': !menuOpen()}">
           <path
@@ -30,14 +31,14 @@
             fill="#b3b3b3" />
         </svg>
         @if (menuOpen()) {
-        <span class="minimize-text fw-bolder" animate.enter="enter" animate.leave="leave">Minimize Menu</span>
+        <span class="minimize-text fw-bolder ms-2" animate.enter="enter" animate.leave="leave">Minimize Menu</span>
         }
       </div>
 
-      <!-- Logout button -->
-      <button class="logout-button btn w-100 ps-0" (click)="logOut()">
-        <img src="/images/icon-logout.svg" alt="">
-      </button>
+      <!-- Desktop Settings -->
+      <div class="settings-desktop d-flex justify-content-center">
+        <app-settings-menu [imageUrl]="'/images/icon-settings-light.svg'"></app-settings-menu>
+      </div>
     </div>
   </header>
   }
@@ -46,7 +47,9 @@
     <router-outlet />
   </main>
 
-  <app-settings-menu></app-settings-menu>
+  <div class="settings-mobile">
+    <app-settings-menu [imageUrl]="'/images/icon-settings.svg'"></app-settings-menu>
+  </div>
 </div>
 
 <app-modal></app-modal>

@@ -4,11 +4,13 @@ import {
   ElementRef,
   HostListener,
   inject,
+  input,
   signal,
   viewChild,
 } from "@angular/core";
 import { AuthService } from "../../../services/auth-service";
 import { NavigationEnd, Router } from "@angular/router";
+import { ModalService } from "../../../services/modal-service";
 
 @Component({
   selector: "app-settings-menu",
@@ -19,6 +21,9 @@ import { NavigationEnd, Router } from "@angular/router";
 export class SettingsMenu {
   authService = inject(AuthService);
   router = inject(Router);
+  modalService = inject(ModalService);
+
+  imageUrl = input();
 
   showSettings = signal(true);
   opened = signal(false);
@@ -28,13 +33,13 @@ export class SettingsMenu {
   }
 
   logOutClick() {
-    this.authService.logOut();
     this.opened.set(false);
+    this.authService.logOut();
     this.router.navigate(["/login"]);
   }
 
-  deleteClick() {
-    console.log("Delete acc");
+  openDeleteModalClick() {
+    this.modalService.openModal("confirm-account-deletion");
   }
 
   // Hide settings on specific routes

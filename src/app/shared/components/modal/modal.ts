@@ -20,6 +20,7 @@ import { EditPotForm } from "../forms/edit-pot-form/edit-pot-form";
 import { AddToPotForm } from "../forms/add-to-pot-form/add-to-pot-form";
 import { WithdrawFromPotForm } from "../forms/withdraw-from-pot-form/withdraw-from-pot-form";
 import { AddTransactionForm } from "../forms/add-transaction-form/add-transaction-form";
+import { ConfirmAcountDeletion } from "../forms/confirm-acount-deletion/confirm-acount-deletion";
 
 @Component({
   selector: "app-modal",
@@ -33,6 +34,7 @@ import { AddTransactionForm } from "../forms/add-transaction-form/add-transactio
     AddToPotForm,
     WithdrawFromPotForm,
     AddTransactionForm,
+    ConfirmAcountDeletion,
   ],
   templateUrl: "./modal.html",
   styleUrl: "./modal.scss",
