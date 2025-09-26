@@ -64,8 +64,6 @@
   padding-top: 70px !important;
   background-color: black;
 
-  view-transition-name: routeAnim;
-
   @media (min-width: $tabletAndUp) {
     padding-top: 100px !important;
   }
@@ -73,6 +71,7 @@
   @media (min-width: $desktopAndUp) {
     padding-top: 32px !important;
     overflow-y: scroll;
+    view-transition-name: routeAnim;
   }
 }
 
