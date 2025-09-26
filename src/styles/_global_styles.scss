@@ -79,7 +79,6 @@ html.modal.visible {
 }
 
 // animations
-
 .enter {
   animation: fade-in 1500ms;
 }
@@ -129,12 +128,12 @@ html.modal.visible {
   }
 }
 
-::view-transition-new(count) {
+::view-transition-new(routeAnim) {
   animation-duration: 400ms;
   animation-name: -ua-view-transition-fade-in, scale-in;
 }
 
-::view-transition-old(count) {
+::view-transition-old(routeAnim) {
   animation-duration: 500ms;
   animation-name: -ua-view-transition-fade-out, scale-out;
 }
