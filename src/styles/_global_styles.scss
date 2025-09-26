@@ -114,3 +114,27 @@ html.modal.visible {
     width: auto;
   }
 }
+
+// Page transitions
+@keyframes rotate-out {
+  to {
+    // transform: scale(40%);
+    // transform: translateX(15%);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(95%);
+  }
+}
+
+::view-transition-new(count) {
+  animation-duration: 400ms;
+  animation-name: -ua-view-transition-fade-in, scale-in;
+}
+
+::view-transition-old(count) {
+  animation-duration: 500ms;
+  animation-name: -ua-view-transition-fade-out, scale-out;
+}
