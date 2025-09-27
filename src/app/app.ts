@@ -5,6 +5,7 @@ import { Modal } from "./shared/components/modal/modal";
 import { CommonModule } from "@angular/common";
 import { AuthService } from "./services/auth-service";
 import { SettingsMenu } from "./shared/components/settings-menu/settings-menu";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-root",
@@ -15,6 +16,7 @@ import { SettingsMenu } from "./shared/components/settings-menu/settings-menu";
 export class App {
   authService = inject(AuthService);
   router = inject(Router);
+  translate = inject(TranslateService);
 
   protected title = "Finance";
   protected menuOpen = signal(true);
@@ -38,10 +40,15 @@ export class App {
           return;
         }
 
+        // Hide navbar on login or register route
         this.showNavbar.set(
           this.router.url !== "/login" && this.router.url !== "/register"
-        ); // Hide navbar on login or register route
+        );
       });
     });
+  }
+
+  setLanguage(lang: "en" | "hu") {
+    this.translate.use(lang);
   }
 }

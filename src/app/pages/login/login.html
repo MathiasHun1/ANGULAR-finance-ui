@@ -1,12 +1,12 @@
 <app-auth-layout>
 
   <form class="custom-card login-form " #form="ngForm" (ngSubmit)="login(form)">
-    <p class="fs-2 fw-bold">Login</p>
+    <p class="fs-2 fw-bold">{{ "app.login.title" | translate}}</p>
 
-    <label class="form-label" for="username">Username</label>
+    <label class="form-label" for="username">{{"app.login.labelUsername" | translate}}</label>
     <input class="form-control mb-3" type="text" id="username" name="username" [(ngModel)]="usernameInput" />
 
-    <label class="form-label" for="password">Password</label>
+    <label class="form-label" for="password">{{"app.login.labelPassword" | translate}}</label>
     <input class="form-control mb-5" type="password" id="password" name="password" [(ngModel)]="passwordInput" />
 
     @if(error()) {
@@ -22,17 +22,18 @@
           <span class="spinner-border spinner-border-sm" aria-hidden="true"
             [ngClass]="{'invisible': !loginLoading()}"></span>
         </span>
-        <span>Login</span>
+        <span>{{"app.login.buttonLogin" | translate}}</span>
       </span>
     </button>
 
     <!-- register button -->
-    <p class="form-label mb-1">Not a user yet?</p>
-    <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4" (click)="goToRegister()">Register new account</button>
+    <p class="form-label mb-1">{{"app.login.labelNewAccount" | translate}}</p>
+    <button class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-4" (click)="goToRegister()">{{"app.login.buttonNewAccout" |
+      translate}}</button>
 
 
     <!-- example login button -->
-    <p class="form-label mb-1">Just want to try? (No account required)</p>
+    <p class="form-label mb-1">{{"app.login.labelExampleLogin" | translate}}</p>
     <button type="button" class="btn btn-dark w-100 fs-7 py-2 mt-0 mb-2" [disabled]="exampleLoading()"
       (click)="exapmleLogin()">
       <span class="container-span">
@@ -40,7 +41,7 @@
           <span class="spinner-border spinner-border-sm" aria-hidden="true"
             [ngClass]="{'invisible': !exampleLoading()}"></span>
         </span>
-        <span>Example Login</span>
+        <span>{{"app.login.buttonExampleLogin" | translate}}</span>
       </span>
     </button>
 

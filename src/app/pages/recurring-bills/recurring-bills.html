@@ -11,7 +11,7 @@
     <!-- Bills Card -->
     <div class="custom-card bg-grey-900 text-white d-flex flex-column gap-4 flex-grow-1 flex-xl-grow-0">
       <div class="d-none d-sm-block pt-3">
-        <img src="/images/icon-recurring-bills.svg" alt="" />
+        <img src="/images/icon-recurring-bills.svg" alt="" width="32" height="28" />
       </div>
 
       <div class="d-flex align-items-center gap-4">
@@ -90,13 +90,13 @@
       @for (bill of filterBills(sortedBills()!); track bill) {
       <div class="bill-line list-group-item">
         <div>
-          <img class="icon" [src]="bill.avatar" alt="" />
+          <img class="icon" [src]="bill.avatar" alt="" width="32" height="32" />
           <span class="ps-3 fs-7 fw-bolder">{{ bill.name }}</span>
 
           <div class="d-sm-none">
             <span class="fs-8 text-green pe-3">Monthly - {{ bill.dueDate + 1 }}th</span>
             @if (getDueDateInfo(bill.dueDate).path) {
-            <img [src]="getDueDateInfo(bill.dueDate).path" alt="" />
+            <img [src]="getDueDateInfo(bill.dueDate).path" alt="" width="14" height="14" />
             }
           </div>
         </div>
@@ -104,7 +104,7 @@
         <div class="d-none d-sm-block">
           <span class="fs-8 text-green pe-3">Monthly - {{ bill.dueDate + 1 }}th</span>
           @if (getDueDateInfo(bill.dueDate).path) {
-          <img [src]="getDueDateInfo(bill.dueDate).path" alt="" />
+          <img [src]="getDueDateInfo(bill.dueDate).path" alt="" width="14" height="14" />
           }
         </div>
 

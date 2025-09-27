@@ -1,0 +1,29 @@
+{
+  "app": {
+    "hero": {
+      "line_1": "Kövesd nyomon a pénzügyeidet",
+      "line_2": "és takaríts meg a jövődre",
+      "line_3": "A Personal Finance App segít kézben tartani a kiadásaidat.",
+      "line_4": "Kövesd a tranzakciókat, állíts be költségvetést, és növeld megtakarításaidat egyszerűen."
+    },
+    "login": {
+      "title": "Bejelentkezés",
+      "labelUsername": "Felhasználónév",
+      "labelPassword": "Jelszó",
+      "labelNewAccount": "Nincs még fiókod?",
+      "labelExampleLogin": "Csak kipróbálnád az appot? (regisztráció nélkül)",
+      "buttonLogin": "Bejelentkezés",
+      "buttonNewAccout": "Regisztráció",
+      "buttonExampleLogin": "Példa Felhasználó Bejelentkezés"
+    },
+    "register": {
+      "title": "Regisztráció",
+      "titleUsername": "Felhasználónév",
+      "titleEmail": "Email Cím",
+      "titlePassword": "Jelszó",
+      "titleConfirmPassword": "Jelszó Megerősítése",
+      "buttonRegister": "Regisztráció",
+      "buttonBack": "Vissza a Bejelentkezéshez"
+    }
+  }
+}

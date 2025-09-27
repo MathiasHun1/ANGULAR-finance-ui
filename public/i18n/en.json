@@ -1,0 +1,29 @@
+{
+  "app": {
+    "hero": {
+      "line_1": "Keep track of your money",
+      "line_2": "and save for your future",
+      "line_3": "Personal finance app puts you in control of your spending",
+      "line_4": "Track transactions, set budgets, and add to savings pots easily."
+    },
+    "login": {
+      "title": "Login",
+      "labelUsername": "Username",
+      "labelPassword": "Password",
+      "labelNewAccount": "Nout a user yet?",
+      "labelExampleLogin": "Just want to try? (No account required)",
+      "buttonLogin": "Login",
+      "buttonNewAccout": "Register New Account",
+      "buttonExampleLogin": "Example Login"
+    },
+    "register": {
+      "title": "Register",
+      "titleUsername": "Username",
+      "titleEmail": "Email Address",
+      "titlePassword": "Password",
+      "titleConfirmPassword": "Confirm Password",
+      "buttonRegister": "Register",
+      "buttonBack": "Back to Login"
+    }
+  }
+}

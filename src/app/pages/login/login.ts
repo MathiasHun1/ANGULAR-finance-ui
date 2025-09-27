@@ -5,10 +5,11 @@ import { AuthService } from "../../services/auth-service";
 import { AuthLayout } from "../../shared/components/auth-layout/auth-layout";
 import { Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-login",
-  imports: [FormsModule, AuthLayout, CommonModule],
+  imports: [FormsModule, AuthLayout, CommonModule, TranslatePipe],
   templateUrl: "./login.html",
   styleUrl: "./login.scss",
 })

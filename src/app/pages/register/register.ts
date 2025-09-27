@@ -4,10 +4,11 @@ import { FormsModule, NgForm } from "@angular/forms";
 import { AuthService } from "../../services/auth-service";
 import { RouterLink, Router, NavigationEnd } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-register",
-  imports: [AuthLayout, FormsModule, RouterLink, CommonModule],
+  imports: [AuthLayout, FormsModule, RouterLink, CommonModule, TranslatePipe],
   templateUrl: "./register.html",
   styleUrl: "./register.scss",
 })
