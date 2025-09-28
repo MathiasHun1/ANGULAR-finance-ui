@@ -14,10 +14,11 @@ import { FormsModule } from "@angular/forms";
 import { TransactionService } from "../../services/transaction-service";
 import { SortOptions } from "../../models/models";
 import { ModalService } from "../../services/modal-service";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-transactions",
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: "./transactions.html",
   styleUrl: "./transactions.scss",
 })

@@ -8,7 +8,8 @@
           fill="#b3b3b3" />
       </svg>
       @if(menuOpen()) {
-      <span class="nav-item-title d-sm-inline" animate.enter="enter" animate.leave="leave">Overview</span>
+      <span class="nav-item-title d-sm-inline" animate.enter="enter" animate.leave="leave">{{"app.nav.overview" |
+        translate}}</span>
       }
     </li>
 
@@ -22,7 +23,8 @@
           fill="#b3b3b3" />
       </svg>
       @if(menuOpen()) {
-      <span class="nav-item-title d-sm-inline" animate.enter="enter" animate.leave="leave">Transactions</span>
+      <span class="nav-item-title d-sm-inline" animate.enter="enter" animate.leave="leave">{{"app.nav.transactions" |
+        translate}}</span>
       }
     </li>
 
@@ -33,7 +35,8 @@
           fill="#b3b3b3" />
       </svg>
       @if(menuOpen()) {
-      <span class="nav-item-title d-sm-inline" animate.enter="enter" animate.leave="leave">Budgets</span>
+      <span class="nav-item-title d-sm-inline" animate.enter="enter" animate.leave="leave">{{"app.nav.budgets" |
+        translate}}</span>
       }
     </li>
     <li routerLink="/pots" routerLinkActive="active" class="nav-item">
@@ -43,7 +46,8 @@
           fill="#b3b3b3" />
       </svg>
       @if(menuOpen()) {
-      <span class="nav-item-title d-sm-inline" animate.enter="enter" animate.leave="leave">Pots</span>
+      <span class="nav-item-title d-sm-inline" animate.enter="enter" animate.leave="leave">{{"app.nav.pots" |
+        translate}}</span>
       }
     </li>
     <li routerLink="/recurring-bills" routerLinkActive="active" class="nav-item">
@@ -53,7 +57,8 @@
           fill="#b3b3b3" />
       </svg>
       @if(menuOpen()) {
-      <span class="nav-item-title d-sm-inline" animate.enter="enter" animate.leave="leave">Recurring Bills</span>
+      <span class="nav-item-title d-sm-inline" animate.enter="enter" animate.leave="leave">{{"app.nav.recurringBills" |
+        translate}}</span>
       }
     </li>
   </ul>

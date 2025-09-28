@@ -24,6 +24,55 @@
       "titleConfirmPassword": "Jelszó Megerősítése",
       "buttonRegister": "Regisztráció",
       "buttonBack": "Vissza a Bejelentkezéshez"
+    },
+    "nav": {
+      "overview": "Áttekintés",
+      "transactions": "Tranzakciók",
+      "budgets": "Költségvetések",
+      "pots": "Perselyek",
+      "recurringBills": "Ismétlődő számlák"
+    },
+    "shrinkMenu": "Menü Összecsukás",
+    "optionsMenu": {
+      "logOut": "Kijelentkezés",
+      "deleteAccount": "Fiók Törlése"
+    },
+    "pages": {
+      "overview": {
+        "title": "Áttekintés",
+        "cardBalance": "Egyenleg",
+        "cardIncome": "Bevételek",
+        "cardExpenses": "Kiadások",
+        "cardPots": "Perselyek",
+        "cardBudgets": "Költségvetések",
+        "cardTransactions": "Tranzakciók",
+        "cardRecurrings": {
+          "title": "Ismétlődő Számlák",
+          "paidBills": "Fizetett Számlák",
+          "upcoming": "Összes Közelgő",
+          "dueSoon": "Hamarosan Fizetendő"
+        },
+
+        "linkDetails": "Részletek",
+        "linkViewAll": "Összes",
+        "totalSaved": "Megtakarított"
+      },
+      "transactions": {
+        "title": "Tranzakciók",
+        "labelSorting": "Rendezés",
+        "labelFilter": "Kategória",
+        "buttonAddSpan": "Tranzakció",
+        "buttonPrev": "Előző",
+        "buttonNext": "Köv.",
+        "labelGroup1": "Címzett/Feladó",
+        "labelGroup2": "Kategória",
+        "labelGroup3": "Tranzakció Dátum",
+        "labelGroup4": "Összeg"
+      }
+    },
+
+    "shared": {
+      "buttonAdd": "Új"
     }
   }
 }

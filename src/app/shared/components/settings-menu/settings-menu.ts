@@ -11,10 +11,11 @@ import {
 import { AuthService } from "../../../services/auth-service";
 import { NavigationEnd, Router } from "@angular/router";
 import { ModalService } from "../../../services/modal-service";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-settings-menu",
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: "./settings-menu.html",
   styleUrl: "./settings-menu.scss",
 })

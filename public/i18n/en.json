@@ -24,6 +24,61 @@
       "titleConfirmPassword": "Confirm Password",
       "buttonRegister": "Register",
       "buttonBack": "Back to Login"
+    },
+    "nav": {
+      "overview": "Overview",
+      "transactions": "Transactions",
+      "budgets": "Budgets",
+      "pots": "Pots",
+      "recurringBills": "Recurring Bills"
+    },
+    "shrinkMenu": "Minimize Menu",
+    "optionsMenu": {
+      "logOut": "Log Out",
+      "deleteAccount": "Delete Account"
+    },
+    "pages": {
+      "overview": {
+        "title": "Overview",
+        "cardBalance": "Current balance",
+        "cardIncome": "Income",
+        "cardExpenses": "Expenses",
+        "cardPots": "Pots",
+        "cardBudgets": "Budgets",
+        "cardTransactions": "Transactions",
+        "cardRecurrings": {
+          "title": "Recurring Bills",
+          "paidBills": "Paid Bills",
+          "upcoming": "Total Upcoming",
+          "dueSoon": "Due Soon"
+        },
+
+        "linkDetails": "See Detalis",
+        "linkViewAll": "View All",
+        "totalSaved": "Total Saved"
+      },
+      "transactions": {
+        "title": "Transactions",
+        "labelSorting": "Sort by",
+        "labelFilter": "Category",
+        "buttonAddSpan": "Transaction",
+        "buttonPrev": "Previous",
+        "buttonNext": "Next",
+        "labelGroup1": "Recipient/sender",
+        "labelGroup2": "Category",
+        "labelGroup3": "Transaction Date",
+        "labelGroup4": "Amount"
+      }
+    },
+
+    "shared": {
+      "buttonAdd": "Add new",
+      "sortings": {
+        "latest": "Latest",
+        "oldest": "Oldest",
+        "highest": "Highest",
+        "lowest": "Lowest"
+      }
     }
   }
 }

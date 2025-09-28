@@ -1,7 +1,8 @@
 <div class="page-title-container  d-flex justify-content-between align-items-center">
-  <h1 class="page-title">Transactions</h1>
+  <h1 class="page-title">{{"app.pages.transactions.title" | translate}}</h1>
   <button class="btn btn-dark px-3 pe-4 py-2 py-lg-3" (click)="openModal()">
-    + Add new <span class="d-none d-sm-inline">Transaction</span>
+    + {{"app.shared.buttonAdd" | translate}} <span class="d-none d-sm-inline">{{"app.pages.transactions.buttonAddSpan" |
+      translate}}</span>
   </button>
 </div>
 
@@ -31,7 +32,7 @@
 
         <!-- Sorting options popup -->
         <ul class="sort-popup--order px-3 list-group fs-7" #mobileSortMenu>
-          <li class=" list-group-item">Sort by</li>
+          <li class=" list-group-item">{{"app.pages.transactions.labelSorting" | translate}}</li>
           <li class="list-group-item pe-5" [ngClass]="{'fw-bold text-black': sortValue() === 'date'}"
             (click)="clickOnSortOption('date')">Latest</li>
           <li class="list-group-item pe-5" [ngClass]="{'fw-bold text-black': sortValue() === 'dateReverse'}"
@@ -53,7 +54,7 @@
         <!-- Category select popup -->
         @if (mobileCategorySelectOpen()) {
         <ul class="sort-popup--order px-3 list-group fs-7" #categorySelectMenu>
-          <li class=" list-group-item">Category</li>
+          <li class=" list-group-item">{{"app.pages.transactions.labelFilter" | translate}}</li>
           <li class="list-group-item pe-5" [ngClass]="{'fw-bold': categoryValue() === ''}"
             (click)="categoryValue.set('')">All</li>
 
@@ -69,19 +70,19 @@
 
       <!-- Only desktop input fields  -->
       <div class="col d-none d-md-flex align-items-center text-nowrap gap-2">
-        <label for="sortby">Sort by</label>
+        <label for="sortby">{{"app.pages.transactions.labelSorting" | translate}}</label>
         <select id="sortby" class="form-select" [(ngModel)]="sortValue">
-          <option value="date">Latest</option>
-          <option value="dateReverse">Oldest</option>
+          <option value="date">{{"app.shared.sortings.latest" | translate}}</option>
+          <option value="dateReverse">{{"app.shared.sortings.oldest" | translate}}</option>
           <option value="name">A - Z</option>
           <option value="nameReverse">Z - A</option>
-          <option value="amount">Highest</option>
-          <option value="amountReverse">Lowest</option>
+          <option value="amount">{{"app.shared.sortings.highest" | translate}}</option>
+          <option value="amountReverse">{{"app.shared.sortings.lowest" | translate}}</option>
         </select>
       </div>
 
       <div class="col d-none d-md-flex align-items-center text-nowrap gap-2">
-        <label for="category">category</label>
+        <label for="category">{{"app.pages.transactions.labelFilter" | translate}}</label>
         <select id="category" class="form-select" [(ngModel)]="categoryValue">
           <option value="">All</option>
           @for (category of categories(); track category) {
@@ -97,10 +98,10 @@
   <div class="list-group ">
     <!-- Info line -->
     <div class="list-group-item d-none d-md-grid">
-      <span>Recipient/sender</span>
-      <span>Category</span>
-      <span>Transaction Date</span>
-      <span class="amount">Amount</span>
+      <span>{{"app.pages.transactions.labelGroup1" | translate}}</span>
+      <span>{{"app.pages.transactions.labelGroup2" | translate}}</span>
+      <span>{{"app.pages.transactions.labelGroup3" | translate}}</span>
+      <span class="amount">{{"app.pages.transactions.labelGroup4" | translate}}</span>
     </div>
 
     <!-- Transaction elements -->
@@ -144,7 +145,7 @@
       <li class="" (click)="stepPrevPage()">
         <div class="page-link stepper">
           <img class="arrow" src="/images/icon-caret-left.svg" alt="" />
-          <span class="control-text">Previous</span>
+          <span class="control-text">{{"app.pages.transactions.buttonPrev" | translate}}</span>
         </div>
       </li>
       <!-- Pages -->
@@ -245,7 +246,7 @@
 
       <li class="" (click)="stepNextPage()">
         <div class="page-link stepper">
-          <span class="control-text">Next </span>
+          <span class="control-text">{{"app.pages.transactions.buttonNext" | translate}} </span>
           <img class="arrow" src="/images/icon-caret-right.svg" alt="" />
         </div>
       </li>

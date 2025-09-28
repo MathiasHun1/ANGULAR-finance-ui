@@ -1,6 +1,4 @@
-import { Component, computed, effect, inject, signal } from "@angular/core";
-import { ApiService } from "../../services/api-service";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { Component, computed, inject } from "@angular/core";
 import {
   BalanceModel,
   ExtendedBudget,
@@ -17,10 +15,18 @@ import { RecurringbillsService } from "../../services/recurringbills-service";
 import { OnInit } from "@angular/core";
 import { BalanceService } from "../../services/balance-service";
 import { LoadingStatus } from "../../shared/components/loading-status/loading-status";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-overview",
-  imports: [CommonModule, RouterLink, ListItem, Chart, LoadingStatus],
+  imports: [
+    CommonModule,
+    RouterLink,
+    ListItem,
+    Chart,
+    LoadingStatus,
+    TranslatePipe,
+  ],
   templateUrl: "./overview.html",
   styleUrl: "./overview.scss",
 })

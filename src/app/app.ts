@@ -6,12 +6,20 @@ import { CommonModule } from "@angular/common";
 import { AuthService } from "./services/auth-service";
 import { SettingsMenu } from "./shared/components/settings-menu/settings-menu";
 import { TranslateService } from "@ngx-translate/core";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.html",
   styleUrl: "./app.scss",
-  imports: [RouterOutlet, NavComponent, Modal, CommonModule, SettingsMenu],
+  imports: [
+    RouterOutlet,
+    NavComponent,
+    Modal,
+    CommonModule,
+    SettingsMenu,
+    TranslatePipe,
+  ],
 })
 export class App {
   authService = inject(AuthService);
