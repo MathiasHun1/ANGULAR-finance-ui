@@ -68,11 +68,23 @@
         "labelGroup2": "Category",
         "labelGroup3": "Transaction Date",
         "labelGroup4": "Amount"
+      },
+      "budgets": {
+        "title": "Budgets",
+        "buttonAddSpan": "Budget",
+        "titleSummary": "Spending Summary",
+        "of": "of",
+        "maximumOf": "Maximum of",
+        "spent": "Spent",
+        "remaining": "Remaining",
+        "latestSpend": "Latest Spendings"
       }
     },
 
     "shared": {
       "buttonAdd": "Add new",
+      "buttonSeeAll": "See All",
+      "buttonCollapse": "Collapse",
       "sortings": {
         "latest": "Latest",
         "oldest": "Oldest",

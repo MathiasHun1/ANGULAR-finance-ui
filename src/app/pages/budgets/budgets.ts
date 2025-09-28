@@ -2,7 +2,6 @@ import { CommonModule } from "@angular/common";
 import {
   Component,
   computed,
-  effect,
   inject,
   OnInit,
   signal,
@@ -12,14 +11,14 @@ import { BudgetCard } from "./components/budget-card/budget-card";
 import { Chart } from "../../shared/components/chart/chart";
 import { BudgetService } from "../../services/budget-service";
 import { FormsModule, NgForm } from "@angular/forms";
-import { BudgetModel, ExtendedBudget, ThemeOption } from "../../models/models";
+import { BudgetModel, ThemeOption } from "../../models/models";
 import { ModalService } from "../../services/modal-service";
 import { TransactionService } from "../../services/transaction-service";
-import { getActualMonthTransactions } from "../../shared/utils/utils";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-budgets",
-  imports: [CommonModule, FormsModule, BudgetCard, Chart],
+  imports: [CommonModule, FormsModule, BudgetCard, Chart, TranslatePipe],
   templateUrl: "./budgets.html",
   styleUrl: "./budgets.scss",
 })

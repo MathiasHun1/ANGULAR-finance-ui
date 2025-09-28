@@ -1,7 +1,8 @@
 <div class="page-title-container d-flex justify-content-between align-items-center">
-  <h1 class="page-title">Budgets</h1>
+  <h1 class="page-title">{{"app.pages.budgets.title" | translate}}</h1>
   <button class="btn btn-dark px-3 pe-4 py-2 py-lg-3" (click)="openModal()">
-    + Add new <span class="d-none d-sm-inline">Budget</span>
+    + {{"app.shared.buttonAdd" | translate}} <span class="d-none d-sm-inline">{{"app.pages.budgets.buttonAddSpan" |
+      translate}}</span>
   </button>
 </div>
 @if (!dataLoaded()) {
@@ -15,7 +16,8 @@
       <app-chart></app-chart>
 
       <div class="w-100">
-        <h2 class="h5 fw-bold">Spending Summary</h2>
+        <h2 class="h5 fw-bold">{{"app.pages.budgets.titleSummary" |
+          translate}}</h2>
         <ul class="list-group w-100">
           @for (budget of extendedBudgets(); track budget.id) {
           <li class="list-group-item w-100 px-0 py-3">
@@ -24,7 +26,7 @@
               <span>{{ budget.category }}</span>
               <div>
                 <span class="fs-7 fw-bold text-black ms-auto pe-2">${{ (budget.spentThisMonth * -1).toFixed(2) }}</span>
-                of
+                {{"app.pages.budgets.of" | translate}}
                 <span class="fs-8">${{ budget.maximum.toFixed(2) }}</span>
               </div>
             </div>

@@ -3,9 +3,11 @@ import { CommonModule } from "@angular/common";
 import { BudgetModel } from "../../../../models/models";
 import { TransactionService } from "../../../../services/transaction-service";
 import { Dropdown } from "../../../../shared/components/dropdown/dropdown";
+import { TranslatePipe } from "@ngx-translate/core";
+
 @Component({
   selector: "app-budget-card",
-  imports: [CommonModule, Dropdown],
+  imports: [CommonModule, Dropdown, TranslatePipe],
   templateUrl: "./budget-card.html",
   styleUrl: "./budget-card.scss",
 })

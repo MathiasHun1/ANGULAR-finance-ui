@@ -68,11 +68,29 @@
         "labelGroup2": "Kategória",
         "labelGroup3": "Tranzakció Dátum",
         "labelGroup4": "Összeg"
+      },
+      "budgets": {
+        "title": "Költségvetések",
+        "buttonAddSpan": "Költségvetés",
+        "titleSummary": "Költések Összegzése",
+        "of": "\\",
+        "maximumOf": "Limit",
+        "spent": "Elköltve",
+        "remaining": "Felhasználható",
+        "latestSpend": "Legutóbbi tranzakciók"
       }
     },
 
     "shared": {
-      "buttonAdd": "Új"
+      "buttonAdd": "Új",
+      "buttonSeeAll": "See All",
+      "buttonCollapse": "Collapse",
+      "sortings": {
+        "latest": "Újak elöl",
+        "oldest": "Régiek elöl",
+        "highest": "Legnagyobb",
+        "lowest": "Legkisebb"
+      }
     }
   }
 }
