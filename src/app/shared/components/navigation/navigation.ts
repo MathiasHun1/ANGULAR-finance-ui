@@ -11,7 +11,6 @@ import { TranslatePipe } from "@ngx-translate/core";
 })
 export class Navigation {
   menuOpen = input.required<boolean>();
-
   isVisible = signal(true);
   opened = signal(true);
 }

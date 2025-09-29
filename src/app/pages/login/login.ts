@@ -6,6 +6,7 @@ import { AuthLayout } from "../../shared/components/auth-layout/auth-layout";
 import { Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { TranslatePipe } from "@ngx-translate/core";
+import { LanguageService } from "../../services/language-service";
 
 @Component({
   selector: "app-login",
@@ -16,6 +17,7 @@ import { TranslatePipe } from "@ngx-translate/core";
 export class Login {
   apiservice = inject(ApiService);
   authService = inject(AuthService);
+  langService = inject(LanguageService);
   router = inject(Router);
 
   error = this.authService.hasError;

@@ -35,7 +35,8 @@
     "shrinkMenu": "Menü Összecsukás",
     "optionsMenu": {
       "logOut": "Kijelentkezés",
-      "deleteAccount": "Fiók Törlése"
+      "deleteAccount": "Fiók Törlése",
+      "buttonLanguage": "Nyelv váltás"
     },
     "pages": {
       "overview": {
@@ -78,6 +79,21 @@
         "spent": "Elköltve",
         "remaining": "Felhasználható",
         "latestSpend": "Legutóbbi tranzakciók"
+      },
+      "pots": {
+        "title": "Perselyek",
+        "buttonAddSpan": "Persely",
+        "cardText": "Megtakarított",
+        "buttonAddMoney": "Pénz hozzáadás",
+        "buttonWithdrawMoney": "Pénz kivétel"
+      },
+      "recurringBills": {
+        "title": "Ismétlődő számlák",
+        "card1Text": "Összes Számla",
+        "card2Title": "Összegzés",
+        "labelGroup1": "Számla neve",
+        "labelGroup2": "Esedékesség",
+        "labelGroup3": "Összeg"
       }
     },
 
@@ -86,6 +102,7 @@
       "buttonSeeAll": "See All",
       "buttonCollapse": "Collapse",
       "sortings": {
+        "label": "Rendezés",
         "latest": "Újak elöl",
         "oldest": "Régiek elöl",
         "highest": "Legnagyobb",

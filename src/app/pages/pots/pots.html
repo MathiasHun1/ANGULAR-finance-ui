@@ -1,7 +1,8 @@
 <div class="page-title-container d-flex justify-content-between align-items-center">
-  <h1 class="page-title">Pots</h1>
+  <h1 class="page-title">{{"app.pages.pots.title" | translate}}</h1>
   <button class="btn btn-dark px-3 pe-4 py-2 py-lg-3" (click)="openModal('add-pot')">
-    + Add new <span class="d-none d-sm-inline">Pot</span>
+    + {{"app.shared.buttonAdd" | translate}} <span class="d-none d-sm-inline">{{"app.pages.pots.buttonAddSpan" |
+      translate}}</span>
   </button>
 </div>
 @if(!pots()) {
@@ -23,7 +24,7 @@
 
       <!-- Total-saved line -->
       <div class="d-flex align-items-center justify-content-between pb-2">
-        <span class="fs--7 text-grey-500">Total Saved</span>
+        <span class="fs--7 text-grey-500">{{"app.pages.pots.cardText" | translate}}</span>
         <span class="fs-3 fw-bolder">${{ pot.total }}</span>
       </div>
 
@@ -43,8 +44,10 @@
 
       <!-- Buttons -->
       <div class="d-flex gap-3">
-        <div class="btn bg-beige-100 w-100" (click)="onAddMoneyClick(pot.id)">Add money</div>
-        <div class="btn bg-beige-100 w-100" (click)="onWithdrawClick(pot.id)">Withdraw</div>
+        <div class="btn bg-beige-100 w-100" (click)="onAddMoneyClick(pot.id)">{{"app.pages.pots.buttonAddMoney" |
+          translate}}</div>
+        <div class="btn bg-beige-100 w-100" (click)="onWithdrawClick(pot.id)">{{"app.pages.pots.buttonWithdrawMoney" |
+          translate}}</div>
       </div>
 
     </div>

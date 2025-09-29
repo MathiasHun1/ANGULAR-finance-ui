@@ -1,19 +1,13 @@
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  OnInit,
-  signal,
-} from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { RecurringbillsService } from "../../services/recurringbills-service";
 import { CommonModule } from "@angular/common";
-import { RecurringBill, SortOptions } from "../../models/models";
-import { FormsModule, FormControl } from "@angular/forms";
+import { RecurringBill } from "../../models/models";
+import { FormsModule } from "@angular/forms";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-recurring-bills",
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: "./recurring-bills.html",
   styleUrl: "./recurring-bills.scss",
 })

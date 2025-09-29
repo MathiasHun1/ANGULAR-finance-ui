@@ -1,7 +1,17 @@
 <app-auth-layout>
 
   <form class="custom-card login-form " #form="ngForm" (ngSubmit)="login(form)">
-    <p class="fs-2 fw-bold">{{ "app.login.title" | translate}}</p>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <p class="fs-2 fw-bold mb-0">{{ "app.login.title" | translate}}</p>
+      <button class="btn" type="button">
+        @if (langService.currentLang() === "hu") {
+        <img src="/images/icon-flag-hun.svg" alt="" width="32" (click)="langService.toggleLang()">
+        } @else {
+        <img src="/images/icon-flag-en.svg" alt="" width="32" (click)="langService.toggleLang()">
+        }
+      </button>
+    </div>
+
 
     <label class="form-label" for="username">{{"app.login.labelUsername" | translate}}</label>
     <input class="form-control mb-3" type="text" id="username" name="username" [(ngModel)]="usernameInput" />

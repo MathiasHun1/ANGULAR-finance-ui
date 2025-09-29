@@ -11,7 +11,8 @@ import {
 import { AuthService } from "../../../services/auth-service";
 import { NavigationEnd, Router } from "@angular/router";
 import { ModalService } from "../../../services/modal-service";
-import { TranslatePipe } from "@ngx-translate/core";
+import { TranslatePipe, TranslateService } from "@ngx-translate/core";
+import { LanguageService } from "../../../services/language-service";
 
 @Component({
   selector: "app-settings-menu",
@@ -23,11 +24,14 @@ export class SettingsMenu {
   authService = inject(AuthService);
   router = inject(Router);
   modalService = inject(ModalService);
+  translate = inject(TranslateService);
+  langService = inject(LanguageService);
 
   imageUrl = input();
 
   showSettings = signal(true);
   opened = signal(false);
+  currentLang = this.langService.currentLang;
 
   toggle() {
     this.opened.set(!this.opened());

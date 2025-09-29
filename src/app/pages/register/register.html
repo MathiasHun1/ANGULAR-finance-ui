@@ -2,7 +2,16 @@
 
   @if (!succeed()) {
   <form class="custom-card login-form " #form="ngForm" (ngSubmit)="register(form)">
-    <p class="fs-2 fw-bold">{{"app.register.title" | translate}}</p>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <p class="fs-2 fw-bold mb-0">{{"app.register.title" | translate}}</p>
+      <button class="btn" type="button">
+        @if (langService.currentLang() === "hu") {
+        <img src="/images/icon-flag-hun.svg" alt="" width="32" (click)="langService.toggleLang()">
+        } @else {
+        <img src="/images/icon-flag-en.svg" alt="" width="32" (click)="langService.toggleLang()">
+        }
+      </button>
+    </div>
 
     <!-- username -->
     <label class="form-label" for="username">{{"app.register.titleUsername" | translate}}</label>

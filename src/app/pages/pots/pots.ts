@@ -3,10 +3,11 @@ import { PotsService } from "../../services/pots-service";
 import { ModalService } from "../../services/modal-service";
 import { Dropdown } from "../../shared/components/dropdown/dropdown";
 import { ModalFormType } from "../../models/models";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-pots",
-  imports: [Dropdown],
+  imports: [Dropdown, TranslatePipe],
   templateUrl: "./pots.html",
   styleUrl: "./pots.scss",
 })

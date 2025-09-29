@@ -1,5 +1,5 @@
 <div class="page-title page-title-container">
-  <h1 class="page-title">Recurring Bills</h1>
+  <h1 class="page-title">{{"app.pages.recurringBills.title" | translate}}</h1>
 </div>
 
 @if (!sortedBills()) {
@@ -17,7 +17,7 @@
       <div class="d-flex align-items-center gap-4">
         <img src="/images/icon-recurring-bills.svg" alt="" class="d-sm-none" />
         <div>
-          <h2 class="m-0 fs-7 pb-2">Total Bills</h2>
+          <h2 class="m-0 fs-7 pb-2">{{"app.pages.recurringBills.card1Text" | translate}}</h2>
           <p class="m-0 fs-3 fw-bolder">${{ (getTotalAmount(sortedBills()) * -1).toFixed(0) }}</p>
         </div>
       </div>
@@ -25,10 +25,10 @@
 
     <!-- Summary card -->
     <div class="custom-card flex-grow-1 flex-xl-grow-0">
-      <h2 class="m-0 fs-6 fw-bolder">Summary</h2>
+      <h2 class="m-0 fs-6 fw-bolder">{{"app.pages.recurringBills.card2Title" | translate}}</h2>
       <div class="list-group fs-8">
         <div class="list-group-item">
-          <span class="text-grey-500">Paid bills</span>
+          <span class="text-grey-500">{{"app.pages.overview.cardRecurrings.paidBills" | translate}}</span>
           <div class="fw-bolder">
             @if (paidBills()) {
             <span class="pe-1">{{paidBills()!.bills.length }}</span>
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="list-group-item">
-          <span class="text-grey-500">Total upcoming</span>
+          <span class="text-grey-500">{{"app.pages.overview.cardRecurrings.upcoming" | translate}}</span>
           <div class="fw-bolder">
             @if(upcomingBills()) {
             <span class="pe-1">{{ upcomingBills()!.bills.length }}</span>
@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="list-group-item text-red">
-          <span class="">Due soon</span>
+          <span class="">{{"app.pages.overview.cardRecurrings.dueSoon" | translate}}</span>
           <div class="fw-bolder">
             @if (dueSoonBills()) {
             <span class="pe-1">{{ dueSoonBills()!.bills.length }}</span>
@@ -67,22 +67,22 @@
       </div>
 
       <div class="col d-flex justify-content-end align-items-center gap-2 mb-4">
-        <label for="sortby" class="fs-7 text-grey-500">Sort by</label>
+        <label for="sortby" class="fs-7 text-grey-500">{{"app.shared.sortings.label" | translate}}</label>
         <select id="sortby" class="form-select w-50" [(ngModel)]="sortValue">
-          <option value="date">Latest</option>
-          <option value="dateReverse">Oldest</option>
+          <option value="date">{{"app.shared.sortings.latest" | translate}}</option>
+          <option value="dateReverse">{{"app.shared.sortings.oldest" | translate}}</option>
           <option value="name">A - Z</option>
           <option value="nameReverse">Z - A</option>
-          <option value="amount">Highest</option>
-          <option value="amountReverse">Lowest</option>
+          <option value="amount">{{"app.shared.sortings.highest" | translate}}</option>
+          <option value="amountReverse">{{"app.shared.sortings.lowest" | translate}}</option>
         </select>
       </div>
     </div>
 
     <div class="bill-line d-none d-sm-grid fs-8 text-grey-500">
-      <p class="m-0">Bill title</p>
-      <p class="m-0">Due date</p>
-      <p class="text-end m-0">Amount</p>
+      <p class="m-0">{{"app.pages.recurringBills.labelGroup1" | translate}}</p>
+      <p class="m-0">{{"app.pages.recurringBills.labelGroup2" | translate}}</p>
+      <p class="text-end m-0">{{"app.pages.recurringBills.labelGroup3" | translate}}</p>
     </div>
 
     <div class="list-group">

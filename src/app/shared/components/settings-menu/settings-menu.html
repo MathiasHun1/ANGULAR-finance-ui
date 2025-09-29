@@ -7,7 +7,17 @@
 
   <!-- Popup -->
   @if(opened()) {
+
   <div class="settings-popup custom-card p-0 py-3" (click)="$event.stopPropagation()" #popup>
+    <button class="btn text-white p-3 d-flex align-items-center gap-3" (click)="langService.toggleLang()">
+      @if(currentLang() === "en") {
+      <img class="me-1" src="/images/icon-flag-en.svg" alt="" width="20">
+      } @else {
+      <img class="me-1" src="/images/icon-flag-hun.svg" alt="" width="20">
+      }
+      <span>{{"app.optionsMenu.buttonLanguage" | translate}}</span>
+    </button>
+
     <button class="btn p-3 text-white d-flex align-items-center gap-3" (click)="logOutClick()">
       <img src="/images/icon-logout.svg" alt="" width="24" height="24">
       <span class="mb-0">{{"app.optionsMenu.logOut" | translate}}</span>
@@ -17,6 +27,7 @@
       <img src="/images/icon-delete.svg" alt="" width="24" height="24">
       <span class="mb-0 text-red">{{"app.optionsMenu.deleteAccount" | translate}}</span>
     </button>
+
   </div>
   }
 </div>

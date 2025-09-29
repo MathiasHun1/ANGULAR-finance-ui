@@ -5,6 +5,7 @@ import { AuthService } from "../../services/auth-service";
 import { RouterLink, Router, NavigationEnd } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { TranslatePipe } from "@ngx-translate/core";
+import { LanguageService } from "../../services/language-service";
 
 @Component({
   selector: "app-register",
@@ -15,6 +16,7 @@ import { TranslatePipe } from "@ngx-translate/core";
 export class Register {
   authService = inject(AuthService);
   router = inject(Router);
+  langService = inject(LanguageService);
 
   constructor() {
     this.router.events.subscribe((event) => {

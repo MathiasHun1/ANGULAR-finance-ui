@@ -35,7 +35,8 @@
     "shrinkMenu": "Minimize Menu",
     "optionsMenu": {
       "logOut": "Log Out",
-      "deleteAccount": "Delete Account"
+      "deleteAccount": "Delete Account",
+      "buttonLanguage": "Switch language"
     },
     "pages": {
       "overview": {
@@ -78,6 +79,21 @@
         "spent": "Spent",
         "remaining": "Remaining",
         "latestSpend": "Latest Spendings"
+      },
+      "pots": {
+        "title": "Pots",
+        "buttonAddSpan": "Pot",
+        "cardText": "Total Saved",
+        "buttonAddMoney": "Add money",
+        "buttonWithdrawMoney": "Withdraw"
+      },
+      "recurringBills": {
+        "title": "Recurring Bills",
+        "card1Text": "Total Bills",
+        "card2Title": "Summary",
+        "labelGroup1": "Bill title",
+        "labelGroup2": "Due Date",
+        "labelGroup3": "Amount"
       }
     },
 
@@ -86,6 +102,7 @@
       "buttonSeeAll": "See All",
       "buttonCollapse": "Collapse",
       "sortings": {
+        "label": "Sort by",
         "latest": "Latest",
         "oldest": "Oldest",
         "highest": "Highest",
